@@ -29,7 +29,7 @@ public class UserService implements IService<User> {
                 Client client = (Client) user;
                 stmt.setString(6, client.getObjectif().name());
 
-                if (client instanceof ClientSport) {
+                if (client.getClass() == ClientSport.class && (client.getObjectif() == Objectif.Perdre_du_poids || client.getObjectif() == Objectif.Prendre_du_poids)) {
                     ClientSport clientSport = (ClientSport) client;
                     stmt.setFloat(7, clientSport.getPoids());
                     stmt.setFloat(8, clientSport.getTaille());
@@ -74,6 +74,7 @@ public class UserService implements IService<User> {
         String sql = "SELECT * FROM User WHERE id = ?";
         try (PreparedStatement stmt = cnx.prepareStatement(sql)) {
             stmt.setInt(1, id);
+            System.out.println("Executing SQL query: " + sql); // Print SQL query
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 String nom = rs.getString("nom");
@@ -83,25 +84,44 @@ public class UserService implements IService<User> {
                 UserType userType = UserType.valueOf(rs.getString("userType"));
                 Objectif objectif = rs.getString("objectif") != null ? Objectif.valueOf(rs.getString("objectif")) : null;
 
+                System.out.println("Retrieved user details:"); // Print retrieved user details
+                System.out.println("Name: " + nom);
+                System.out.println("Email: " + email);
+                System.out.println("User type: " + userType);
+                // Print other relevant information as needed
+
                 if (userType == UserType.Client && (objectif == Objectif.Perdre_du_poids || objectif == Objectif.Prendre_du_poids)) {
                     float poids = rs.getFloat("poids");
                     float taille = rs.getFloat("taille");
                     int age = rs.getInt("age");
                     Sexe sexe = Sexe.valueOf(rs.getString("sexe"));
                     Activer activer = Activer.valueOf(rs.getString("activer"));
+
+                    System.out.println("Creating ClientSport object:"); // Print creation of ClientSport object
+                    // Print other relevant information as needed
+
                     return new ClientSport(id, nom, email, telephone, adresse, objectif, poids, taille, age, sexe, activer);
                 } else if (userType == UserType.Client) {
+                    System.out.println("Creating Client object:"); // Print creation of Client object
+                    // Print other relevant information as needed
                     return new Client(id, nom, email, telephone, adresse, objectif);
                 } else if (userType == UserType.Vendeur) {
+                    System.out.println("Creating Vendeur object:"); // Print creation of Vendeur object
+                    // Print other relevant information as needed
                     return new Vendeur(id, nom, email, telephone, adresse);
                 } else if (userType == UserType.Livreur) {
                     boolean disponible = rs.getBoolean("disponible");
+
+                    System.out.println("Creating Livreur object:"); // Print creation of Livreur object
+                    // Print other relevant information as needed
+
                     return new Livreur(id, nom, email, telephone, adresse, disponible);
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        System.out.println("User not found."); // Print if user is not found
         return null;
     }
 
@@ -119,7 +139,7 @@ public class UserService implements IService<User> {
                 Client client = (Client) user;
                 stmt.setString(6, client.getObjectif().name());
 
-                if (client instanceof ClientSport) {
+                if (client.getClass() == ClientSport.class && (client.getObjectif() == Objectif.Perdre_du_poids || client.getObjectif() == Objectif.Prendre_du_poids)) {
                     ClientSport clientSport = (ClientSport) client;
                     stmt.setFloat(7, clientSport.getPoids());
                     stmt.setFloat(8, clientSport.getTaille());
@@ -153,7 +173,6 @@ public class UserService implements IService<User> {
                 stmt.setNull(12, Types.BOOLEAN);
             }
 
-            stmt.setInt(13, user.getId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

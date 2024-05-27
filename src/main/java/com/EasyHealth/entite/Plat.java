@@ -7,6 +7,8 @@ public class Plat {
     private double prix;
     private double protein;
     private double calories;
+
+    private String categorie;
     private int idm;
 
     // Getters and Setters
@@ -67,6 +69,13 @@ public class Plat {
         this.idm = idm;
     }
 
-    // Additional methods if needed
+    public String getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(String categorie) {
+        this.categorie = categorie;
+    }
+// Additional methods if needed
 }
 
