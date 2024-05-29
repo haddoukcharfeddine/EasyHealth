@@ -1,13 +1,31 @@
 package com.EasyHealth.entite;
 
+import java.util.Date;
+import java.util.List;
+
 public class Commande {
     private int idc;
-    private int clientId;
-    private int vendeurId;
-    private Integer livreurId;
+    private Date date;
+    private double prixTotal;
+    private List<Plat> platsChoisis;
+    private int idUClient;
+    private int idUVendeur;
+    private int idULivreur;
+
+    // Constructors
+    public Commande() {}
+
+    public Commande(int idc, Date date, double prixTotal, List<Plat> platsChoisis, int idUClient, int idUVendeur, int idULivreur) {
+        this.idc = idc;
+        this.date = date;
+        this.prixTotal = prixTotal;
+        this.platsChoisis = platsChoisis;
+        this.idUClient = idUClient;
+        this.idUVendeur = idUVendeur;
+        this.idULivreur = idULivreur;
+    }
 
     // Getters and Setters
-
     public int getIdc() {
         return idc;
     }
@@ -16,30 +34,58 @@ public class Commande {
         this.idc = idc;
     }
 
-    public int getClientId() {
-        return clientId;
+    public Date getDate() {
+        return date;
     }
 
-    public void setClientId(int clientId) {
-        this.clientId = clientId;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public int getVendeurId() {
-        return vendeurId;
+    public double getPrixTotal() {
+        return prixTotal;
     }
 
-    public void setVendeurId(int vendeurId) {
-        this.vendeurId = vendeurId;
+    public void setPrixTotal(double prixTotal) {
+        this.prixTotal = prixTotal;
     }
 
-    public Integer getLivreurId() {
-        return livreurId;
+    public List<Plat> getPlatsChoisis() {
+        return platsChoisis;
     }
 
-    public void setLivreurId(Integer livreurId) {
-        this.livreurId = livreurId;
+    public void setPlatsChoisis(List<Plat> platsChoisis) {
+        this.platsChoisis = platsChoisis;
     }
 
-    // Additional methods if needed
+    public int getIdUClient() {
+        return idUClient;
+    }
+
+    public void setIdUClient(int idUClient) {
+        this.idUClient = idUClient;
+    }
+
+    public int getIdUVendeur() {
+        return idUVendeur;
+    }
+
+    public void setIdUVendeur(int idUVendeur) {
+        this.idUVendeur = idUVendeur;
+    }
+
+    public int getIdULivreur() {
+        return idULivreur;
+    }
+
+    public void setIdULivreur(int idULivreur) {
+        this.idULivreur = idULivreur;
+    }
+
+    // Methods
+    public void calculerPrixTotal() {
+        // Implementation here
+    }
 }
+
 

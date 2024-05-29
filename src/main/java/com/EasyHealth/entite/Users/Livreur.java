@@ -1,10 +1,6 @@
-package com.EasyHealth.entite;
+package com.EasyHealth.entite.Users;
 
-import util.DataSource;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import com.EasyHealth.entite.Enum.UserType;
 
 public class Livreur extends User {
     private boolean disponible;
@@ -22,7 +18,17 @@ public class Livreur extends User {
         this.disponible = disponible;
     }
 
-    // Livreur-specific methods
+    public void accepterCommande() {
+        // Implementation here
+    }
+
+    public void suivreLivraison() {
+        // Implementation here
+    }
+
+    public void notifierClient() {
+        // Implementation here
+    }
 }
 
 

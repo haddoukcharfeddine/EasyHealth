@@ -1,35 +1,43 @@
 package com.EasyHealth.entite;
 
+import java.util.List;
+
 public class Menu {
-    private int idm;
-    private int idu;
-    private String Nommenu;
+    private int idM;
+    private String nomMenu;
+    private static List<Plat> plats;
+
+    // Constructors
+    public Menu() {}
+
+    public Menu(int idM, String nomMenu, List<Plat> plats) {
+        this.idM = idM;
+        this.nomMenu = nomMenu;
+        this.plats = plats;
+    }
 
     // Getters and Setters
-
-    public int getIdm() {
-        return idm;
+    public int getIdM() {
+        return idM;
     }
 
-    public void setIdm(int idm) {
-        this.idm = idm;
+    public void setIdM(int idM) {
+        this.idM = idM;
     }
 
-    public int getIdu() {
-        return idu;
+    public String getNomMenu() {
+        return nomMenu;
     }
 
-    public void setIdu(int idu) {
-        this.idu = idu;
+    public void setNomMenu(String nomMenu) {
+        this.nomMenu = nomMenu;
     }
 
-    public String getNommenu() {
-        return Nommenu;
+    public static List<Plat> getPlats() {
+        return plats;
     }
 
-    public void setNommenu(String nommenu) {
-        Nommenu = nommenu;
+    public void setPlats(List<Plat> plats) {
+        this.plats = plats;
     }
-// Additional methods if needed
 }
-
