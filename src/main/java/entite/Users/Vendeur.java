@@ -1,10 +1,9 @@
-package com.EasyHealth.entite.Users;
+package entite.Users;
 
-import com.EasyHealth.entite.Enum.UserType;
-import com.EasyHealth.entite.Menu;
-import com.EasyHealth.entite.Plat;
-import com.EasyHealth.entite.Users.User;
-import com.EasyHealth.service.PlatService;
+import entite.Enum.UserType;
+import entite.Menu;
+import entite.Plat;
+import service.PlatService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +12,8 @@ import java.util.Scanner;
 public class Vendeur extends User {
     List<Plat> plats= new ArrayList<>();
     // Constructors, getters, setters, and methods
-    public Vendeur(int id, String nom, String email, String telephone, String adresse) {
-        super(id, nom, email, telephone, adresse, UserType.Vendeur);
+    public Vendeur(int id, String nom, String email, String telephone, String adresse,String password) {
+        super(id, nom, email, telephone, adresse,password, UserType.Vendeur);
     }
 
     public void ajouterPlat() {

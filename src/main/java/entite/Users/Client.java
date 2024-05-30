@@ -1,10 +1,10 @@
-package com.EasyHealth.entite.Users;
+package entite.Users;
 
-import com.EasyHealth.entite.Commande;
-import com.EasyHealth.entite.Enum.Objectif;
-import com.EasyHealth.entite.Enum.UserType;
-import com.EasyHealth.entite.Menu;
-import com.EasyHealth.entite.Plat;
+import entite.Commande;
+import entite.Enum.Objectif;
+import entite.Enum.UserType;
+import entite.Menu;
+import entite.Plat;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,8 +16,8 @@ public class Client extends User {
     private List<Commande> historiqueCommandes;
 
     // Constructors, getters, setters, and methods
-    public Client(int id, String nom, String email, String telephone, String adresse, Objectif objectif) {
-        super(id, nom, email, telephone, adresse, UserType.Client);
+    public Client(int id, String nom, String email, String telephone, String adresse,String password, Objectif objectif) {
+        super(id, nom, email, telephone, adresse,password, UserType.Client);
         this.objectif = objectif;
     }
 

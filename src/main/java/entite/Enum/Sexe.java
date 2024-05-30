@@ -1,4 +1,4 @@
-package com.EasyHealth.entite.Enum;
+package entite.Enum;
 
 public enum Sexe {
     HOMME,

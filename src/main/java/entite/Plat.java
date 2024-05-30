@@ -1,4 +1,4 @@
-package com.EasyHealth.entite;
+package entite;
 
 public class Plat {
     private int idP;

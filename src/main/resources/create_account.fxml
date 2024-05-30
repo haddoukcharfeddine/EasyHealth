@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="431.0" prefWidth="557.0" spacing="10" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreateAccountController">
+    <HBox alignment="TOP_RIGHT" prefHeight="19.0" prefWidth="557.0">
+        <children>
+            <Button fx:id="accueilButton" mnemonicParsing="false" text="Accueil" />
+        </children>
+    </HBox>
+    <Label id="createAccountTitle" text="Créer un Compte" />
+    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+        <children>
+            <TextField fx:id="newUsernameField" promptText="Entrer le Nom d'utilisateur" />
+        </children>
+    </HBox>
+    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+        <children>
+            <TextField fx:id="newEmailField" promptText="Entrer l'Email" />
+        </children>
+    </HBox>
+    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+        <children>
+            <TextField fx:id="newTelephoneField" promptText="Entrer le Numéro de Téléphone" />
+        </children>
+    </HBox>
+    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+        <children>
+            <TextField fx:id="newAddresseField" promptText="Entrer l'Adresse" />
+        </children>
+    </HBox>
+    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+        <children>
+            <TextField fx:id="newPasswordField" promptText="Entrer le Mot de Passe" />
+        </children>
+    </HBox>
+    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+        <children>
+            <ChoiceBox fx:id="userTypeChoiceBox" prefWidth="150.0" />
+        </children>
+    </HBox>
+    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+        <children>
+            <ChoiceBox fx:id="objectifChoiceBox" prefWidth="150.0" />
+        </children>
+    </HBox>
+    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+        <children>
+            <CheckBox fx:id="disponibleCheckBox" text="Êtes-vous disponible dès maintenant ?" />
+        </children>
+    </HBox>
+    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+        <children>
+            <TextField fx:id="poidsField" promptText="Entrer le Poids" />
+        </children>
+    </HBox>
+    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+        <children>
+            <TextField fx:id="tailleField" promptText="Entrer la Taille" />
+        </children>
+    </HBox>
+    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+        <children>
+            <TextField fx:id="ageField" promptText="Entrer l'Âge" />
+        </children>
+    </HBox>
+    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+        <children>
+            <ChoiceBox fx:id="sexeChoiceBox" prefWidth="150.0" />
+        </children>
+    </HBox>
+    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+        <children>
+            <ChoiceBox fx:id="ActiverChoiceBox" prefWidth="150.0" />
+        </children>
+    </HBox>
+    <Button fx:id="createAccountButton" text="Créer un Compte" />
+</VBox>

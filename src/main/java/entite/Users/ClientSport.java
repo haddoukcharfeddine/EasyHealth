@@ -1,9 +1,8 @@
-package com.EasyHealth.entite.Users;
+package entite.Users;
 
-import com.EasyHealth.entite.Enum.Activer;
-import com.EasyHealth.entite.Enum.Objectif;
-import com.EasyHealth.entite.Enum.Sexe;
-import com.EasyHealth.entite.Users.Client;
+import entite.Enum.Activer;
+import entite.Enum.Objectif;
+import entite.Enum.Sexe;
 
 public class ClientSport extends Client {
     private float poids;
@@ -13,8 +12,8 @@ public class ClientSport extends Client {
     private Activer activer;
 
     // Constructors, getters, setters, and methods
-    public ClientSport(int id, String nom, String email, String telephone, String adresse, Objectif objectif, float poids, float taille, int age, Sexe sexe, Activer activer) {
-        super(id, nom, email, telephone, adresse, objectif);
+    public ClientSport(int id, String nom, String email, String telephone, String adresse,String password, Objectif objectif, float poids, float taille, int age, Sexe sexe, Activer activer) {
+        super(id, nom, email, telephone, adresse,password,objectif);
         this.poids = poids;
         this.taille = taille;
         this.age = age;

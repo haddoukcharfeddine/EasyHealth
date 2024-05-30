@@ -1,7 +1,8 @@
 package com.EasyHealth;
-import com.EasyHealth.entite.Users.User;
-import com.EasyHealth.entite.Users.Vendeur;
-import com.EasyHealth.service.UserService;
+import entite.Enum.Objectif;
+import entite.Users.Client;
+import entite.Users.User;
+import service.UserService;
 
 
 import java.sql.SQLException;
@@ -13,7 +14,7 @@ public class Main {
         UserService userService = new UserService();
 // creat Users
 
-//        Client client = new Client(0, "John Dhoa", "john@example.com", "123456789", "123 Street", Objectif.Aucun);
+//        Client client = new Client(0, "John Dhoa", "john@example.com", "123456789", "123 Street","password", Objectif.Aucun);
 //     userService.addUser(client);
 
 //        Vendeur vendeur = new Vendeur(0, "Vendor One", "vendor1@example.com", "234567890", "789 Boulevard");
@@ -50,7 +51,12 @@ public class Main {
 //        userService.deleteUserByTelephone("123456789");
 
 
-//   User.creerUnCompte();
+//        try {
+//            User.creerUnCompte();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
 
         //creer plat
 //        Vendeur vendeur = new Vendeur(43, "Vendor One", "vendor1@example.com", "234567890", "789 Boulevard");

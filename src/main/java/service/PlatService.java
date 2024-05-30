@@ -1,13 +1,13 @@
-package com.EasyHealth.service;
+package service;
 
-import com.EasyHealth.entite.*;
+import com.EasyHealth.Main;
+import entite.Menu;
+import entite.Plat;
 import util.DataSource;
 
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public  class PlatService implements PService<Plat> {

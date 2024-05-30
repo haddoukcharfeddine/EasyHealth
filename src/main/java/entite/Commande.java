@@ -1,4 +1,4 @@
-package com.EasyHealth.entite;
+package entite;
 
 import java.util.Date;
 import java.util.List;

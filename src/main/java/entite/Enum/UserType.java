@@ -1,4 +1,4 @@
-package com.EasyHealth.entite.Enum;
+package entite.Enum;
 
 public enum UserType {
     Client, Vendeur, Livreur

@@ -1,10 +1,10 @@
-package com.EasyHealth.service;
+package service;
 
-import com.EasyHealth.entite.Enum.Activer;
-import com.EasyHealth.entite.Enum.Objectif;
-import com.EasyHealth.entite.Enum.Sexe;
-import com.EasyHealth.entite.Enum.UserType;
-import com.EasyHealth.entite.Users.*;
+import entite.Enum.Activer;
+import entite.Enum.Objectif;
+import entite.Enum.Sexe;
+import entite.Enum.UserType;
+import entite.Users.*;
 import util.DataSource;
 
 
@@ -23,53 +23,58 @@ public class UserService implements IService<User> {
     //user
     @Override
     public void addUser(User user) {
-        String sql = "INSERT INTO User (nom, email, telephone, adresse, userType, objectif, poids, taille, age, sexe, activer, disponible) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO User (nom, email, telephone, adresse, password, userType, objectif, poids, taille, age, sexe, activer, disponible) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
         try (PreparedStatement stmt = cnx.prepareStatement(sql)) {
+            // Set common parameters
             stmt.setString(1, user.getNom());
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getTelephone());
             stmt.setString(4, user.getAdresse());
-            stmt.setString(5, user.getUserType().name());
+            stmt.setString(5, user.getPassword());
+            stmt.setString(6, user.getUserType().name());
 
+            // Set specific parameters based on user type
             if (user instanceof Client) {
                 Client client = (Client) user;
-                stmt.setString(6, client.getObjectif().name());
+                stmt.setString(7, client.getObjectif().name());
 
-                if (client.getClass() == ClientSport.class && (client.getObjectif() == Objectif.Perdre_du_poids || client.getObjectif() == Objectif.Prendre_du_poids)) {
+                if (client instanceof ClientSport && (client.getObjectif() == Objectif.Perdre_du_poids || client.getObjectif() == Objectif.Prendre_du_poids)) {
                     ClientSport clientSport = (ClientSport) client;
-                    stmt.setFloat(7, clientSport.getPoids());
-                    stmt.setFloat(8, clientSport.getTaille());
-                    stmt.setInt(9, clientSport.getAge());
-                    stmt.setString(10, clientSport.getSexe().name());
-                    stmt.setString(11, clientSport.getActiver().name());
+                    stmt.setFloat(8, clientSport.getPoids());
+                    stmt.setFloat(9, clientSport.getTaille());
+                    stmt.setInt(10, clientSport.getAge());
+                    stmt.setString(11, clientSport.getSexe().name());
+                    stmt.setString(12, clientSport.getActiver().name());
                 } else {
-                    stmt.setNull(7, Types.FLOAT);
                     stmt.setNull(8, Types.FLOAT);
-                    stmt.setNull(9, Types.INTEGER);
-                    stmt.setNull(10, Types.VARCHAR);
+                    stmt.setNull(9, Types.FLOAT);
+                    stmt.setNull(10, Types.INTEGER);
                     stmt.setNull(11, Types.VARCHAR);
+                    stmt.setNull(12, Types.VARCHAR);
                 }
-                stmt.setNull(12, Types.BOOLEAN);
+                stmt.setNull(13, Types.BOOLEAN);
             } else if (user instanceof Livreur) {
                 Livreur livreur = (Livreur) user;
-                stmt.setNull(6, Types.VARCHAR);
-                stmt.setNull(7, Types.FLOAT);
-                stmt.setNull(8, Types.FLOAT);
-                stmt.setNull(9, Types.INTEGER);
-                stmt.setNull(10, Types.VARCHAR);
-                stmt.setNull(11, Types.VARCHAR);
-                stmt.setBoolean(12, livreur.isDisponible());
+                stmt.setBoolean(13, livreur.isDisponible());
             } else {
-                stmt.setNull(6, Types.VARCHAR);
-                stmt.setNull(7, Types.FLOAT);
+                // Set default values for other types of users
+                stmt.setNull(7, Types.VARCHAR);
                 stmt.setNull(8, Types.FLOAT);
-                stmt.setNull(9, Types.INTEGER);
-                stmt.setNull(10, Types.VARCHAR);
+                stmt.setNull(9, Types.FLOAT);
+                stmt.setNull(10, Types.INTEGER);
                 stmt.setNull(11, Types.VARCHAR);
-                stmt.setNull(12, Types.BOOLEAN);
+                stmt.setNull(12, Types.VARCHAR);
+                stmt.setNull(13, Types.BOOLEAN);
             }
 
-            stmt.executeUpdate();
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected == 1) {
+                System.out.println("User added successfully!");
+            } else {
+                System.out.println("Failed to add user!");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -87,6 +92,7 @@ public class UserService implements IService<User> {
                 String email = rs.getString("email");
                 String telephone = rs.getString("telephone");
                 String adresse = rs.getString("adresse");
+                String password = rs.getString("password");
                 UserType userType = UserType.valueOf(rs.getString("userType"));
                 Objectif objectif = rs.getString("objectif") != null ? Objectif.valueOf(rs.getString("objectif")) : null;
 
@@ -106,22 +112,22 @@ public class UserService implements IService<User> {
                     System.out.println("Creating ClientSport object:"); // Print creation of ClientSport object
                     // Print other relevant information as needed
 
-                    return new ClientSport(id, nom, email, telephone, adresse, objectif, poids, taille, age, sexe, activer);
+                    return new ClientSport(id, nom, email, telephone, adresse,password, objectif, poids, taille, age, sexe, activer);
                 } else if (userType == UserType.Client) {
                     System.out.println("Creating Client object:"); // Print creation of Client object
                     // Print other relevant information as needed
-                    return new Client(id, nom, email, telephone, adresse, objectif);
+                    return new Client(id, nom, email, telephone, adresse,password, objectif);
                 } else if (userType == UserType.Vendeur) {
                     System.out.println("Creating Vendeur object:"); // Print creation of Vendeur object
                     // Print other relevant information as needed
-                    return new Vendeur(id, nom, email, telephone, adresse);
+                    return new Vendeur(id, nom, email, telephone, adresse,password);
                 } else if (userType == UserType.Livreur) {
                     boolean disponible = rs.getBoolean("disponible");
 
                     System.out.println("Creating Livreur object:"); // Print creation of Livreur object
                     // Print other relevant information as needed
 
-                    return new Livreur(id, nom, email, telephone, adresse, disponible);
+                    return new Livreur(id, nom, email, telephone, adresse,password, disponible);
                 }
             }
         } catch (SQLException e) {
@@ -153,6 +159,10 @@ public class UserService implements IService<User> {
         if (user.getAdresse() != null) {
             updateFields.add("adresse = ?");
             updateValues.add(user.getAdresse());
+        }
+        if (user.getPassword() != null) {
+            updateFields.add("password = ?");
+            updateValues.add(user.getPassword());
         }
         if (user.getUserType() != null) {
             updateFields.add("userType = ?");
@@ -205,7 +215,7 @@ public class UserService implements IService<User> {
                             return; // Exit method
                         }
 
-                        client = new ClientSport(client.getId(), client.getNom(), client.getEmail(), client.getTelephone(), client.getAdresse(), newObjectif, poids, taille, age, sexe, activer);
+                        client = new ClientSport(client.getId(), client.getNom(), client.getEmail(), client.getTelephone(), client.getAdresse(),client.getPassword(), newObjectif, poids, taille, age, sexe, activer);
                         deleteUser(oldId);
                         addUser(client);
                     } else {
@@ -344,6 +354,7 @@ public class UserService implements IService<User> {
                 String nom = rs.getString("nom");
                 String email = rs.getString("email");
                 String adresse = rs.getString("adresse");
+                String password = rs.getString("password");
                 UserType userType = UserType.valueOf(rs.getString("userType"));
                 Objectif objectif = rs.getString("objectif") != null ? Objectif.valueOf(rs.getString("objectif")) : null;
 
@@ -363,22 +374,22 @@ public class UserService implements IService<User> {
                     System.out.println("Creating ClientSport object:"); // Print creation of ClientSport object
                     // Print other relevant information as needed
 
-                    return new ClientSport(id, nom, email, telephone, adresse, objectif, poids, taille, age, sexe, activer);
+                    return new ClientSport(id, nom, email, telephone, adresse,password,objectif, poids, taille, age, sexe, activer);
                 } else if (userType == UserType.Client) {
                     System.out.println("Creating Client object:"); // Print creation of Client object
                     // Print other relevant information as needed
-                    return new Client(id, nom, email, telephone, adresse, objectif);
+                    return new Client(id, nom, email, telephone, adresse,password, objectif);
                 } else if (userType == UserType.Vendeur) {
                     System.out.println("Creating Vendeur object:"); // Print creation of Vendeur object
                     // Print other relevant information as needed
-                    return new Vendeur(id, nom, email, telephone, adresse);
+                    return new Vendeur(id, nom, email, telephone, adresse,password);
                 } else if (userType == UserType.Livreur) {
                     boolean disponible = rs.getBoolean("disponible");
 
                     System.out.println("Creating Livreur object:"); // Print creation of Livreur object
                     // Print other relevant information as needed
 
-                    return new Livreur(id, nom, email, telephone, adresse, disponible);
+                    return new Livreur(id, nom, email, telephone, adresse,password, disponible);
                 }
             }
         } catch (SQLException e) {
@@ -400,10 +411,32 @@ public class UserService implements IService<User> {
             System.out.println("Failed to delete user with telephone: " + telephone); // Print error message
         }
     }
-//
-    //plat
+    @Override
+    public boolean checkTelephoneExists(String telephone) throws SQLException {
+        String sql = "SELECT COUNT(*) AS count FROM User WHERE telephone = ?";
+        try (PreparedStatement stmt = cnx.prepareStatement(sql)) {
+            stmt.setString(1, telephone);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    int count = rs.getInt("count");
+                    return count > 0;
+                }
+            }
+        }
+        return false;
+    }
+    @Override
+    public boolean validateLogin(String telephone, String password) throws SQLException {
+        String sql = "SELECT * FROM User WHERE telephone = ? AND password = ?";
+        try (PreparedStatement stmt = cnx.prepareStatement(sql)) {
+            stmt.setString(1, telephone);
+            stmt.setString(2, password); // No need to hash the password
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next(); // If a row is found, the login is successful
+            }
+        }
+    }
 
- //
 
 
 

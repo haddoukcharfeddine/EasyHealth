@@ -1,7 +1,7 @@
-package com.EasyHealth.service;
+package service;
 
-import com.EasyHealth.entite.Menu;
-import com.EasyHealth.entite.Plat;
+import entite.Menu;
+import entite.Plat;
 
 import java.util.List;
 

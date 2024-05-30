@@ -1,12 +1,12 @@
-package com.EasyHealth.entite.Users;
+package entite.Users;
 
-import com.EasyHealth.entite.Enum.UserType;
+import entite.Enum.UserType;
 
 public class Livreur extends User {
     private boolean disponible;
 
-    public Livreur(int id, String nom, String email, String telephone, String adresse, boolean disponible) {
-        super(id, nom, email, telephone, adresse, UserType.Livreur);
+    public Livreur(int id, String nom, String email, String telephone, String adresse,String password, boolean disponible) {
+        super(id, nom, email, telephone, adresse,password, UserType.Livreur);
         this.disponible = disponible;
     }
 
