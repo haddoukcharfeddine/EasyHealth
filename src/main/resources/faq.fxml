@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" alignment="CENTER" spacing="10" fx:controller="controller.FAQController">
-    <Label text="FAQ Page" id="faqTitle"/>
-    <!-- Add your FAQ content here -->
-    <Button text="Back" fx:id="backBtn"/>
+<VBox alignment="CENTER" spacing="10" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FAQController">
+   <HBox fx:id="header" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+      <children>
+          <Label id="mainTitle" text="FAQ Page" />
+      </children>
+   </HBox>
+    <Label text="Dans un monde où la santé et le bien-être sont de plus en plus importants, notre plateforme de commande de repas se veut une solution innovante pour répondre aux besoins nutritionnels individuels des clients. Notre plateforme de commande de repas offre une solution complète et personnalisée pour répondre aux besoins nutritionnels des clients tout en simplifiant le processus de commande et de livraison. Nous sommes convaincus que cette approche améliorera l'expérience des clients et encouragera des habitudes alimentaires plus saines et durables." wrapText="true" />
+    <Button fx:id="backBtn" text="Back" />
+   <HBox fx:id="footer" prefHeight="100.0" prefWidth="200.0" />
 </VBox>
-

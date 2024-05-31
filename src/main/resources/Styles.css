@@ -3,7 +3,7 @@
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-VBox {
+VBox, HBox {
     -fx-background-color: #f9f9f9;
     -fx-padding: 20px;
 }
@@ -12,59 +12,50 @@ HBox {
     -fx-padding: 10px;
 }
 
-Button {
-    -fx-background-color: #556B2F;
+/* Common Button Styles */
+.button-common, Button, ButtonBar > Button, #loginButton, #creat, #AccueilButton, #createAccountButton, #accueilButton {
+    -fx-background-color: #a9c988;
     -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-font-size: 14px;
     -fx-padding: 10px 20px;
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
 }
 
-Button:hover {
-    -fx-background-color: #6b8e23;
+.button-common:hover, Button:hover, ButtonBar > Button:hover, #loginButton:hover, #creat:hover, #AccueilButton:hover, #createAccountButton:hover, #accueilButton:hover {
+    -fx-background-color: #a9c988;
 }
 
 ButtonBar > Button {
-    -fx-background-color: #556B2F;
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
     -fx-padding: 5px 10px;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
 }
 
-ButtonBar > Button:hover {
-    -fx-background-color: #6b8e23;
-}
-
-Label {
+Label, #footer Label {
     -fx-font-size: 18px;
     -fx-text-fill: #333;
 }
 
-#header {
-    -fx-background-color: #556B2F;
+#header, #headert {
+    -fx-background-color: #a9c988;
     -fx-padding: 10px;
     -fx-border-radius: 5px;
 }
 
-#header Button {
+#header Button, #header #loginBtn, #header #PanierBtn, #header #menusBtn, #header #faqBtn {
     -fx-background-color: transparent;
     -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-font-size: 14px;
     -fx-border-width: 0;
-    -fx-padding: 5px 10px; /* Align button height with the header */
+    -fx-padding: 5px 10px;
 }
 
-#header Button:hover {
-    -fx-text-fill: #556B2F;
+#header Button:hover, #header #loginBtn:hover, #header #PanierBtn:hover, #header #menusBtn:hover, #header #faqBtn:hover {
+    -fx-text-fill: #a9c988;
     -fx-background-color: white;
 }
 
-#header #SearchText {
+#header #SearchText, #footer #emailField, #telephoneField, #passwordField, #newUsernameField, #newEmailField, #newTelephoneField, #newAddresseField, #newPasswordField, #poidsField, #tailleField, #ageField {
     -fx-background-color: white;
     -fx-text-fill: #333;
     -fx-font-size: 14px;
@@ -72,21 +63,10 @@ Label {
     -fx-border-radius: 5px;
 }
 
-#header #SearchBtn {
-    -fx-background-color: white;
-    -fx-text-fill: #556B2F;
-    -fx-font-weight: bold;
-    -fx-border-radius: 5px;
-}
-
-#header #SearchBtn:hover {
-    -fx-background-color: #f0f0f0;
-}
-
 #mainTitle {
     -fx-font-size: 36px;
     -fx-font-weight: bold;
-    -fx-text-fill: #556B2F;
+    -fx-text-fill: #caa669;
 }
 
 #mainSubtitle {
@@ -97,7 +77,7 @@ Label {
 }
 
 #storeListBtn {
-    -fx-background-color: #556B2F;
+    -fx-background-color: #caa669;
     -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-font-size: 16px;
@@ -107,172 +87,43 @@ Label {
 }
 
 #storeListBtn:hover {
-    -fx-background-color: #6b8e23;
+    -fx-background-color: #a9c988;
 }
 
 #footer {
-    -fx-background-color: #556B2F;
+    -fx-background-color: #a9c988;
     -fx-padding: 20px;
     -fx-border-radius: 5px;
 }
 
-#footer Label {
-    -fx-font-size: 18px;
-    -fx-text-fill: white;
-}
-
-#footer #emailField {
+#footer #sendBtn, #header #SearchBtn {
     -fx-background-color: white;
-    -fx-text-fill: #333;
-    -fx-font-size: 14px;
-    -fx-padding: 5px;
-    -fx-border-radius: 5px;
-}
-
-#footer #sendBtn {
-    -fx-background-color: white;
-    -fx-text-fill: #556B2F;
+    -fx-text-fill: #a9c988;
     -fx-font-weight: bold;
     -fx-border-radius: 5px;
 }
-#footer #sendBtn:hover {
+
+#footer #sendBtn:hover, #header #SearchBtn:hover {
     -fx-background-color: #f0f0f0;
 }
 
-/* Adjustments for the Login and Panier buttons */
-#header #loginBtn {
-    -fx-background-color: transparent;
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-font-size: 14px;
-    -fx-border-width: 0;
-    -fx-padding: 5px 10px;
-}
-
-#header #PanierBtn {
-    -fx-background-color: transparent;
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-font-size: 14px;
-    -fx-border-width: 0;
-    -fx-padding: 5px 10px;
-}
-
-/* Adjustments for the Menu and FAQ buttons */
-#header #menusBtn {
-    -fx-background-color: transparent;
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-font-size: 14px;
-    -fx-border-width: 0;
-    -fx-padding: 5px 10px;
-}
-
-#header #faqBtn {
-    -fx-background-color: transparent;
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-font-size: 14px;
-    -fx-border-width: 0;
-    -fx-padding: 5px 10px;
-}
-
-/* Adjustments for the Search Text Field and Button */
-#header #SearchText {
-    -fx-background-color: white;
-    -fx-text-fill: #333;
-    -fx-font-size: 14px;
-    -fx-padding: 5px;
-    -fx-border-radius: 5px;
-}
-
-#header #SearchBtn {
-    -fx-background-color: white;
-    -fx-text-fill: #556B2F;
-    -fx-font-weight: bold;
-    -fx-border-radius: 5px;
-}
-
-#header #SearchBtn:hover {
-    -fx-background-color: #f0f0f0;
-}
 /* login */
-#loginTitle {
+#loginTitle, #createAccountTitle {
     -fx-font-size: 24px;
     -fx-font-weight: bold;
     -fx-text-fill: #000000;
 }
 
-#telephoneField, #passwordField {
-    -fx-background-color: #ffffff;
-    -fx-prompt-text-fill: #888888;
-    -fx-text-fill: #000000;
-    -fx-border-color: #000000;
-    -fx-border-width: 1px;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
+/* Specific Button Styles in the header */
+#header #SearchText {
+    -fx-font-size: 14px;
 }
 
-#loginButton, #creat, #AccueilButton {
-    -fx-background-color: #556B2F;
-    -fx-text-fill: #FFFFFF;
-    -fx-font-weight: bold;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
+/* ChoiceBox and CheckBox specific styles */
+#userTypeChoiceBox, #objectifChoiceBox, #sexeChoiceBox, #ActiverChoiceBox, #disponibleCheckBox {
+    /* Add specific styling for ChoiceBox and CheckBox here */
 }
 
-#loginButton:hover, #creat:hover, #AccueilButton:hover {
-    -fx-background-color: #ffffff;
-    -fx-text-fill: #556B2F;
-}
-/* creat account */
-
-#createAccountTitle {
-    -fx-font-size: 24px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #000000;
-}
-
-#newUsernameField,
-#newEmailField,
-#newTelephoneField,
-#newAddresseField,
-#newPasswordField,
-#poidsField,
-#tailleField,
-#ageField {
-    -fx-background-color: #ffffff;
-    -fx-prompt-text-fill: #888888;
-    -fx-text-fill: #000000;
-    -fx-border-color: #000000;
-    -fx-border-width: 1px;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
-}
-
-#userTypeChoiceBox,
-#objectifChoiceBox,
-#sexeChoiceBox,
-#ActiverChoiceBox {
-    /* Add specific styling for ChoiceBox here */
-}
-
-#disponibleCheckBox {
-    /* Add specific styling for CheckBox here */
-}
-
-#createAccountButton, #accueilButton {
-    -fx-background-color: #556B2F;
-    -fx-text-fill: #FFFFFF;
-    -fx-font-weight: bold;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
-}
-
-#createAccountButton:hover, #accueilButton:hover {
-    -fx-background-color: #ffffff;
-    -fx-text-fill: #556B2F;
-}
 
 
 

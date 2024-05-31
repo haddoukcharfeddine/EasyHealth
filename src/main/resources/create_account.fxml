@@ -1,84 +1,138 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="498.0" prefWidth="732.0" spacing="20" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreateAccountController" stylesheets="@styles.css">
-    <HBox alignment="TOP_RIGHT" prefHeight="19.0" prefWidth="557.0">
+<VBox alignment="CENTER" prefHeight="755.0" prefWidth="761.0" spacing="20" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreateAccountController">
+    <HBox id="header" alignment="TOP_RIGHT" prefHeight="26.0" prefWidth="721.0">
         <children>
-            <Button fx:id="accueilButton" mnemonicParsing="false" text="Accueil" />
+            <ImageView fitHeight="146.0" fitWidth="126.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
+                <image>
+                    <Image url="@images/logos.png" />
+                </image>
+                <viewport>
+                    <Rectangle2D />
+                </viewport>
+                <HBox.margin>
+                    <Insets bottom="-40.0" top="-40.0" />
+                </HBox.margin>
+            </ImageView>
+            <HBox id="headert" prefHeight="39.0" prefWidth="371.0" />
+            <HBox id="headert" alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                <children>
+                    <Button fx:id="accueilButton" mnemonicParsing="false" text="Accueil">
+                  <graphic>
+                     <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@images/Accueil.png" />
+                        </image>
+                     </ImageView>
+                  </graphic></Button>
+                </children>
+            </HBox>
         </children>
     </HBox>
+    <HBox prefHeight="47.0" prefWidth="721.0" />
     <Label id="createAccountTitle" text="Créer un Compte" />
-    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+    <HBox alignment="CENTER" prefHeight="38.0" prefWidth="721.0">
         <children>
-            <TextField fx:id="newUsernameField" promptText="Entrer le Nom d'utilisateur" />
-        </children>
-    </HBox>
-    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-        <children>
-            <TextField fx:id="newEmailField" promptText="Entrer l'Email" />
-        </children>
-    </HBox>
-    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-        <children>
-            <TextField fx:id="newTelephoneField" promptText="Entrer le Numéro de Téléphone" />
-        </children>
-    </HBox>
-    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-        <children>
-            <TextField fx:id="newAddresseField" promptText="Entrer l'Adresse" />
-        </children>
-    </HBox>
-    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-        <children>
+            <TextField fx:id="newUsernameField" promptText="Entrer le Nom d'utilisateur">
+                <HBox.margin>
+                    <Insets right="20.0" />
+                </HBox.margin>
+            </TextField>
+            <TextField fx:id="newEmailField" promptText="Entrer l'Email">
+                <HBox.margin>
+                    <Insets right="20.0" />
+                </HBox.margin>
+            </TextField>
             <TextField fx:id="newPasswordField" promptText="Entrer le Mot de Passe" />
         </children>
     </HBox>
-    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+    <HBox alignment="CENTER" prefHeight="44.0" prefWidth="721.0">
         <children>
-            <ChoiceBox fx:id="userTypeChoiceBox" prefWidth="150.0" />
+            <TextField fx:id="newTelephoneField" promptText="Entrer le Numéro de Téléphone">
+                <HBox.margin>
+                    <Insets right="50.0" />
+                </HBox.margin></TextField>
+            <TextField fx:id="newAddresseField" promptText="Entrer l'Adresse" />
         </children>
     </HBox>
-    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+    <HBox alignment="CENTER" prefHeight="20.0" prefWidth="721.0">
         <children>
-            <ChoiceBox fx:id="objectifChoiceBox" prefWidth="150.0" />
+            <ChoiceBox fx:id="userTypeChoiceBox" prefWidth="150.0">
+                <padding>
+                    <Insets bottom="-5.0" top="-5.0" />
+                </padding></ChoiceBox>
         </children>
+        <VBox.margin>
+            <Insets top="-20.0" />
+        </VBox.margin>
     </HBox>
-    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+    <HBox alignment="CENTER" prefHeight="35.0" prefWidth="721.0">
+        <children>
+            <ChoiceBox fx:id="objectifChoiceBox" prefWidth="150.0">
+                <padding>
+                    <Insets bottom="-5.0" top="-5.0" />
+                </padding></ChoiceBox>
+        </children>
+        <VBox.margin>
+            <Insets top="-20.0" />
+        </VBox.margin>
+    </HBox>
+    <HBox alignment="CENTER" prefHeight="23.0" prefWidth="721.0">
         <children>
             <CheckBox fx:id="disponibleCheckBox" text="Êtes-vous disponible dès maintenant ?" />
         </children>
     </HBox>
-    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+    <HBox alignment="CENTER" prefHeight="21.0" prefWidth="721.0">
         <children>
-            <TextField fx:id="poidsField" promptText="Entrer le Poids" />
+            <TextField fx:id="poidsField" promptText="Entrer le Poids">
+                <HBox.margin>
+                    <Insets right="50.0" />
+                </HBox.margin></TextField>
+            <TextField fx:id="tailleField" promptText="Entrer la Taille">
+                <HBox.margin>
+                    <Insets right="50.0" />
+                </HBox.margin></TextField>
+            <TextField fx:id="ageField" promptText="Entrer l'Âge">
+                <HBox.margin>
+                    <Insets />
+                </HBox.margin></TextField>
         </children>
+        <VBox.margin>
+            <Insets top="-10.0" />
+        </VBox.margin>
     </HBox>
-    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+    <HBox alignment="CENTER" prefHeight="37.0" prefWidth="721.0">
         <children>
-            <TextField fx:id="tailleField" promptText="Entrer la Taille" />
+            <ChoiceBox fx:id="sexeChoiceBox" prefWidth="150.0">
+                <HBox.margin>
+                    <Insets right="50.0" />
+                </HBox.margin>
+                <padding>
+                    <Insets bottom="-5.0" top="-5.0" />
+                </padding></ChoiceBox>
+            <ChoiceBox fx:id="ActiverChoiceBox" prefWidth="150.0">
+                <HBox.margin>
+                    <Insets right="50.0" />
+                </HBox.margin>
+                <padding>
+                    <Insets bottom="-5.0" top="-5.0" />
+                </padding></ChoiceBox>
         </children>
-    </HBox>
-    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-        <children>
-            <TextField fx:id="ageField" promptText="Entrer l'Âge" />
-        </children>
-    </HBox>
-    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-        <children>
-            <ChoiceBox fx:id="sexeChoiceBox" prefWidth="150.0" />
-        </children>
-    </HBox>
-    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-        <children>
-            <ChoiceBox fx:id="ActiverChoiceBox" prefWidth="150.0" />
-        </children>
+        <VBox.margin>
+            <Insets />
+        </VBox.margin>
     </HBox>
     <Button fx:id="createAccountButton" text="Créer un Compte" />
 </VBox>
