@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -37,6 +38,8 @@ public class AccueilDeux {
 
     @FXML
     private Button storeListBtn;
+    @FXML
+    private TextField SearchText;
 
     @FXML
     private HBox footer;
@@ -52,7 +55,6 @@ public class AccueilDeux {
     private void initialize() {
         // Initialize your buttons and other components if needed
         menusBtn.setOnAction(event -> handleMenus());
-        faqBtn.setOnAction(event -> handleFAQ());
         storeListBtn.setOnAction(event -> handleStoreList());
         logoutItem.setOnAction(event -> handleLogout());
 
@@ -65,10 +67,7 @@ public class AccueilDeux {
         System.out.println("Menus button clicked");
     }
 
-    private void handleFAQ() {
-        // Handle FAQ button action
-        System.out.println("FAQ button clicked");
-    }
+
 
     private void handleStoreList() {
         // Handle store list button action
@@ -112,6 +111,13 @@ public class AccueilDeux {
                 addMenuItem.setVisible(false);
             }
         }
+    }
+    @FXML
+    private void handleSearchAction(ActionEvent event) {
+        // Perform the action you want when Enter is pressed in the search text field
+        String searchText = SearchText.getText();
+        System.out.println("Search action performed with text: " + searchText);
+        // Add your search logic here
     }
 }
 

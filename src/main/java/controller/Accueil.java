@@ -1,10 +1,14 @@
 package controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,6 +22,9 @@ public class Accueil {
 
     @FXML
     private Button faqBtn;
+
+    @FXML
+    private TextField SearchText;
 
     @FXML
     public void initialize() {
@@ -59,6 +66,13 @@ public class Accueil {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    @FXML
+    private void handleSearchAction(ActionEvent event) {
+        // Perform the action you want when Enter is pressed in the search text field
+        String searchText = SearchText.getText();
+        System.out.println("Search action performed with text: " + searchText);
+        // Add your search logic here
     }
 }
 
