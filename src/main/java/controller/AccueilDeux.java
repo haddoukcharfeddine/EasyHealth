@@ -3,6 +3,7 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,21 +12,23 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class AccueilDeux {
 
     @FXML
     private Button menusBtn;
 
-    @FXML
-    private Button faqBtn;
 
     @FXML
     private MenuButton profileMenuBtn;
-
     @FXML
     private MenuItem addDishItem;
+    @FXML
+    private MenuItem profileItem;
 
     @FXML
     private MenuItem addMenuItem;
@@ -33,11 +36,6 @@ public class AccueilDeux {
     @FXML
     private MenuItem logoutItem;
 
-    @FXML
-    private TextField emailField;
-
-    @FXML
-    private Button storeListBtn;
     @FXML
     private TextField SearchText;
 
@@ -55,7 +53,7 @@ public class AccueilDeux {
     private void initialize() {
         // Initialize your buttons and other components if needed
         menusBtn.setOnAction(event -> handleMenus());
-        storeListBtn.setOnAction(event -> handleStoreList());
+        profileItem.setOnAction(event -> handleProfileEditAction());
         logoutItem.setOnAction(event -> handleLogout());
 
         // Set visibility of vendor-specific menu items
@@ -87,7 +85,7 @@ public class AccueilDeux {
         try {
             // Load the login page
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Accueil.fxml"));
-            Parent root = loader.load();
+            VBox root = loader.load();
 
             // Get the current stage (window) and set the new scene
             Stage stage = (Stage) profileMenuBtn.getScene().getWindow();
@@ -97,6 +95,22 @@ public class AccueilDeux {
             e.printStackTrace();
         }
     }
+    private void handleProfileEditAction() {
+        try {
+            // Load the EditProfile FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/editprofile.fxml"));
+            VBox root = loader.load();
+
+            // Get the current stage (window) and set the new scene
+            Stage stage = (Stage) profileMenuBtn.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 
     private void updateMenuItemsVisibility() {

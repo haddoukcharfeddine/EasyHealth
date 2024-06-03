@@ -4,12 +4,15 @@
 }
 
 VBox, HBox {
-    -fx-background-color: #f9f9f9;
+    -fx-background-color: #fff5ec;
     -fx-padding: 20px;
 }
 
-HBox {
-    -fx-padding: 10px;
+#imagee {
+    -fx-background-color:#f4d548;
+    -fx-padding: 0px 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 40px;
 }
 
 /* Common Button Styles */

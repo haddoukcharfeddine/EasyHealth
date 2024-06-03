@@ -177,112 +177,34 @@ public class UserService implements IService<User> {
                 updateValues.add(newObjectif.name());
 
                 if (newObjectif == Objectif.Perdre_du_poids || newObjectif == Objectif.Prendre_du_poids) {
-                    int oldId = client.getId();
-                    float poids = Float.NaN;
-                    float taille = Float.NaN;
-                    int age = -1;
-                    Sexe sexe = null;
-                    Activer activer = null;
-
-                    if (!(client.getClass() == ClientSport.class)) {
-                        Scanner scanner = new Scanner(System.in);
-                        System.out.println("Please provide additional information for the selected goal (Poids, Taille, Age, Sexe, Activer):");
-
-                        System.out.print("Poids: ");
-                        poids = scanner.nextFloat();
-
-                        System.out.print("Taille: ");
-                        taille = scanner.nextFloat();
-
-                        System.out.print("Age: ");
-                        age = scanner.nextInt();
-
-                        System.out.print("Sexe (HOMME/FEMME): ");
-                        String sexeInput = scanner.next().toUpperCase();
-                        try {
-                            sexe = Sexe.valueOf(sexeInput);
-                        } catch (IllegalArgumentException e) {
-                            System.out.println("Invalid Sexe. Please enter HOMME or FEMME.");
-                            return; // Exit method
-                        }
-
-                        System.out.print("Activer (SEDENTAIRE, LEGERE, MODEREE, INTENSE): ");
-                        String activerInput = scanner.next().toUpperCase();
-                        try {
-                            activer = Activer.valueOf(activerInput);
-                        } catch (IllegalArgumentException e) {
-                            System.out.println("Invalid Activer. Please enter SEDENTAIRE, LEGERE, MODEREE, or INTENSE.");
-                            return; // Exit method
-                        }
-
-                        client = new ClientSport(client.getId(), client.getNom(), client.getEmail(), client.getTelephone(), client.getAdresse(),client.getPassword(), newObjectif, poids, taille, age, sexe, activer);
-                        deleteUser(oldId);
-                        addUser(client);
+                    ClientSport clientSport;
+                    if (!(client instanceof ClientSport)) {
+                        clientSport = new ClientSport(client.getId(), client.getNom(), client.getEmail(), client.getTelephone(), client.getAdresse(), client.getPassword(), newObjectif, 0, 0, 0, Sexe.HOMME, Activer.SEDENTAIRE);
+                        deleteUser(client.getId());
+                        addUser(clientSport);
                     } else {
-                        ClientSport clientSport = (ClientSport) client;
-                        if (Float.isNaN(clientSport.getPoids())) {
-                            Scanner scanner = new Scanner(System.in);
-                            System.out.print("Poids: ");
-                            poids = scanner.nextFloat();
-                            clientSport.setPoids(poids);
-                        }
-                        if (Float.isNaN(clientSport.getTaille())) {
-                            Scanner scanner = new Scanner(System.in);
-                            System.out.print("Taille: ");
-                            taille = scanner.nextFloat();
-                            clientSport.setTaille(taille);
-                        }
-                        if (clientSport.getAge() == -1) {
-                            Scanner scanner = new Scanner(System.in);
-                            System.out.print("Age: ");
-                            age = scanner.nextInt();
-                            clientSport.setAge(age);
-                        }
-                        if (clientSport.getSexe() == null) {
-                            Scanner scanner = new Scanner(System.in);
-                            System.out.print("Sexe (HOMME/FEMME): ");
-                            String sexeInput = scanner.next().toUpperCase();
-                            try {
-                                sexe = Sexe.valueOf(sexeInput);
-                                clientSport.setSexe(sexe);
-                            } catch (IllegalArgumentException e) {
-                                System.out.println("Invalid Sexe. Please enter HOMME or FEMME.");
-                                return; // Exit method
-                            }
-                        }
-                        if (clientSport.getActiver() == null) {
-                            Scanner scanner = new Scanner(System.in);
-                            System.out.print("Activer (SEDENTAIRE, LEGERE, MODEREE, INTENSE): ");
-                            String activerInput = scanner.next().toUpperCase();
-                            try {
-                                activer = Activer.valueOf(activerInput);
-                                clientSport.setActiver(activer);
-                            } catch (IllegalArgumentException e) {
-                                System.out.println("Invalid Activer. Please enter SEDENTAIRE, LEGERE, MODEREE, or INTENSE.");
-                                return; // Exit method
-                            }
-                        }
+                        clientSport = (ClientSport) client;
                     }
 
-                    if (!Float.isNaN(((ClientSport) client).getPoids())) {
+                    if (!Float.isNaN(clientSport.getPoids())) {
                         updateFields.add("poids = ?");
-                        updateValues.add(((ClientSport) client).getPoids());
+                        updateValues.add(clientSport.getPoids());
                     }
-                    if (!Float.isNaN(((ClientSport) client).getTaille())) {
+                    if (!Float.isNaN(clientSport.getTaille())) {
                         updateFields.add("taille = ?");
-                        updateValues.add(((ClientSport) client).getTaille());
+                        updateValues.add(clientSport.getTaille());
                     }
-                    if (((ClientSport) client).getAge() != -1) {
+                    if (clientSport.getAge() != -1) {
                         updateFields.add("age = ?");
-                        updateValues.add(((ClientSport) client).getAge());
+                        updateValues.add(clientSport.getAge());
                     }
-                    if (((ClientSport) client).getSexe() != null) {
+                    if (clientSport.getSexe() != null) {
                         updateFields.add("sexe = ?");
-                        updateValues.add(((ClientSport) client).getSexe().name());
+                        updateValues.add(clientSport.getSexe().name());
                     }
-                    if (((ClientSport) client).getActiver() != null) {
+                    if (clientSport.getActiver() != null) {
                         updateFields.add("activer = ?");
-                        updateValues.add(((ClientSport) client).getActiver().name());
+                        updateValues.add(clientSport.getActiver().name());
                     }
                 } else if (newObjectif == Objectif.Aucun) {
                     updateFields.add("poids = NULL");
@@ -330,6 +252,7 @@ public class UserService implements IService<User> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
     @Override
@@ -436,7 +359,9 @@ public class UserService implements IService<User> {
             }
         }
     }
-
+    public static UserType getUserType(User user) {
+        return user.getUserType();
+    }
 
 
 

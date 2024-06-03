@@ -9,12 +9,12 @@ public interface IService <T>{
     T getUserById(int id);
     void updateUser(T t);
     void deleteUser(int id);
-    User getUserByTelephone(String telephone);
     void deleteUserByTelephone(String telephone);
 
     boolean checkTelephoneExists(String telephone) throws SQLException;
 
     boolean validateLogin(String telephone, String password) throws SQLException;
+    User getUserByTelephone(String telephone) throws SQLException;
 
 
 //Menu

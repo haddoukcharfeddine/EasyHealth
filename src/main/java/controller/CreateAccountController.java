@@ -16,6 +16,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import service.UserService;
+import session.UserSession;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -76,7 +77,7 @@ public class CreateAccountController {
         objectifChoiceBox.getItems().addAll("Perdre_du_poids", "Prendre_du_poids", "Aucun");
         objectifChoiceBox.setValue("Objectif");
 
-        sexeChoiceBox.getItems().addAll("Sexe", "HOMME", "FEMME");
+        sexeChoiceBox.getItems().addAll( "HOMME", "FEMME");
         sexeChoiceBox.setValue("Sexe");
         ActiverChoiceBox.getItems().addAll("SEDENTAIRE", "LEGERE", "MODEREE", "INTENSE");
         ActiverChoiceBox.setValue("Activiter");
@@ -155,10 +156,11 @@ public class CreateAccountController {
             String userType = userTypeChoiceBox.getValue();
             String objectifType = objectifChoiceBox.getValue();
             String activerType = ActiverChoiceBox.getValue();
+            String sexe = sexeChoiceBox.getValue();
             float poids = 0;
             float taille = 0;
             int age = 0;
-            String sexe = sexeChoiceBox.getValue();
+
 
             // Parse poids, taille, and age only if they are visible
             if (poidsField.isVisible()) {
@@ -197,13 +199,14 @@ public class CreateAccountController {
             if (newUser != null) {
                 UserService userService = new UserService();
                 userService.addUser(newUser);
+                User user = userService.getUserByTelephone(telephone);
+                UserSession session = UserSession.getInstance();
+                session.setTelephone(user.getTelephone());
+                session.setUserId(user.getId());
 
                 // Navigate to AccueilDeux after successful account creation
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccueilDeux.fxml"));
                 Parent root = loader.load();
-
-                AccueilDeux accueilDeux = loader.getController();
-                accueilDeux.setUserType(userType);
 
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(new Scene(root));

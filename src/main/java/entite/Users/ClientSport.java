@@ -21,6 +21,7 @@ public class ClientSport extends Client {
         this.activer = activer;
     }
 
+
     public float getPoids() { return poids; }
     public void setPoids(float poids) { this.poids = poids; }
     public float getTaille() { return taille; }

@@ -12,11 +12,10 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import service.UserService;
+import session.UserSession;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 public class LoginController {
 
@@ -36,7 +35,7 @@ public class LoginController {
     @FXML
     public void initialize() {
         // Initialize event handlers
-        creat.setOnAction(event -> navigateToCreat());
+        creat.setOnAction(event -> navigateToCreateAccount());
 
         AccueilButton.setOnAction(event -> navigateToAccueil());
 
@@ -68,14 +67,18 @@ public class LoginController {
             return;
         }
 
-        boolean loginSuccessful = userService.validateLogin(telephone, password);
+        User user = userService.getUserByTelephone(telephone);
 
-        if (loginSuccessful) {
+        if (user != null && userService.validateLogin(telephone, password)) {
+            UserSession session = UserSession.getInstance();
+            session.setTelephone(user.getTelephone());
+            session.setUserId(user.getId());
             navigateToAccueilDeux();
         } else {
             showErrorAlert("Invalid Credentials", "Telephone number or password is incorrect.");
         }
     }
+
     @FXML
     private void showErrorAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -83,9 +86,6 @@ public class LoginController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
-    }
-    private boolean isValidTelephone(String telephone) {
-        return true;
     }
 
     private void navigateToAccueil() {
@@ -100,6 +100,7 @@ public class LoginController {
             e.printStackTrace();
         }
     }
+
     private void navigateToAccueilDeux() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccueilDeux.fxml"));
@@ -108,12 +109,12 @@ public class LoginController {
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
-            showErrorAlert("Navigation Error", "Failed to load the Accueil page.");
+            showErrorAlert("Navigation Error", "Failed to load the Home page.");
             e.printStackTrace();
         }
     }
 
-    private void navigateToCreat() {
+    private void navigateToCreateAccount() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/create_account.fxml"));
             Parent root = loader.load();
@@ -121,11 +122,14 @@ public class LoginController {
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
-            showErrorAlert("Navigation Error", "Failed to load the Create page.");
+            showErrorAlert("Navigation Error", "Failed to load the Create Account page.");
             e.printStackTrace();
         }
     }
+
 }
+
+
 
 
 

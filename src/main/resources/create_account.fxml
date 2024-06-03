@@ -41,9 +41,8 @@
             </HBox>
         </children>
     </HBox>
-    <HBox prefHeight="47.0" prefWidth="721.0" />
-    <Label id="createAccountTitle" text="Créer un Compte" />
-    <HBox alignment="CENTER" prefHeight="38.0" prefWidth="721.0">
+    <Label id="createAccountTitle" prefHeight="23.0" prefWidth="192.0" text="Créer un Compte" />
+    <HBox alignment="CENTER" prefHeight="35.0" prefWidth="721.0">
         <children>
             <TextField fx:id="newUsernameField" promptText="Entrer le Nom d'utilisateur">
                 <HBox.margin>
@@ -58,7 +57,7 @@
             <TextField fx:id="newPasswordField" promptText="Entrer le Mot de Passe" />
         </children>
     </HBox>
-    <HBox alignment="CENTER" prefHeight="44.0" prefWidth="721.0">
+    <HBox alignment="CENTER" prefHeight="37.0" prefWidth="721.0">
         <children>
             <TextField fx:id="newTelephoneField" promptText="Entrer le Numéro de Téléphone">
                 <HBox.margin>
@@ -66,6 +65,12 @@
                 </HBox.margin></TextField>
             <TextField fx:id="newAddresseField" promptText="Entrer l'Adresse" />
         </children>
+      <opaqueInsets>
+         <Insets />
+      </opaqueInsets>
+      <VBox.margin>
+         <Insets top="-30.0" />
+      </VBox.margin>
     </HBox>
     <HBox alignment="CENTER" prefHeight="20.0" prefWidth="721.0">
         <children>
@@ -78,7 +83,7 @@
             <Insets top="-20.0" />
         </VBox.margin>
     </HBox>
-    <HBox alignment="CENTER" prefHeight="35.0" prefWidth="721.0">
+    <HBox alignment="CENTER" prefHeight="34.0" prefWidth="721.0">
         <children>
             <ChoiceBox fx:id="objectifChoiceBox" prefWidth="150.0">
                 <padding>
@@ -93,6 +98,9 @@
         <children>
             <CheckBox fx:id="disponibleCheckBox" text="Êtes-vous disponible dès maintenant ?" />
         </children>
+      <VBox.margin>
+         <Insets top="-30.0" />
+      </VBox.margin>
     </HBox>
     <HBox alignment="CENTER" prefHeight="21.0" prefWidth="721.0">
         <children>
@@ -110,7 +118,7 @@
                 </HBox.margin></TextField>
         </children>
         <VBox.margin>
-            <Insets top="-10.0" />
+            <Insets top="-20.0" />
         </VBox.margin>
     </HBox>
     <HBox alignment="CENTER" prefHeight="37.0" prefWidth="721.0">

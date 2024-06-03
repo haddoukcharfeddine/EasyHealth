@@ -10,7 +10,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox alignment="TOP_CENTER" spacing="20" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AccueilDeux">
@@ -34,7 +37,7 @@
                           </TextField>
                   </children>
                </HBox>
-                  <HBox alignment="CENTER" prefHeight="184.0" prefWidth="142.0">
+                  <HBox id="imagee" alignment="CENTER" prefHeight="151.0" prefWidth="174.0" HBox.hgrow="NEVER">
                       <children>
                           <ImageView fitHeight="168.0" fitWidth="194.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
                               <image>
@@ -92,21 +95,42 @@
       <center>
       
           <!-- Contenu Principal -->
-          <VBox alignment="CENTER" spacing="10" BorderPane.alignment="CENTER">
-              <Label id="mainTitle" text="LE BON REPAS, À CHAQUE FOIS" />
-              <Label id="mainSubtitle" text="Choisissez parmi un menu hebdomadaire varié proposant des recettes de 15 minutes, fraîchement préparées et livrées directement chez vous !" wrapText="true" />
-      
-              <!-- Grille d'Images -->
-              <!-- Ajouter ici la grille d'images si nécessaire -->
-      
-              <!-- Bouton Liste des Magasins -->
-              <Button fx:id="storeListBtn" text="Notre Liste de Magasins" />
+          <VBox alignment="CENTER" prefHeight="527.0" prefWidth="727.0" spacing="10" BorderPane.alignment="CENTER">
+            <children>
+               <GridPane prefHeight="34.0" prefWidth="687.0">
+                 <columnConstraints>
+                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="528.0" minWidth="10.0" prefWidth="244.0" />
+                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="458.0" minWidth="10.0" prefWidth="443.0" />
+                 </columnConstraints>
+                 <rowConstraints>
+                     <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                   <RowConstraints maxHeight="20.0" minHeight="0.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                   <RowConstraints maxHeight="20.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                   <RowConstraints maxHeight="20.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                     <RowConstraints maxHeight="20.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                 </rowConstraints>
+                  <children>
+                     <HBox prefHeight="46.0" prefWidth="204.0" GridPane.rowIndex="1">
+                        <children>
+                           <Label prefHeight="27.0" prefWidth="156.0" text="Calories" />
+                        </children>
+                     </HBox>
+                     <HBox prefHeight="66.0" prefWidth="369.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <children>
+                           <Label text="Proteine" />
+                        </children>
+                     </HBox>
+                  </children>
+               </GridPane>
+            </children>
           </VBox>
       </center>
       <bottom>
       
           <!-- Section Pied de Page -->
-          <HBox id="footer" alignment="CENTER" prefHeight="100.0" prefWidth="697.0" spacing="10" BorderPane.alignment="CENTER">
+          <HBox id="footer" alignment="CENTER" prefHeight="105.0" prefWidth="727.0" spacing="10" BorderPane.alignment="CENTER">
     </HBox>
       </bottom>
    </BorderPane>
