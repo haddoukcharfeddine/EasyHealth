@@ -7,7 +7,7 @@ public class UserSession {
     private int userId;
 
     private UserSession() {
-        // Constructor is private to prevent instantiation
+
     }
 
     public static UserSession getInstance() {

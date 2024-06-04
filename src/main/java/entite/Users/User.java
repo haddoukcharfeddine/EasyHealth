@@ -17,7 +17,7 @@ public  class User {
     private String password;
     private UserType userType;
 
-    // Constructors, getters, setters, and methods
+
     public User(int id, String nom, String email, String telephone,String adresse,String password ,UserType userType) {
         this.id = id;
         this.nom = nom;
@@ -30,7 +30,7 @@ public  class User {
 
 
 
-    // Getters and setters
+
 
     public String getPassword() {
         return password;
@@ -54,11 +54,11 @@ public  class User {
     public void setUserType(UserType userType) { this.userType = userType; }
 
     public void laisserReview() {
-        // implementation
+
     }
 
     public void consulterReview() {
-        // implementation
+
     }
 }
 

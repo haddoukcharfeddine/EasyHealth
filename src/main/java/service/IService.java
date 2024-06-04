@@ -17,7 +17,4 @@ public interface IService <T>{
     User getUserByTelephone(String telephone) throws SQLException;
 
 
-//Menu
-
-
 }

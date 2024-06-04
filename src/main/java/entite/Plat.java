@@ -24,7 +24,7 @@ public class Plat {
         this.Categorie =categorie;
     }
 
-    // Getters and Setters
+
     public int getIdP() {
         return idP;
     }

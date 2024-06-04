@@ -16,7 +16,7 @@ public class FAQController {
 
     @FXML
     public void initialize() {
-        // Set action for back button
+
         backBtn.setOnAction(event -> navigateToAccueil());
     }
 

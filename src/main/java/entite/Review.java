@@ -9,7 +9,7 @@ public class Review {
     private Date date;
     private int idUClient;
 
-    // Constructors
+
     public Review() {}
 
     public Review(int idReview, int rating, String comment, Date date, int idUClient) {
@@ -20,7 +20,7 @@ public class Review {
         this.idUClient = idUClient;
     }
 
-    // Getters and Setters
+
     public int getIdReview() {
         return idReview;
     }

@@ -17,7 +17,7 @@ public class MenuController {
 
     @FXML
     public void initialize() {
-        // Set action for back button
+
         backBtn.setOnAction(event -> handleBackButtonAction());
     }
 

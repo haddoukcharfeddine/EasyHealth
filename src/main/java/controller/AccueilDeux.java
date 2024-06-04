@@ -42,7 +42,7 @@ public class AccueilDeux {
     @FXML
     private HBox footer;
 
-    private String userType; // Store the user type
+    private String userType;
 
     public void setUserType(String userType) {
         this.userType = userType;
@@ -51,43 +51,43 @@ public class AccueilDeux {
 
     @FXML
     private void initialize() {
-        // Initialize your buttons and other components if needed
+
         menusBtn.setOnAction(event -> handleMenus());
         profileItem.setOnAction(event -> handleProfileEditAction());
         logoutItem.setOnAction(event -> handleLogout());
 
-        // Set visibility of vendor-specific menu items
+
         updateMenuItemsVisibility();
     }
 
     private void handleMenus() {
-        // Handle menus button action
+
         System.out.println("Menus button clicked");
     }
 
 
 
     private void handleStoreList() {
-        // Handle store list button action
+
         System.out.println("Store List button clicked");
     }
 
     private void handleAddDish() {
-        // Handle add dish action
+
         System.out.println("Add Dish action clicked");
     }
     private void handleAddMenu() {
-        // Handle add dish action
+
         System.out.println("Add Dish action clicked");
     }
 
     private void handleLogout() {
         try {
-            // Load the login page
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Accueil.fxml"));
             VBox root = loader.load();
 
-            // Get the current stage (window) and set the new scene
+
             Stage stage = (Stage) profileMenuBtn.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
@@ -97,11 +97,11 @@ public class AccueilDeux {
     }
     private void handleProfileEditAction() {
         try {
-            // Load the EditProfile FXML file
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/editprofile.fxml"));
             VBox root = loader.load();
 
-            // Get the current stage (window) and set the new scene
+
             Stage stage = (Stage) profileMenuBtn.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
@@ -128,10 +128,10 @@ public class AccueilDeux {
     }
     @FXML
     private void handleSearchAction(ActionEvent event) {
-        // Perform the action you want when Enter is pressed in the search text field
+
         String searchText = SearchText.getText();
         System.out.println("Search action performed with text: " + searchText);
-        // Add your search logic here
+
     }
 }
 

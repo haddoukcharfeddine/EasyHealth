@@ -19,15 +19,15 @@ public class Livreur extends User {
     }
 
     public void accepterCommande() {
-        // Implementation here
+
     }
 
     public void suivreLivraison() {
-        // Implementation here
+
     }
 
     public void notifierClient() {
-        // Implementation here
+
     }
 }
 

@@ -18,7 +18,7 @@
 <VBox alignment="TOP_CENTER" spacing="20" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditProfileController">
     <BorderPane prefHeight="600.0" prefWidth="800.0">
         <top>
-            <!-- Section En-tête -->
+
             <HBox id="header" alignment="CENTER" prefHeight="121.0" prefWidth="692.0" BorderPane.alignment="CENTER">
                 <children>
                     <Button fx:id="menusBtn" prefHeight="40.0" prefWidth="77.0" text="Menu">
@@ -143,9 +143,9 @@
         </center>
 
         <bottom>
-            <!-- Section Pied de Page -->
+
             <HBox id="footer" alignment="CENTER" prefHeight="63.0" prefWidth="800.0" spacing="10" BorderPane.alignment="CENTER">
-                <!-- Add footer elements here if needed -->
+
             </HBox>
         </bottom>
     </BorderPane>

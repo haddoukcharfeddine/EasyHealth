@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class Vendeur extends User {
     List<Plat> plats= new ArrayList<>();
-    // Constructors, getters, setters, and methods
+
     public Vendeur(int id, String nom, String email, String telephone, String adresse,String password) {
         super(id, nom, email, telephone, adresse,password, UserType.Vendeur);
     }
@@ -19,11 +19,11 @@ public class Vendeur extends User {
     public void ajouterPlat() {
         Scanner scanner = new Scanner(System.in);
 
-        // Prompt the Vendeur to enter the name of the Plat
+
         System.out.println("Entrer le nom du Plat:");
         String nomPlat = scanner.nextLine();
 
-        // Prompt the Vendeur to enter other details of the Plat (description, prix, protein, calories, categorie)
+
         System.out.println("Entrer la description:");
         String description = scanner.nextLine();
 
@@ -39,15 +39,15 @@ public class Vendeur extends User {
         System.out.println("Entrer la Categorie:");
         String categorie = scanner.nextLine();
 
-        // Create a new Plat object with the entered details
+
         Plat plat = new Plat(0, nomPlat, description, prix, protein, calories, this.getId(), categorie);
 
-        // Add the Plat using the UserService
+
         PlatService platService = new PlatService();
         platService.ajouterPlat(plat);
     }
 
-    // Method to delete an existing plat
+
 
     public void supprimerPlat() {
         PlatService platService = new PlatService();
@@ -68,21 +68,21 @@ public class Vendeur extends User {
         }
     }
 
-    // Method to add a new menu
+
     public void ajouterMenu(String nomMenu, List<Plat> plats) {
         PlatService platService = new PlatService();
         Menu menu = new Menu(0, nomMenu, plats);
         platService.ajouterMenu(menu);
     }
 
-    // Method to modify an existing menu
+
     public void modifierMenu(int idM, String nomMenu, List<Plat> plats) {
         PlatService platService = new PlatService();
         Menu menu = new Menu(idM, nomMenu, plats);
         platService.modifierMenu(menu);
     }
 
-    // Method to delete an existing menu
+
     public void supprimerMenu(int idM) {
         PlatService platService = new PlatService();
         platService.supprimerMenu(idM);

@@ -1,5 +1,7 @@
 package controller;
 
+import entite.Enum.UserType;
+import entite.Users.Livreur;
 import entite.Users.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,7 +36,7 @@ public class LoginController {
 
     @FXML
     public void initialize() {
-        // Initialize event handlers
+
         creat.setOnAction(event -> navigateToCreateAccount());
 
         AccueilButton.setOnAction(event -> navigateToAccueil());
@@ -52,7 +54,7 @@ public class LoginController {
     @FXML
     private void handleLogin(ActionEvent event) throws IOException, SQLException {
         String telephone = telephoneField.getText().trim();
-        String password = passwordField.getText().trim(); // No need to hash the password
+        String password = passwordField.getText().trim();
 
         if (telephone.isEmpty() || password.isEmpty()) {
             showErrorAlert("Incomplete Information", "Please enter both telephone number and password.");
@@ -73,7 +75,12 @@ public class LoginController {
             UserSession session = UserSession.getInstance();
             session.setTelephone(user.getTelephone());
             session.setUserId(user.getId());
-            navigateToAccueilDeux();
+
+            if (user.getUserType() == UserType.Livreur) {
+                navigateToAccueilTrois();
+            } else {
+                navigateToAccueilDeux();
+            }
         } else {
             showErrorAlert("Invalid Credentials", "Telephone number or password is incorrect.");
         }
@@ -114,6 +121,19 @@ public class LoginController {
         }
     }
 
+    private void navigateToAccueilTrois() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccueilTrois.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) loginButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            showErrorAlert("Navigation Error", "Failed to load the AccueilTrois page.");
+            e.printStackTrace();
+        }
+    }
+
     private void navigateToCreateAccount() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/create_account.fxml"));
@@ -126,9 +146,7 @@ public class LoginController {
             e.printStackTrace();
         }
     }
-
 }
-
 
 
 

@@ -7,7 +7,7 @@ public class Menu {
     private String nomMenu;
     private static List<Plat> plats;
 
-    // Constructors
+
     public Menu() {}
 
     public Menu(int idM, String nomMenu, List<Plat> plats) {
@@ -16,7 +16,7 @@ public class Menu {
         this.plats = plats;
     }
 
-    // Getters and Setters
+
     public int getIdM() {
         return idM;
     }

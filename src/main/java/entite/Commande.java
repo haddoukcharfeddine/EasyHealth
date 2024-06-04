@@ -25,7 +25,7 @@ public class Commande {
         this.idULivreur = idULivreur;
     }
 
-    // Getters and Setters
+
     public int getIdc() {
         return idc;
     }
@@ -84,7 +84,7 @@ public class Commande {
 
     // Methods
     public void calculerPrixTotal() {
-        // Implementation here
+
     }
 }
 

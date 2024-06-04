@@ -76,41 +76,41 @@ public class EditProfileController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Add items to the objectiveChoiceBox
+
         objectiveChoiceBox.getItems().addAll("Perdre_du_poids", "Prendre_du_poids", "Aucun");
-        objectiveChoiceBox.setValue("Objectif"); // Set default value
+        objectiveChoiceBox.setValue("Objectif");
         SexeChoiceBox.getItems().addAll("HOMME", "FEMME");
         SexeChoiceBox.setValue("Sexe");
 
-        // Add items to the ActiverChoiceBox
-        ActiverChoiceBox.getItems().addAll("SEDENTAIRE", "LEGERE", "MODEREE", "INTENSE");
-        ActiverChoiceBox.setValue("Activiter"); // Set default value
 
-        userService = new UserService(); // Initialize userService
+        ActiverChoiceBox.getItems().addAll("SEDENTAIRE", "LEGERE", "MODEREE", "INTENSE");
+        ActiverChoiceBox.setValue("Activiter");
+
+        userService = new UserService();
         UserSession session = UserSession.getInstance();
         String currentUserTelephone = session.getTelephone();
 
-        // Use the telephone number to fetch additional user data from the database
+
         currentUser = userService.getUserByTelephone(currentUserTelephone);
         if (currentUser != null) {
             String userType = String.valueOf(userService.getUserType(currentUser));
 
-            // Now you have the user's type and objective, you can show/hide UI elements accordingly
+
             if (userType.equals("Client")) {
-                // Show fields for basic user information
+
                 setupClientUI();
 
-                // Add a listener to the objectiveChoiceBox
+
                 objectiveChoiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
                     if ("Perdre_du_poids".equals(newValue) || "Prendre_du_poids".equals(newValue)) {
-                        // Show fields related to weight management
+
                         PoidsField.setVisible(true);
                         TailleField.setVisible(true);
                         ActiverChoiceBox.setVisible(true);
                         SexeChoiceBox.setVisible(true);
                         ageField.setVisible(true);
                     } else {
-                        // Hide weight management fields
+
                         PoidsField.setVisible(false);
                         TailleField.setVisible(false);
                         ActiverChoiceBox.setVisible(false);
@@ -119,7 +119,7 @@ public class EditProfileController implements Initializable {
                     }
                 });
             } else {
-                // For non-client users (vendeur, livreur, etc.), hide weight management fields
+
                 setupNonClientUI();
             }
         }
@@ -153,31 +153,29 @@ public class EditProfileController implements Initializable {
         TelephoneField.setVisible(true);
     }
 
-    // Load current user data
+
     private void loadUserData() {
         if (currentUser != null) {
-            // Populate basic user information
+
             NomField.setText(currentUser.getNom());
             emailField.setText(currentUser.getEmail());
             addressField.setText(currentUser.getAdresse());
             TelephoneField.setText(currentUser.getTelephone());
 
-            // Check if the user is a Client
+
             if (currentUser instanceof Client) {
                 Client client = (Client) currentUser;
                 String objective = String.valueOf(client.getObjectif());
 
-                // Set objective choice box
+
                 objectiveChoiceBox.setValue(objective);
 
-                // Clear fields related to weight management if the objective is not to lose or gain weight
                 if (!objective.equals("Perdre_du_poids") && !objective.equals("Prendre_du_poids")) {
                     PoidsField.clear();
                     TailleField.clear();
                     ageField.clear();
                 }
 
-                // Handle ClientSport specific information
                 if (client instanceof ClientSport) {
                     ClientSport clientSport = (ClientSport) client;
                     PoidsField.setText(String.valueOf(clientSport.getPoids()));
@@ -186,7 +184,7 @@ public class EditProfileController implements Initializable {
                     ActiverChoiceBox.setValue(clientSport.getActiver().toString());
                     SexeChoiceBox.setValue(clientSport.getSexe().toString());
                 } else {
-                    // Clear fields related to ClientSport specific information
+
                     PoidsField.clear();
                     TailleField.clear();
                     ageField.clear();
@@ -204,7 +202,7 @@ public class EditProfileController implements Initializable {
         String address = addressField.getText();
         String telephone = TelephoneField.getText();
 
-        // Get and validate additional fields if the user is a ClientSport
+
         float poids = !PoidsField.getText().isEmpty() ? Float.parseFloat(PoidsField.getText()) : Float.NaN;
         float taille = !TailleField.getText().isEmpty() ? Float.parseFloat(TailleField.getText()) : Float.NaN;
         int age = !ageField.getText().isEmpty() ? Integer.parseInt(ageField.getText()) : -1;
@@ -212,7 +210,7 @@ public class EditProfileController implements Initializable {
         Activer activer = ActiverChoiceBox.getValue() != null ? Activer.valueOf(ActiverChoiceBox.getValue()) : null;
         Sexe sexe = SexeChoiceBox.getValue() != null ? Sexe.valueOf(SexeChoiceBox.getValue()) : null;
 
-        // Update fields in the currentUser object
+
         currentUser.setNom(name);
         currentUser.setEmail(email);
         currentUser.setAdresse(address);
@@ -246,7 +244,7 @@ public class EditProfileController implements Initializable {
             }
         } else if (currentUser instanceof Livreur) {
             Livreur livreur = (Livreur) currentUser;
-            livreur.setDisponible(true); // Add logic for updating "disponible" if necessary
+            livreur.setDisponible(true);
         }
 
         try {
@@ -267,14 +265,14 @@ public class EditProfileController implements Initializable {
     @FXML
     private void handleLogout() {
         try {
-            // Load the FXML file of the Accueil page
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Accueil.fxml"));
             Parent root = loader.load();
 
-            // Get the current stage
+
             Stage stage = (Stage) profileMenuBtn.getScene().getWindow();
 
-            // Set the new scene with the content of the Accueil page
+
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
@@ -284,14 +282,14 @@ public class EditProfileController implements Initializable {
     }
     @FXML
     private void handleEditProfile(){try {
-        // Load the FXML file of the Accueil page
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/editProfile.fxml"));
         Parent root = loader.load();
 
-        // Get the current stage
+
         Stage stage = (Stage) profileMenuBtn.getScene().getWindow();
 
-        // Set the new scene with the content of the Accueil page
+
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

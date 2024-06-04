@@ -69,10 +69,10 @@ public class CreateAccountController {
 
     @FXML
     public void initialize() {
-        // Set action for Accueil button
+
         accueilButton.setOnAction(event -> navigateToAccueil());
         userTypeChoiceBox.getItems().addAll("Client", "Vendeur", "Livreur");
-        userTypeChoiceBox.setValue("Type d'Utilisateur"); // Set default value
+        userTypeChoiceBox.setValue("Type d'Utilisateur");
 
         objectifChoiceBox.getItems().addAll("Perdre_du_poids", "Prendre_du_poids", "Aucun");
         objectifChoiceBox.setValue("Objectif");
@@ -86,7 +86,7 @@ public class CreateAccountController {
 
         createAccountButton.setOnAction(event -> handleCreateAccount(event));
 
-        // Hide additional fields by default
+
         objectifChoiceBox.setVisible(false);
         disponibleCheckBox.setVisible(false);
         poidsField.setVisible(false);
@@ -100,7 +100,7 @@ public class CreateAccountController {
         String userType = userTypeChoiceBox.getValue();
         String objectifType = objectifChoiceBox.getValue();
 
-        // Reset visibility of all fields
+
         objectifChoiceBox.setVisible(true);
         poidsField.setVisible(true);
         tailleField.setVisible(true);
@@ -110,12 +110,10 @@ public class CreateAccountController {
         ActiverChoiceBox.setVisible(true);
 
         if (userType.equals("Client")) {
-
             if (objectifType.equals("Perdre_du_poids") || objectifType.equals("Prendre_du_poids")) {
                 disponibleCheckBox.setVisible(false);
-                // No changes needed, fields already visible
             } else {
-                // Hide additional fields if objectif is not related to weight
+
                 poidsField.setVisible(false);
                 tailleField.setVisible(false);
                 ageField.setVisible(false);
@@ -124,7 +122,7 @@ public class CreateAccountController {
                 ActiverChoiceBox.setVisible(false);
             }
         } else if (userType.equals("Vendeur")) {
-            // Hide all additional fields for Vendeur
+
             objectifChoiceBox.setVisible(false);
             poidsField.setVisible(false);
             tailleField.setVisible(false);
@@ -133,7 +131,7 @@ public class CreateAccountController {
             disponibleCheckBox.setVisible(false);
             ActiverChoiceBox.setVisible(false);
         } else if (userType.equals("Livreur")) {
-            // Hide additional fields for Livreur except for disponible
+
             objectifChoiceBox.setVisible(false);
             poidsField.setVisible(false);
             tailleField.setVisible(false);
@@ -146,8 +144,8 @@ public class CreateAccountController {
     @FXML
     private void handleCreateAccount(ActionEvent event) {
         try {
-            // Retrieve input values from the UI components
-            int id = 0; // You may need to generate or retrieve a unique ID
+
+            int id = 0;
             String username = newUsernameField.getText().trim();
             String email = newEmailField.getText().trim();
             String telephone = newTelephoneField.getText().trim();
@@ -162,7 +160,6 @@ public class CreateAccountController {
             int age = 0;
 
 
-            // Parse poids, taille, and age only if they are visible
             if (poidsField.isVisible()) {
                 poids = Float.parseFloat(poidsField.getText().trim());
             }
@@ -173,14 +170,14 @@ public class CreateAccountController {
                 age = Integer.parseInt(ageField.getText().trim());
             }
 
-            // Validate input based on objectifType and userType
+
             if (userType.equals("Client") && (objectifType.equals("Perdre_du_poids") || objectifType.equals("Prendre_du_poids"))) {
                 if (poids <= 0 || taille <= 0 || age <= 0) {
                     throw new NumberFormatException("Invalid input for poids, taille, or age!");
                 }
             }
 
-            // Create a new user object based on the input values
+
             User newUser = null;
             if (userType.equals("Client")) {
                 if (objectifType.equals("Perdre_du_poids") || objectifType.equals("Prendre_du_poids")) {
@@ -195,7 +192,7 @@ public class CreateAccountController {
                 newUser = new Livreur(id, username, email, telephone, address, password, disponible);
             }
 
-            // Add the new user to the database using UserService
+
             if (newUser != null) {
                 UserService userService = new UserService();
                 userService.addUser(newUser);
@@ -204,13 +201,12 @@ public class CreateAccountController {
                 session.setTelephone(user.getTelephone());
                 session.setUserId(user.getId());
 
-                // Navigate to AccueilDeux after successful account creation
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccueilDeux.fxml"));
-                Parent root = loader.load();
 
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(new Scene(root));
-                stage.show();
+                if (newUser instanceof Livreur) {
+                    navigateToAccueilTrois(event);
+                } else {
+                    navigateToAccueilDeux(event);
+                }
             }
         } catch (NumberFormatException e) {
             System.out.println("Invalid input for poids, taille, or age!");
@@ -221,13 +217,36 @@ public class CreateAccountController {
         }
     }
 
-    @FXML
     private void navigateToAccueil() {
         try {
             Parent accueilPage = FXMLLoader.load(getClass().getResource("/Accueil.fxml"));
             Scene accueilScene = new Scene(accueilPage, 800, 600);
             Stage stage = (Stage) createAccountButton.getScene().getWindow();
             stage.setScene(accueilScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void navigateToAccueilDeux(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccueilDeux.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void navigateToAccueilTrois(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccueilTrois.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

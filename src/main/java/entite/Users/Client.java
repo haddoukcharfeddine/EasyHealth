@@ -15,7 +15,7 @@ public class Client extends User {
     private Objectif objectif;
     private List<Commande> historiqueCommandes;
 
-    // Constructors, getters, setters, and methods
+
     public Client(int id, String nom, String email, String telephone, String adresse,String password, Objectif objectif) {
         super(id, nom, email, telephone, adresse,password, UserType.Client);
         this.objectif = objectif;
@@ -40,14 +40,14 @@ public class Client extends User {
 
     public void passerCommande() {
         Scanner scanner = new Scanner(System.in);
-        List<Plat> plats = Menu.getPlats(); // Assuming Menu is a class with static method getPlats()
+        List<Plat> plats = Menu.getPlats();
         List<Plat> platsCommandes = new ArrayList<>();
         String continuer;
 
         do {
             System.out.print("Entrez l'ID du plat que vous souhaitez commander: ");
             int idP = scanner.nextInt();
-            scanner.nextLine(); // consume newline
+            scanner.nextLine();
 
             Plat platCommande = null;
             for (Plat plat : plats) {
@@ -69,10 +69,10 @@ public class Client extends User {
         } while (continuer.equalsIgnoreCase("oui"));
 
         if (!platsCommandes.isEmpty()) {
-            Date dateCommande = new Date(); // Assuming current date as order date
+            Date dateCommande = new Date();
             double prixTotal = platsCommandes.stream().mapToDouble(Plat::getPrix).sum();
-            int idUVendeur = platsCommandes.get(0).getIdUVendeur(); // Assuming all plats are from the same vendor
-            int idULivreur = 1; // Placeholder for delivery person ID
+            int idUVendeur = platsCommandes.get(0).getIdUVendeur();
+            int idULivreur = 1;
 
             Commande nouvelleCommande = new Commande(0, dateCommande, prixTotal, platsCommandes, getId(), idUVendeur, idULivreur);
             historiqueCommandes.add(nouvelleCommande);
@@ -83,11 +83,11 @@ public class Client extends User {
     }
 
     public void payerCommande() {
-        // Implementation here
+
     }
 
     public void consulterHistoriqueCommandes() {
-        // Implementation here
+
     }
 
 }

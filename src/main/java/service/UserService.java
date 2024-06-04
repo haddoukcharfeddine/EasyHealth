@@ -27,7 +27,7 @@ public class UserService implements IService<User> {
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = cnx.prepareStatement(sql)) {
-            // Set common parameters
+
             stmt.setString(1, user.getNom());
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getTelephone());
@@ -35,7 +35,7 @@ public class UserService implements IService<User> {
             stmt.setString(5, user.getPassword());
             stmt.setString(6, user.getUserType().name());
 
-            // Set specific parameters based on user type
+
             if (user instanceof Client) {
                 Client client = (Client) user;
                 stmt.setString(7, client.getObjectif().name());
@@ -57,9 +57,16 @@ public class UserService implements IService<User> {
                 stmt.setNull(13, Types.BOOLEAN);
             } else if (user instanceof Livreur) {
                 Livreur livreur = (Livreur) user;
+                stmt.setNull(7, Types.VARCHAR);
+                stmt.setNull(8, Types.FLOAT);
+                stmt.setNull(9, Types.FLOAT);
+                stmt.setNull(10, Types.INTEGER);
+                stmt.setNull(11, Types.VARCHAR);
+                stmt.setNull(12, Types.VARCHAR);
+                stmt.setNull(13, Types.BOOLEAN);
                 stmt.setBoolean(13, livreur.isDisponible());
             } else {
-                // Set default values for other types of users
+
                 stmt.setNull(7, Types.VARCHAR);
                 stmt.setNull(8, Types.FLOAT);
                 stmt.setNull(9, Types.FLOAT);
@@ -85,7 +92,7 @@ public class UserService implements IService<User> {
         String sql = "SELECT * FROM User WHERE id = ?";
         try (PreparedStatement stmt = cnx.prepareStatement(sql)) {
             stmt.setInt(1, id);
-            System.out.println("Executing SQL query: " + sql); // Print SQL query
+            System.out.println("Executing SQL query: " + sql);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 String nom = rs.getString("nom");
@@ -96,7 +103,7 @@ public class UserService implements IService<User> {
                 UserType userType = UserType.valueOf(rs.getString("userType"));
                 Objectif objectif = rs.getString("objectif") != null ? Objectif.valueOf(rs.getString("objectif")) : null;
 
-                System.out.println("Retrieved user details:"); // Print retrieved user details
+                System.out.println("Retrieved user details:");
                 System.out.println("Name: " + nom);
                 System.out.println("Email: " + email);
                 System.out.println("User type: " + userType);
@@ -109,23 +116,23 @@ public class UserService implements IService<User> {
                     Sexe sexe = Sexe.valueOf(rs.getString("sexe"));
                     Activer activer = Activer.valueOf(rs.getString("activer"));
 
-                    System.out.println("Creating ClientSport object:"); // Print creation of ClientSport object
-                    // Print other relevant information as needed
+                    System.out.println("Creating ClientSport object:");
+
 
                     return new ClientSport(id, nom, email, telephone, adresse,password, objectif, poids, taille, age, sexe, activer);
                 } else if (userType == UserType.Client) {
-                    System.out.println("Creating Client object:"); // Print creation of Client object
-                    // Print other relevant information as needed
+                    System.out.println("Creating Client object:");
+
                     return new Client(id, nom, email, telephone, adresse,password, objectif);
                 } else if (userType == UserType.Vendeur) {
-                    System.out.println("Creating Vendeur object:"); // Print creation of Vendeur object
-                    // Print other relevant information as needed
+                    System.out.println("Creating Vendeur object:");
+
                     return new Vendeur(id, nom, email, telephone, adresse,password);
                 } else if (userType == UserType.Livreur) {
                     boolean disponible = rs.getBoolean("disponible");
 
-                    System.out.println("Creating Livreur object:"); // Print creation of Livreur object
-                    // Print other relevant information as needed
+                    System.out.println("Creating Livreur object:");
+
 
                     return new Livreur(id, nom, email, telephone, adresse,password, disponible);
                 }
@@ -133,7 +140,7 @@ public class UserService implements IService<User> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println("User not found."); // Print if user is not found
+        System.out.println("User not found.");
         return null;
     }
 
@@ -143,7 +150,7 @@ public class UserService implements IService<User> {
         List<String> updateFields = new ArrayList<>();
         List<Object> updateValues = new ArrayList<>();
 
-        // Check and add fields to be updated based on the provided User object
+
         if (user.getNom() != null) {
             updateFields.add("nom = ?");
             updateValues.add(user.getNom());
@@ -222,14 +229,14 @@ public class UserService implements IService<User> {
             updateValues.add(livreur.isDisponible());
         }
 
-        // Append the fields to be updated to the SQL query
+
         sql += String.join(", ", updateFields);
         sql += " WHERE id = ?";
 
         try (PreparedStatement stmt = cnx.prepareStatement(sql)) {
             int parameterIndex = 1;
 
-            // Set values for fields to be updated
+
             for (Object value : updateValues) {
                 if (value instanceof String) {
                     stmt.setString(parameterIndex++, (String) value);
@@ -244,10 +251,10 @@ public class UserService implements IService<User> {
                 }
             }
 
-            // Set ID for WHERE clause
+
             stmt.setInt(parameterIndex, user.getId());
 
-            // Execute the update statement
+
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -270,7 +277,7 @@ public class UserService implements IService<User> {
         String sql = "SELECT * FROM User WHERE telephone = ?";
         try (PreparedStatement stmt = cnx.prepareStatement(sql)) {
             stmt.setString(1, telephone);
-            System.out.println("Executing SQL query: " + sql); // Print SQL query
+            System.out.println("Executing SQL query: " + sql);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 int id = rs.getInt("id");
@@ -281,11 +288,11 @@ public class UserService implements IService<User> {
                 UserType userType = UserType.valueOf(rs.getString("userType"));
                 Objectif objectif = rs.getString("objectif") != null ? Objectif.valueOf(rs.getString("objectif")) : null;
 
-                System.out.println("Retrieved user details:"); // Print retrieved user details
+                System.out.println("Retrieved user details:");
                 System.out.println("Name: " + nom);
                 System.out.println("Email: " + email);
                 System.out.println("User type: " + userType);
-                // Print other relevant information as needed
+
 
                 if (userType == UserType.Client && (objectif == Objectif.Perdre_du_poids || objectif == Objectif.Prendre_du_poids)) {
                     float poids = rs.getFloat("poids");
@@ -294,23 +301,23 @@ public class UserService implements IService<User> {
                     Sexe sexe = Sexe.valueOf(rs.getString("sexe"));
                     Activer activer = Activer.valueOf(rs.getString("activer"));
 
-                    System.out.println("Creating ClientSport object:"); // Print creation of ClientSport object
-                    // Print other relevant information as needed
+                    System.out.println("Creating ClientSport object:");
+
 
                     return new ClientSport(id, nom, email, telephone, adresse,password,objectif, poids, taille, age, sexe, activer);
                 } else if (userType == UserType.Client) {
-                    System.out.println("Creating Client object:"); // Print creation of Client object
+                    System.out.println("Creating Client object:");
                     // Print other relevant information as needed
                     return new Client(id, nom, email, telephone, adresse,password, objectif);
                 } else if (userType == UserType.Vendeur) {
-                    System.out.println("Creating Vendeur object:"); // Print creation of Vendeur object
+                    System.out.println("Creating Vendeur object:");
                     // Print other relevant information as needed
                     return new Vendeur(id, nom, email, telephone, adresse,password);
                 } else if (userType == UserType.Livreur) {
                     boolean disponible = rs.getBoolean("disponible");
 
-                    System.out.println("Creating Livreur object:"); // Print creation of Livreur object
-                    // Print other relevant information as needed
+                    System.out.println("Creating Livreur object:");
+
 
                     return new Livreur(id, nom, email, telephone, adresse,password, disponible);
                 }
@@ -318,7 +325,7 @@ public class UserService implements IService<User> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println("User not found."); // Print if user is not found
+        System.out.println("User not found.");
         return null;
     }
 
@@ -328,10 +335,40 @@ public class UserService implements IService<User> {
         try (PreparedStatement stmt = cnx.prepareStatement(sql)) {
             stmt.setString(1, telephone);
             stmt.executeUpdate();
-            System.out.println("Deleted user with telephone: " + telephone); // Print confirmation message
+            System.out.println("Deleted user with telephone: " + telephone);
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Failed to delete user with telephone: " + telephone); // Print error message
+            System.out.println("Failed to delete user with telephone: " + telephone);
+        }
+    }
+    public boolean isLivreurAvailableByTelephone(String telephone) {
+        String sql = "SELECT disponible FROM User WHERE telephone = ? AND userType = ?";
+        try (PreparedStatement stmt = cnx.prepareStatement(sql)) {
+            stmt.setString(1, telephone);
+            stmt.setString(2, UserType.Livreur.name());
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getBoolean("disponible");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public void updateLivreurAvailabilityByTelephone(String telephone, boolean isAvailable) {
+        String sql = "UPDATE User SET disponible = ? WHERE telephone = ? AND userType = ?";
+        try (PreparedStatement stmt = cnx.prepareStatement(sql)) {
+            stmt.setBoolean(1, isAvailable);
+            stmt.setString(2, telephone);
+            stmt.setString(3, UserType.Livreur.name());
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected == 1) {
+                System.out.println("Livreur availability updated successfully!");
+            } else {
+                System.out.println("Failed to update livreur availability!");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
     @Override
@@ -353,9 +390,9 @@ public class UserService implements IService<User> {
         String sql = "SELECT * FROM User WHERE telephone = ? AND password = ?";
         try (PreparedStatement stmt = cnx.prepareStatement(sql)) {
             stmt.setString(1, telephone);
-            stmt.setString(2, password); // No need to hash the password
+            stmt.setString(2, password);
             try (ResultSet rs = stmt.executeQuery()) {
-                return rs.next(); // If a row is found, the login is successful
+                return rs.next();
             }
         }
     }

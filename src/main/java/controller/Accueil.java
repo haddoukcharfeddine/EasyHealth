@@ -29,7 +29,7 @@ public class Accueil {
     @FXML
     public void initialize() {
         menusBtn.setOnAction(event -> navigateToMenu());
-        // Set action for login button
+
         loginBtn.setOnAction(event -> navigateToLogin());
         faqBtn.setOnAction(event -> navigateToFAQ());
 
@@ -69,10 +69,10 @@ public class Accueil {
     }
     @FXML
     private void handleSearchAction(ActionEvent event) {
-        // Perform the action you want when Enter is pressed in the search text field
+
         String searchText = SearchText.getText();
         System.out.println("Search action performed with text: " + searchText);
-        // Add your search logic here
+
     }
 }
 

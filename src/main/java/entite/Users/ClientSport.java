@@ -11,7 +11,7 @@ public class ClientSport extends Client {
     private Sexe sexe;
     private Activer activer;
 
-    // Constructors, getters, setters, and methods
+
     public ClientSport(int id, String nom, String email, String telephone, String adresse,String password, Objectif objectif, float poids, float taille, int age, Sexe sexe, Activer activer) {
         super(id, nom, email, telephone, adresse,password,objectif);
         this.poids = poids;

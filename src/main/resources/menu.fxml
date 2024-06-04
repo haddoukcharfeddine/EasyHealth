@@ -6,7 +6,7 @@
 
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.MenuController" alignment="CENTER" spacing="10">
     <Label text="Menu Page" id="menuTitle"/>
-    <!-- Add your menu page content here -->
+
     <Button text="Back" fx:id="backBtn"/>
 </VBox>
 
