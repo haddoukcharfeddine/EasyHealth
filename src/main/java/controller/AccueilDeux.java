@@ -34,13 +34,14 @@ public class AccueilDeux {
     @FXML
     private MenuItem profileItem;
     @FXML
+    private MenuItem profileviewItem;
+    @FXML
     private MenuItem addMenuItem;
     @FXML
     private MenuItem logoutItem;
     @FXML
     private TextField SearchText;
-    @FXML
-    private HBox footer;
+
     @FXML
     private HBox CaloriesItem;
     @FXML
@@ -145,11 +146,19 @@ public class AccueilDeux {
             if (userType.equals("Vendeur")) {
                 addDishItem.setVisible(true);
                 addMenuItem.setVisible(true);
+                profileviewItem.setVisible(true);
+                platsBtn.setVisible(false);
+                menusBtn.setVisible(false);
+                SearchText.setVisible(false);
                 addDishItem.setOnAction(event -> handleAjouterPlatEditAction());
                 addMenuItem.setOnAction(event -> handleAddMenu());
             } else {
                 addDishItem.setVisible(false);
                 addMenuItem.setVisible(false);
+                profileviewItem.setVisible(false);
+                platsBtn.setVisible(true);
+                menusBtn.setVisible(true);
+                SearchText.setVisible(true);
             }
         }
     }

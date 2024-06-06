@@ -11,20 +11,18 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+
 <VBox alignment="TOP_CENTER" spacing="20" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AjouterPlatController">
     <BorderPane prefHeight="600.0" prefWidth="800.0">
     <top>
         <HBox id="header" alignment="CENTER" prefHeight="121.0" prefWidth="692.0" BorderPane.alignment="CENTER">
             <children>
                 <Button fx:id="AccueilButton" mnemonicParsing="false" text="Accueil" />
-                <Button fx:id="menusBtn" prefHeight="40.0" prefWidth="77.0" text="Menu">
-                    <HBox.margin>
-                        <Insets />
-                    </HBox.margin>
-                </Button>
                 <HBox fx:id="headert" alignment="CENTER" prefHeight="101.0" prefWidth="197.0" />
                 <HBox id="imagee" alignment="CENTER" prefHeight="151.0" prefWidth="174.0" HBox.hgrow="NEVER">
                     <children>
@@ -46,9 +44,9 @@
                 </HBox>
                 <MenuButton fx:id="profileMenuBtn" alignment="TOP_LEFT" blendMode="DARKEN" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="39.0">
                     <items>
+                        <MenuItem fx:id="profileviewItem" mnemonicParsing="false" text="Profile" />
                         <MenuItem fx:id="profileItem" mnemonicParsing="false" onAction="#handleEditProfile" text="Edit Profile" />
-                        <MenuItem fx:id="settingsItem" mnemonicParsing="false" text="Paramètres" />
-                        <MenuItem fx:id="addMenuItem" mnemonicParsing="false" text="Ajouter un Menu" visible="false" />
+                        <MenuItem fx:id="addMenuItem" mnemonicParsing="false" text="Ajouter un Menu" />
                         <MenuItem fx:id="logoutItem" mnemonicParsing="false" onAction="#handleLogout" text="Déconnexion" />
                     </items>
                     <graphic>
@@ -73,35 +71,49 @@
             <VBox alignment="CENTER" spacing="10">
                 <GridPane hgap="10" vgap="10">
                     <padding>
-                        <Insets top="20" right="20" bottom="20" left="20"/>
+                        <Insets bottom="20" left="20" right="20" top="20" />
                     </padding>
-                    <Label text="Nom du Plat:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                    <TextField fx:id="nomPlatField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                    <Label text="Nom du Plat:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <TextField fx:id="nomPlatField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-                    <Label text="Description:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                    <TextArea fx:id="descriptionField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                    <Label text="Description:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <TextArea fx:id="descriptionField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-                    <Label text="Prix:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                    <TextField fx:id="prixField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                    <Label text="Prix:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <TextField fx:id="prixField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-                    <Label text="Protéines:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-                    <TextField fx:id="proteineField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                    <Label text="Protéines:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                    <TextField fx:id="proteineField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-                    <Label text="Calories:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-                    <TextField fx:id="caloriesField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                    <Label text="Calories:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                    <TextField fx:id="caloriesField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
-                    <Label text="Catégorie:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-                    <TextField fx:id="categorieField" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+                    <Label text="Catégorie:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                    <TextField fx:id="categorieField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
 
-                    <Label text="Image:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
-                    <HBox spacing="10" GridPane.rowIndex="6" GridPane.columnIndex="1">
+                    <Label text="Image:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                    <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="6">
                         <children>
                             <ImageView fx:id="imageView" fitHeight="100.0" fitWidth="100.0" preserveRatio="true" />
-                            <Button text="Choisir Image" onAction="#handleSelectImage" />
+                            <Button onAction="#handleSelectImage" text="Choisir Image" />
                         </children>
                     </HBox>
 
-                    <Button text="Ajouter Plat" onAction="#handleAddPlat" GridPane.rowIndex="7" GridPane.columnIndex="1" GridPane.halignment="RIGHT"/>
+                    <Button onAction="#handleAddPlat" text="Ajouter Plat" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
+               <columnConstraints>
+                  <ColumnConstraints />
+                  <ColumnConstraints />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+               </rowConstraints>
                 </GridPane>
             </VBox>
         </center>

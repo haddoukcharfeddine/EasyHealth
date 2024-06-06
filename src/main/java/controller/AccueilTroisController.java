@@ -3,9 +3,13 @@ package controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import entite.Commande;
 import service.UserService;
@@ -25,14 +29,6 @@ public class AccueilTroisController {
     @FXML
     private MenuItem profileItem;
 
-    @FXML
-    private MenuItem settingsItem;
-
-    @FXML
-    private MenuItem addDishItem;
-
-    @FXML
-    private MenuItem addMenuItem;
 
     @FXML
     private MenuItem logoutItem;
@@ -74,6 +70,7 @@ public class AccueilTroisController {
         prixTotalColumn.setCellValueFactory(new PropertyValueFactory<>("prixTotal"));
         telephoneClientColumn.setCellValueFactory(new PropertyValueFactory<>("telephoneClient"));
         telephoneVendeurColumn.setCellValueFactory(new PropertyValueFactory<>("telephoneVendeur"));
+        profileItem.setOnAction(event -> handleProfileEditAction());
 
         // Add sample data
         commandesTable.setItems(commandesList);
@@ -152,5 +149,16 @@ public class AccueilTroisController {
     private void handleRefuseCommand(Commande commande) {
 
         System.out.println("Refused: " + commande);
+    }
+    private void handleProfileEditAction() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/editprofile.fxml"));
+            VBox root = loader.load();
+            Stage stage = (Stage) profileMenuBtn.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

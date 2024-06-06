@@ -68,8 +68,8 @@
                     </Button>
                     <MenuButton fx:id="profileMenuBtn" alignment="TOP_LEFT" blendMode="DARKEN" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="39.0">
                         <items>
+                            <MenuItem fx:id="profileviewItem" mnemonicParsing="false" text="Profile" visible="false" />
                             <MenuItem fx:id="profileItem" mnemonicParsing="false" text="Edit Profile" />
-                            <MenuItem fx:id="settingsItem" mnemonicParsing="false" text="Paramètres" />
                             <MenuItem fx:id="addDishItem" mnemonicParsing="false" text="Ajouter un Plat" visible="false" />
                             <MenuItem fx:id="addMenuItem" mnemonicParsing="false" text="Ajouter un Menu" visible="false" />
                             <MenuItem fx:id="logoutItem" mnemonicParsing="false" text="Déconnexion" />

@@ -38,7 +38,6 @@
                     <MenuButton fx:id="profileMenuBtn" alignment="TOP_LEFT" blendMode="DARKEN" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="39.0">
                         <items>
                             <MenuItem fx:id="profileItem" mnemonicParsing="false" text="Edit Profile" />
-                            <MenuItem fx:id="settingsItem" mnemonicParsing="false" text="Paramètres" />
                             <MenuItem fx:id="logoutItem" mnemonicParsing="false" text="Déconnexion" />
                         </items>
                         <graphic>

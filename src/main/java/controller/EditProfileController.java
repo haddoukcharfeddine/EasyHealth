@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import service.UserService;
 import session.UserSession;
@@ -68,6 +69,8 @@ public class EditProfileController implements Initializable {
 
     @FXML
     private MenuItem addMenuItem;
+    @FXML
+    private MenuItem profileviewItem;
 
     @FXML
     private MenuItem logoutItem;
@@ -75,6 +78,22 @@ public class EditProfileController implements Initializable {
    private  MenuButton profileMenuBtn;
     @FXML
     private Button AccueilButton;
+    @FXML
+    private Button platsBtn;
+    @FXML
+    private Button menusBtn;
+    @FXML
+    private Label poidsLabel;
+    @FXML
+    private Label tailleLabel;
+    @FXML
+    private Label activiterLabel;
+    @FXML
+    private Label sexeLabel;
+    @FXML
+    private Label ageLabel;
+    @FXML
+    private Label objecitiveLabel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -89,7 +108,7 @@ public class EditProfileController implements Initializable {
         ActiverChoiceBox.setValue("Activiter");
 
         AccueilButton.setOnAction(event -> navigateToAccueilDeux());
-
+        platsBtn.setOnAction(event -> handlePlatsButtonClick());
         userService = new UserService();
         UserSession session = UserSession.getInstance();
         String currentUserTelephone = session.getTelephone();
@@ -99,6 +118,25 @@ public class EditProfileController implements Initializable {
         if (currentUser != null) {
             String userType = String.valueOf(userService.getUserType(currentUser));
 
+            if (userType != null) {
+                if (userType.equals("Vendeur")) {
+                    addDishItem.setVisible(true);
+                    addMenuItem.setVisible(true);
+                    profileviewItem.setVisible(true);
+                    platsBtn.setVisible(false);
+                    menusBtn.setVisible(false);
+
+                    addDishItem.setOnAction(event -> handleAjouterPlatEditAction());
+                    addMenuItem.setOnAction(event -> handleAddMenu());
+                } else {
+                    addDishItem.setVisible(false);
+                    addMenuItem.setVisible(false);
+                    profileviewItem.setVisible(false);
+                    platsBtn.setVisible(false);
+                    menusBtn.setVisible(false);
+
+                }
+            }
 
             if (userType.equals("Client")) {
 
@@ -113,8 +151,8 @@ public class EditProfileController implements Initializable {
                         ActiverChoiceBox.setVisible(true);
                         SexeChoiceBox.setVisible(true);
                         ageField.setVisible(true);
-                    } else {
 
+                    } else {
                         PoidsField.setVisible(false);
                         TailleField.setVisible(false);
                         ActiverChoiceBox.setVisible(false);
@@ -150,6 +188,12 @@ public class EditProfileController implements Initializable {
         ActiverChoiceBox.setVisible(false);
         SexeChoiceBox.setVisible(false);
         ageField.setVisible(false);
+        poidsLabel.setVisible(false);
+        tailleLabel.setVisible(false);
+        activiterLabel.setVisible(false);
+        sexeLabel.setVisible(false);
+        ageLabel.setVisible(false);
+        objecitiveLabel.setVisible(false);
 
         NomField.setVisible(true);
         emailField.setVisible(true);
@@ -265,6 +309,33 @@ public class EditProfileController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+    @FXML
+    void handlePlatsButtonClick() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Plats.fxml"));
+            VBox root = loader.load();
+            Stage stage = (Stage) platsBtn.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle the exception here, such as displaying an error message to the user
+        }
+    }
+    private void handleAddMenu() {
+        System.out.println("Add Menu action clicked");
+    }
+    private void handleAjouterPlatEditAction() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterPlat.fxml"));
+            VBox root = loader.load();
+            Stage stage = (Stage) profileMenuBtn.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     @FXML
     private void handleLogout() {

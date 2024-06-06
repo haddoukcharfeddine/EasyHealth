@@ -9,14 +9,13 @@ import entite.Plat;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import service.PlatService;
 import session.UserSession;
 
@@ -38,12 +37,14 @@ public class AjouterPlatController {
     private ImageView imageView;
     @FXML
     private MenuButton profileMenuBtn;
-
+    @FXML
+    private Button AccueilButton;
     private File selectedImageFile;
 
     @FXML
     private void initialize() {
         profileMenuBtn.getItems().forEach(this::setMenuItemAction);
+        AccueilButton.setOnAction(event -> navigateToAccueilDeux());
     }
 
     private void setMenuItemAction(MenuItem menuItem) {
@@ -111,7 +112,18 @@ public class AjouterPlatController {
         // Optionally, display a success message
         showInformationAlert("Success", "Plat added successfully");
     }
-
+    private void navigateToAccueilDeux() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccueilDeux.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) AccueilButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            showErrorAlert("Erreur de navigation", "Échec du chargement de la page AccueilDeux.");
+            e.printStackTrace();
+        }
+    }
     @FXML
     private void handleEditProfile(ActionEvent event) {
         switchScene("/editprofile.fxml");
