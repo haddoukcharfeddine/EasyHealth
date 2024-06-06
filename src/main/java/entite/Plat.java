@@ -1,5 +1,7 @@
 package entite;
 
+
+
 public class Plat {
     private int idP;
     private String nomPlat;
@@ -7,13 +9,11 @@ public class Plat {
     private double prix;
     private int protein;
     private int calories;
-    private int idUVendeur;
-    private String Categorie;
+    private String idUVendeur;
+    private String categorie;
+    private byte[] imageData; // Image data as byte array
 
-    // Constructors
-
-
-    public Plat(int idP, String nomPlat, String description, double prix, int protein, int calories, int idUVendeur,String categorie) {
+    public Plat(int idP, String nomPlat, String description, double prix, int protein, int calories, String idUVendeur, String categorie, byte[] imageData) {
         this.idP = idP;
         this.nomPlat = nomPlat;
         this.description = description;
@@ -21,9 +21,11 @@ public class Plat {
         this.protein = protein;
         this.calories = calories;
         this.idUVendeur = idUVendeur;
-        this.Categorie =categorie;
+        this.categorie = categorie;
+        this.imageData = imageData;
     }
 
+    // Getters and setters
 
     public int getIdP() {
         return idP;
@@ -73,17 +75,29 @@ public class Plat {
         this.calories = calories;
     }
 
-    public int getIdUVendeur() {
+    public String getIdUVendeur() {
         return idUVendeur;
     }
 
-    public void setIdUVendeur(int idUVendeur) {
+    public void setIdUVendeur(String idUVendeur) {
         this.idUVendeur = idUVendeur;
     }
 
-    public String getCategorie() {return Categorie;}
+    public String getCategorie() {
+        return categorie;
+    }
 
-    public void setCategorie(String categorie) {Categorie = categorie;}
+    public void setCategorie(String categorie) {
+        this.categorie = categorie;
+    }
+
+    public byte[] getImageData() {
+        return imageData;
+    }
+
+    public void setImageData(byte[] imageData) {
+        this.imageData = imageData;
+    }
 }
 
 

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Client extends User {
-    private Objectif objectif;
+    private static Objectif objectif;
     private List<Commande> historiqueCommandes;
 
 
@@ -21,7 +21,7 @@ public class Client extends User {
         this.objectif = objectif;
     }
 
-    public Objectif getObjectif() { return objectif; }
+    public static Objectif getObjectif() { return objectif; }
     public void setObjectif(Objectif objectif) { this.objectif = objectif; }
     public void consulterMenu() {
         List<Plat> plats = Menu.getPlats();
@@ -39,47 +39,6 @@ public class Client extends User {
     }
 
     public void passerCommande() {
-        Scanner scanner = new Scanner(System.in);
-        List<Plat> plats = Menu.getPlats();
-        List<Plat> platsCommandes = new ArrayList<>();
-        String continuer;
-
-        do {
-            System.out.print("Entrez l'ID du plat que vous souhaitez commander: ");
-            int idP = scanner.nextInt();
-            scanner.nextLine();
-
-            Plat platCommande = null;
-            for (Plat plat : plats) {
-                if (plat.getIdP() == idP) {
-                    platCommande = plat;
-                    break;
-                }
-            }
-
-            if (platCommande != null) {
-                platsCommandes.add(platCommande);
-                System.out.println("Plat ajouté à la commande: " + platCommande.getNomPlat());
-            } else {
-                System.out.println("ID du plat non trouvé.");
-            }
-
-            System.out.print("Voulez-vous commander un autre plat? (oui/non): ");
-            continuer = scanner.nextLine();
-        } while (continuer.equalsIgnoreCase("oui"));
-
-        if (!platsCommandes.isEmpty()) {
-            Date dateCommande = new Date();
-            double prixTotal = platsCommandes.stream().mapToDouble(Plat::getPrix).sum();
-            int idUVendeur = platsCommandes.get(0).getIdUVendeur();
-            int idULivreur = 1;
-
-            Commande nouvelleCommande = new Commande(0, dateCommande, prixTotal, platsCommandes, getId(), idUVendeur, idULivreur);
-            historiqueCommandes.add(nouvelleCommande);
-            System.out.println("Commande passée avec succès.");
-        } else {
-            System.out.println("Aucune commande n'a été passée.");
-        }
     }
 
     public void payerCommande() {

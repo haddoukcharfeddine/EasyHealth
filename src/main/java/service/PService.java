@@ -6,12 +6,14 @@ import entite.Plat;
 import java.util.List;
 
 public interface PService<T> {
+    void ajouterPlat(Plat plat);
+
     void modifierPlat(Plat plat);
 
     void supprimerPlatById(int idP);
 
     void supprimerPlatByNom(String nomPlat);
-    void ajouterPlat(Plat plat);
+
     void modifierMenu(Menu menu);
 
 

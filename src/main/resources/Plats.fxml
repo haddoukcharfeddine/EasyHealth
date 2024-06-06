@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
@@ -13,17 +11,14 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" spacing="20" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AccueilDeux">
-    <BorderPane prefHeight="418.0" prefWidth="727.0">
+<VBox stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PlatsController">
+    <BorderPane prefHeight="597.0" prefWidth="747.0">
         <top>
-
             <HBox id="header" alignment="CENTER" prefHeight="121.0" prefWidth="692.0" BorderPane.alignment="CENTER">
-
                 <children>
-                    <Button fx:id="platsBtn" mnemonicParsing="false" prefHeight="30.0" prefWidth="68.0" text="Plats" onAction="#handlePlatsButtonClick" />
+                    <Button fx:id="AccueilButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="77.0" text="Accueil" />
                     <Button fx:id="menusBtn" prefHeight="40.0" prefWidth="77.0" text="Menu">
                         <HBox.margin>
                             <Insets />
@@ -38,9 +33,9 @@
                             </TextField>
                         </children>
                     </HBox>
-                    <HBox id="imagee" alignment="CENTER" prefHeight="151.0" prefWidth="174.0" HBox.hgrow="NEVER">
+                    <HBox id="imagee" alignment="CENTER" prefHeight="202.0" prefWidth="153.0" HBox.hgrow="NEVER">
                         <children>
-                            <ImageView fitHeight="168.0" fitWidth="194.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
+                            <ImageView fitHeight="175.0" fitWidth="168.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
                                 <image>
                                     <Image url="@images/logos.png" />
                                 </image>
@@ -48,12 +43,12 @@
                                     <Rectangle2D />
                                 </viewport>
                                 <HBox.margin>
-                                    <Insets />
+                                    <Insets bottom="-20.0" />
                                 </HBox.margin>
                             </ImageView>
                         </children>
                         <HBox.margin>
-                            <Insets bottom="-50.0" top="-70.0" />
+                            <Insets bottom="-30.0" top="-70.0" />
                         </HBox.margin>
                     </HBox>
                     <Button fx:id="PanierBtn" blendMode="HARD_LIGHT" mnemonicParsing="false" prefHeight="46.0" prefWidth="74.0">
@@ -94,44 +89,13 @@
             </HBox>
         </top>
         <center>
-
-
-            <VBox alignment="CENTER" prefHeight="527.0" prefWidth="727.0" spacing="10" BorderPane.alignment="CENTER">
-                <children>
-                    <GridPane prefHeight="34.0" prefWidth="687.0">
-                        <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="528.0" minWidth="10.0" prefWidth="244.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="458.0" minWidth="10.0" prefWidth="443.0" />
-                        </columnConstraints>
-                        <rowConstraints>
-                            <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="20.0" minHeight="0.0" prefHeight="20.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="20.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="20.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="20.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                        </rowConstraints>
-                        <children>
-                            <HBox fx:id="CaloriesItem" prefHeight="46.0" prefWidth="204.0" visible="false" GridPane.rowIndex="1">
-                                <children>
-                                    <Label prefHeight="27.0" prefWidth="156.0" text="Calories" />
-                                </children>
-                            </HBox>
-                            <HBox fx:id="ProteineItem" prefHeight="66.0" prefWidth="369.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                <children>
-                                    <Label text="Proteine" />
-                                </children>
-                            </HBox>
-                        </children>
-                    </GridPane>
-                </children>
-            </VBox>
+            <GridPane fx:id="gridPane" alignment="CENTER" hgap="10" prefWidth="800" vgap="10">
+                <!-- Content for displaying plats -->
+            </GridPane>
         </center>
         <bottom>
+            <HBox id="footer" alignment="CENTER" prefHeight="63.0" prefWidth="800.0" spacing="10" BorderPane.alignment="CENTER">
 
-
-            <HBox id="footer" alignment="CENTER" prefHeight="105.0" prefWidth="727.0" spacing="10" BorderPane.alignment="CENTER">
             </HBox>
         </bottom>
     </BorderPane>

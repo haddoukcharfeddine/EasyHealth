@@ -16,36 +16,7 @@ public class Vendeur extends User {
         super(id, nom, email, telephone, adresse,password, UserType.Vendeur);
     }
 
-    public void ajouterPlat() {
-        Scanner scanner = new Scanner(System.in);
 
-
-        System.out.println("Entrer le nom du Plat:");
-        String nomPlat = scanner.nextLine();
-
-
-        System.out.println("Entrer la description:");
-        String description = scanner.nextLine();
-
-        System.out.println("Entrer le Prix:");
-        double prix = Double.parseDouble(scanner.nextLine());
-
-        System.out.println("Entrer le nombre de protein:");
-        int protein = Integer.parseInt(scanner.nextLine());
-
-        System.out.println("Entrer le nombre des calories:");
-        int calories = Integer.parseInt(scanner.nextLine());
-
-        System.out.println("Entrer la Categorie:");
-        String categorie = scanner.nextLine();
-
-
-        Plat plat = new Plat(0, nomPlat, description, prix, protein, calories, this.getId(), categorie);
-
-
-        PlatService platService = new PlatService();
-        platService.ajouterPlat(plat);
-    }
 
 
 

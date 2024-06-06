@@ -129,6 +129,16 @@ Label, #footer Label {
 #userTypeChoiceBox, #objectifChoiceBox, #sexeChoiceBox, #ActiverChoiceBox, #disponibleCheckBox {
     /* Add specific styling for ChoiceBox and CheckBox here */
 }
+.plate-info {
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-padding: 10px;
+}
+
+.plate-image {
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+}
 
 
 

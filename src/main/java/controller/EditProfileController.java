@@ -73,6 +73,8 @@ public class EditProfileController implements Initializable {
     private MenuItem logoutItem;
    @FXML
    private  MenuButton profileMenuBtn;
+    @FXML
+    private Button AccueilButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -85,6 +87,8 @@ public class EditProfileController implements Initializable {
 
         ActiverChoiceBox.getItems().addAll("SEDENTAIRE", "LEGERE", "MODEREE", "INTENSE");
         ActiverChoiceBox.setValue("Activiter");
+
+        AccueilButton.setOnAction(event -> navigateToAccueilDeux());
 
         userService = new UserService();
         UserSession session = UserSession.getInstance();
@@ -296,6 +300,26 @@ public class EditProfileController implements Initializable {
     } catch (IOException e) {
         e.printStackTrace();
     }}
+    @FXML
+    private void showErrorAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    private void navigateToAccueilDeux() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccueilDeux.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) AccueilButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            showErrorAlert("Erreur de navigation", "Échec du chargement de la page AccueilDeux.");
+            e.printStackTrace();
+        }
+    }
 }
 
 
