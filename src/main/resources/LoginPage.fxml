@@ -47,11 +47,13 @@
     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="NEVER">
         <children>
             <TextField fx:id="telephoneField" promptText="Numéro de téléphone" />
+            <Label fx:id="telephoneErrorLabel" textFill="red" visible="false"/>
         </children>
     </HBox>
     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="NEVER">
         <children>
             <PasswordField fx:id="passwordField" promptText="Mot de passe" />
+            <Label fx:id="passwordErrorLabel" textFill="red" visible="false"/>
         </children>
     </HBox>
     <Button fx:id="loginButton" text="Connexion" VBox.vgrow="NEVER" />

@@ -10,16 +10,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import service.UserService;
 import session.UserSession;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class CreateAccountController {
 
@@ -46,6 +42,7 @@ public class CreateAccountController {
 
     @FXML
     private ChoiceBox<String> objectifChoiceBox;
+
     @FXML
     private ChoiceBox<String> ActiverChoiceBox;
 
@@ -68,6 +65,21 @@ public class CreateAccountController {
     private Button createAccountButton;
 
     @FXML
+    private Label usernameErrorLabel;
+
+    @FXML
+    private Label emailErrorLabel;
+
+    @FXML
+    private Label telephoneErrorLabel;
+
+    @FXML
+    private Label addressErrorLabel;
+
+    @FXML
+    private Label passwordErrorLabel;
+
+    @FXML
     public void initialize() {
 
         accueilButton.setOnAction(event -> navigateToAccueil());
@@ -77,7 +89,7 @@ public class CreateAccountController {
         objectifChoiceBox.getItems().addAll("Perdre_du_poids", "Prendre_du_poids", "Aucun");
         objectifChoiceBox.setValue("Objectif");
 
-        sexeChoiceBox.getItems().addAll( "HOMME", "FEMME");
+        sexeChoiceBox.getItems().addAll("HOMME", "FEMME");
         sexeChoiceBox.setValue("Sexe");
         ActiverChoiceBox.getItems().addAll("SEDENTAIRE", "LEGERE", "MODEREE", "INTENSE");
         ActiverChoiceBox.setValue("Activiter");
@@ -85,7 +97,6 @@ public class CreateAccountController {
         objectifChoiceBox.setOnAction(event -> handleUserTypeSelection());
 
         createAccountButton.setOnAction(event -> handleCreateAccount(event));
-
 
         objectifChoiceBox.setVisible(false);
         disponibleCheckBox.setVisible(false);
@@ -100,7 +111,6 @@ public class CreateAccountController {
         String userType = userTypeChoiceBox.getValue();
         String objectifType = objectifChoiceBox.getValue();
 
-
         objectifChoiceBox.setVisible(true);
         poidsField.setVisible(true);
         tailleField.setVisible(true);
@@ -113,7 +123,6 @@ public class CreateAccountController {
             if (objectifType.equals("Perdre_du_poids") || objectifType.equals("Prendre_du_poids")) {
                 disponibleCheckBox.setVisible(false);
             } else {
-
                 poidsField.setVisible(false);
                 tailleField.setVisible(false);
                 ageField.setVisible(false);
@@ -122,7 +131,6 @@ public class CreateAccountController {
                 ActiverChoiceBox.setVisible(false);
             }
         } else if (userType.equals("Vendeur")) {
-
             objectifChoiceBox.setVisible(false);
             poidsField.setVisible(false);
             tailleField.setVisible(false);
@@ -131,7 +139,6 @@ public class CreateAccountController {
             disponibleCheckBox.setVisible(false);
             ActiverChoiceBox.setVisible(false);
         } else if (userType.equals("Livreur")) {
-
             objectifChoiceBox.setVisible(false);
             poidsField.setVisible(false);
             tailleField.setVisible(false);
@@ -144,7 +151,6 @@ public class CreateAccountController {
     @FXML
     private void handleCreateAccount(ActionEvent event) {
         try {
-
             int id = 0;
             String username = newUsernameField.getText().trim();
             String email = newEmailField.getText().trim();
@@ -159,6 +165,47 @@ public class CreateAccountController {
             float taille = 0;
             int age = 0;
 
+            boolean valid = true;
+
+            // Validate mandatory fields
+            if (username.isEmpty()) {
+                setFieldError(newUsernameField, usernameErrorLabel, "Le nom d'utilisateur est requis.");
+                valid = false;
+            } else {
+                clearFieldError(newUsernameField, usernameErrorLabel);
+            }
+
+            if (email.isEmpty() || !email.contains("@")) {
+                setFieldError(newEmailField, emailErrorLabel, "L'email est invalide.");
+                valid = false;
+            } else {
+                clearFieldError(newEmailField, emailErrorLabel);
+            }
+
+            if (telephone.isEmpty() || !telephone.matches("\\d{8}")) {
+                setFieldError(newTelephoneField, telephoneErrorLabel, "Le numéro de téléphone doit contenir exactement 8 chiffres.");
+                valid = false;
+            } else {
+                clearFieldError(newTelephoneField, telephoneErrorLabel);
+            }
+
+            if (address.isEmpty()) {
+                setFieldError(newAddresseField, addressErrorLabel, "L'adresse est requise.");
+                valid = false;
+            } else {
+                clearFieldError(newAddresseField, addressErrorLabel);
+            }
+
+            if (password.isEmpty() || !isValidPassword(password)) {
+                setFieldError(newPasswordField, passwordErrorLabel, "Au moins une majuscule et un caractère spécial");
+                valid = false;
+            } else {
+                clearFieldError(newPasswordField, passwordErrorLabel);
+            }
+
+            if (!valid) {
+                throw new IllegalArgumentException("Some fields are not filled or invalid!");
+            }
 
             if (poidsField.isVisible()) {
                 poids = Float.parseFloat(poidsField.getText().trim());
@@ -170,13 +217,11 @@ public class CreateAccountController {
                 age = Integer.parseInt(ageField.getText().trim());
             }
 
-
             if (userType.equals("Client") && (objectifType.equals("Perdre_du_poids") || objectifType.equals("Prendre_du_poids"))) {
                 if (poids <= 0 || taille <= 0 || age <= 0) {
                     throw new NumberFormatException("Invalid input for poids, taille, or age!");
                 }
             }
-
 
             User newUser = null;
             if (userType.equals("Client")) {
@@ -192,7 +237,6 @@ public class CreateAccountController {
                 newUser = new Livreur(id, username, email, telephone, address, password, disponible);
             }
 
-
             if (newUser != null) {
                 UserService userService = new UserService();
                 userService.addUser(newUser);
@@ -200,7 +244,6 @@ public class CreateAccountController {
                 UserSession session = UserSession.getInstance();
                 session.setTelephone(user.getTelephone());
                 session.setUserId(user.getId());
-
 
                 if (newUser instanceof Livreur) {
                     navigateToAccueilTrois(event);
@@ -210,11 +253,28 @@ public class CreateAccountController {
             }
         } catch (NumberFormatException e) {
             System.out.println("Invalid input for poids, taille, or age!");
-        } catch (NullPointerException e) {
-            System.out.println("Some fields are not filled!");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void setFieldError(TextField field, Label errorLabel, String errorMessage) {
+        field.setStyle("-fx-border-color: red;");
+        errorLabel.setText(errorMessage);
+        errorLabel.setVisible(true);
+    }
+
+    private void clearFieldError(TextField field, Label errorLabel) {
+        field.setStyle(null);
+        errorLabel.setVisible(false);
+    }
+
+    private boolean isValidPassword(String password) {
+        boolean hasUppercase = !password.equals(password.toLowerCase());
+        boolean hasSpecial = password.matches(".*[!@#$%^&*()].*");
+        return hasUppercase && hasSpecial;
     }
 
     private void navigateToAccueil() {
@@ -252,5 +312,6 @@ public class CreateAccountController {
         }
     }
 }
+
 
 

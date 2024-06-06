@@ -1,7 +1,6 @@
 package controller;
 
 import entite.Enum.UserType;
-import entite.Users.Livreur;
 import entite.Users.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -35,17 +35,21 @@ public class LoginController {
     private Button AccueilButton;
 
     @FXML
+    private Label telephoneErrorLabel;
+
+    @FXML
+    private Label passwordErrorLabel;
+
+    @FXML
     public void initialize() {
-
         creat.setOnAction(event -> navigateToCreateAccount());
-
         AccueilButton.setOnAction(event -> navigateToAccueil());
 
         loginButton.setOnAction(event -> {
             try {
                 handleLogin(event);
             } catch (IOException | SQLException e) {
-                showErrorAlert("Error", "An error occurred while logging in.");
+                showErrorAlert("Erreur", "Une erreur s'est produite lors de la connexion.");
                 e.printStackTrace();
             }
         });
@@ -53,11 +57,18 @@ public class LoginController {
 
     @FXML
     private void handleLogin(ActionEvent event) throws IOException, SQLException {
+        clearFieldErrors();
+
         String telephone = telephoneField.getText().trim();
         String password = passwordField.getText().trim();
 
         if (telephone.isEmpty() || password.isEmpty()) {
-            showErrorAlert("Incomplete Information", "Please enter both telephone number and password.");
+            if (telephone.isEmpty()) {
+                setFieldError(telephoneField,telephoneErrorLabel, "Le numéro de téléphone est requis.");
+            }
+            if (password.isEmpty()) {
+                setFieldError(passwordField,passwordErrorLabel, "Le mot de passe est requis.");
+            }
             return;
         }
 
@@ -65,7 +76,7 @@ public class LoginController {
         boolean telephoneExists = userService.checkTelephoneExists(telephone);
 
         if (!telephoneExists) {
-            showErrorAlert("Telephone Not Registered", "The telephone number entered is not registered.");
+            showErrorAlert("Numéro de téléphone non enregistré", "Le numéro de téléphone entré n'est pas enregistré.");
             return;
         }
 
@@ -82,8 +93,19 @@ public class LoginController {
                 navigateToAccueilDeux();
             }
         } else {
-            showErrorAlert("Invalid Credentials", "Telephone number or password is incorrect.");
+            showErrorAlert("Identifiants invalides", "Le numéro de téléphone ou le mot de passe est incorrect.");
         }
+    }
+
+    private void setFieldError(TextField field, Label label, String message) {
+        field.setStyle("-fx-border-color: red;");
+        label.setText(message);
+        label.setVisible(true);
+    }
+
+    private void clearFieldErrors() {
+        telephoneErrorLabel.setVisible(false);
+        passwordErrorLabel.setVisible(false);
     }
 
     @FXML
@@ -103,7 +125,7 @@ public class LoginController {
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
-            showErrorAlert("Navigation Error", "Failed to load the Accueil page.");
+            showErrorAlert("Erreur de navigation", "Échec du chargement de la page d'accueil.");
             e.printStackTrace();
         }
     }
@@ -116,7 +138,7 @@ public class LoginController {
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
-            showErrorAlert("Navigation Error", "Failed to load the Home page.");
+            showErrorAlert("Erreur de navigation", "Échec du chargement de la page AccueilDeux.");
             e.printStackTrace();
         }
     }
@@ -129,7 +151,7 @@ public class LoginController {
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
-            showErrorAlert("Navigation Error", "Failed to load the AccueilTrois page.");
+            showErrorAlert("Erreur de navigation", "Échec du chargement de la page AccueilTrois.");
             e.printStackTrace();
         }
     }
@@ -142,7 +164,7 @@ public class LoginController {
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
-            showErrorAlert("Navigation Error", "Failed to load the Create Account page.");
+            showErrorAlert("Erreur de navigation", "Échec du chargement de la page de création de compte.");
             e.printStackTrace();
         }
     }
