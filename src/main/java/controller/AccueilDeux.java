@@ -65,12 +65,7 @@ public class AccueilDeux {
 
     @FXML
     private void initialize() {
-        menusBtn.setOnAction(event -> handleMenus());
-        profileItem.setOnAction(event -> handleProfileEditAction());
-        logoutItem.setOnAction(event -> handleLogout());
-        platsBtn.setOnAction(event -> handlePlatsButtonClick());
-        profileviewItem.setOnAction(event -> handleProfileViewItemAction());
-        // Retrieve the current user and set userType
+
         UserService userService = new UserService();
         UserSession session = UserSession.getInstance();
         String currentUserTelephone = session.getTelephone();
@@ -81,6 +76,7 @@ public class AccueilDeux {
         }
     }
 
+    @FXML
     private void handleMenus() {
         System.out.println("Menus button clicked");
     }
@@ -94,6 +90,7 @@ public class AccueilDeux {
         System.out.println("Add Menu action clicked");
     }
 
+    @FXML
     private void handleLogout() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Accueil.fxml"));
@@ -105,6 +102,7 @@ public class AccueilDeux {
             e.printStackTrace();
         }
     }
+    @FXML
     private void handleProfileViewItemAction() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Profile.fxml"));
@@ -117,6 +115,7 @@ public class AccueilDeux {
         }
     }
 
+    @FXML
     private void handleProfileEditAction() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/editprofile.fxml"));

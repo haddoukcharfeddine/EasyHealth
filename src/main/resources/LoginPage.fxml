@@ -33,7 +33,7 @@
             <HBox id="headert" alignment="TOP_RIGHT" prefHeight="43.0" prefWidth="287.0" HBox.hgrow="NEVER" />
             <HBox id="headert" alignment="TOP_RIGHT" prefHeight="37.0" prefWidth="175.0" HBox.hgrow="NEVER">
                 <children>
-                    <Button fx:id="AccueilButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="106.0" text="Accueil" HBox.hgrow="NEVER">
+                    <Button fx:id="AccueilButton" onAction="#navigateToAccueil" mnemonicParsing="false" prefHeight="35.0" prefWidth="106.0" text="Accueil" HBox.hgrow="NEVER">
                         <graphic>
                             <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                 <image>
@@ -73,6 +73,6 @@
     <Button fx:id="loginButton" text="Connexion" VBox.vgrow="NEVER" />
 
     <!-- Bouton pour créer un compte -->
-    <Button fx:id="creat" text="Créer un compte" VBox.vgrow="NEVER" />
+    <Button fx:id="creat" onAction="#navigateToCreateAccount" text="Créer un compte" VBox.vgrow="NEVER" />
 </VBox>
 

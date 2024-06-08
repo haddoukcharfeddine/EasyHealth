@@ -31,7 +31,7 @@
             <HBox id="headert" prefHeight="39.0" prefWidth="371.0" />
             <HBox id="headert" alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
                 <children>
-                    <Button fx:id="accueilButton" mnemonicParsing="false" text="Accueil">
+                    <Button fx:id="accueilButton" onAction="#navigateToAccueil" mnemonicParsing="false" text="Accueil">
                         <graphic>
                             <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                 <image>
@@ -106,12 +106,12 @@
         </HBox>
 
         <HBox alignment="CENTER" prefHeight="35.0" prefWidth="681.0">
-            <ChoiceBox fx:id="userTypeChoiceBox" prefWidth="150.0">
+            <ChoiceBox fx:id="userTypeChoiceBox" onAction="#handleUserTypeSelection" prefWidth="150.0">
                 <HBox.margin>
                     <Insets right="20.0" top="-20.0" />
                 </HBox.margin>
             </ChoiceBox>
-            <ChoiceBox fx:id="objectifChoiceBox" prefWidth="150.0">
+            <ChoiceBox fx:id="objectifChoiceBox" onAction="#handleUserTypeSelection" prefWidth="150.0">
                 <HBox.margin>
                     <Insets top="-20.0" />
                 </HBox.margin>

@@ -112,7 +112,7 @@ public class EditProfileController implements Initializable {
             }
         });
 
-        platsBtn.setOnAction(event -> handlePlatsButtonClick());
+
         userService = new UserService();
         UserSession session = UserSession.getInstance();
         String currentUserTelephone = session.getTelephone();
@@ -130,8 +130,6 @@ public class EditProfileController implements Initializable {
                     platsBtn.setVisible(false);
                     menusBtn.setVisible(false);
 
-                    addDishItem.setOnAction(event -> handleAjouterPlatEditAction());
-                    addMenuItem.setOnAction(event -> handleAddMenu());
                 } else {
                     addDishItem.setVisible(false);
                     addMenuItem.setVisible(false);
@@ -327,9 +325,23 @@ public class EditProfileController implements Initializable {
             // Handle the exception here, such as displaying an error message to the user
         }
     }
+    @FXML
+    private void handleProfileViewItemAction() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Profile.fxml"));
+            VBox root = loader.load();
+            Stage stage = (Stage) profileMenuBtn.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
     private void handleAddMenu() {
         System.out.println("Add Menu action clicked");
     }
+    @FXML
     private void handleAjouterPlatEditAction() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterPlat.fxml"));

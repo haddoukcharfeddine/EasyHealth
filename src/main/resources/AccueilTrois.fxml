@@ -46,7 +46,7 @@
                     </HBox>
                     <MenuButton fx:id="profileMenuBtn" alignment="TOP_LEFT" blendMode="DARKEN" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="39.0">
                         <items>
-                            <MenuItem fx:id="profileItem" mnemonicParsing="false" text="Modifier le Profil" />
+                            <MenuItem fx:id="profileItem" onAction="#handleProfileEditAction" mnemonicParsing="false" text="Modifier le Profil" />
                             <MenuItem fx:id="logoutItem" mnemonicParsing="false" onAction="#handleLogout" text="Déconnexion" />
                         </items>
                         <graphic>

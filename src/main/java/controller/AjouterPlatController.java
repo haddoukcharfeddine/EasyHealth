@@ -44,7 +44,7 @@ public class AjouterPlatController {
     @FXML
     private void initialize() {
         profileMenuBtn.getItems().forEach(this::setMenuItemAction);
-        AccueilButton.setOnAction(event -> navigateToAccueilDeux());
+
     }
 
     private void setMenuItemAction(MenuItem menuItem) {
@@ -112,6 +112,7 @@ public class AjouterPlatController {
         // Optionally, display a success message
         showInformationAlert("Success", "Plat added successfully");
     }
+    @FXML
     private void navigateToAccueilDeux() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccueilDeux.fxml"));

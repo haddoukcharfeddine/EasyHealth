@@ -26,14 +26,7 @@ public class Accueil {
     @FXML
     private TextField SearchText;
 
-    @FXML
-    public void initialize() {
-        menusBtn.setOnAction(event -> navigateToMenu());
 
-        loginBtn.setOnAction(event -> navigateToLogin());
-        faqBtn.setOnAction(event -> navigateToFAQ());
-
-    }
     @FXML
     private void navigateToLogin() {
         try {

@@ -82,7 +82,6 @@ public class CreateAccountController {
     @FXML
     public void initialize() {
 
-        accueilButton.setOnAction(event -> navigateToAccueil());
         userTypeChoiceBox.getItems().addAll("Client", "Vendeur", "Livreur");
         userTypeChoiceBox.setValue("Type d'Utilisateur");
 
@@ -93,8 +92,8 @@ public class CreateAccountController {
         sexeChoiceBox.setValue("Sexe");
         ActiverChoiceBox.getItems().addAll("SEDENTAIRE", "LEGERE", "MODEREE", "INTENSE");
         ActiverChoiceBox.setValue("Activiter");
-        userTypeChoiceBox.setOnAction(event -> handleUserTypeSelection());
-        objectifChoiceBox.setOnAction(event -> handleUserTypeSelection());
+
+
 
         createAccountButton.setOnAction(event -> handleCreateAccount(event));
 
@@ -107,6 +106,7 @@ public class CreateAccountController {
         ActiverChoiceBox.setVisible(false);
     }
 
+    @FXML
     private void handleUserTypeSelection() {
         String userType = userTypeChoiceBox.getValue();
         String objectifType = objectifChoiceBox.getValue();
@@ -277,6 +277,7 @@ public class CreateAccountController {
         return hasUppercase && hasSpecial;
     }
 
+    @FXML
     private void navigateToAccueil() {
         try {
             Parent accueilPage = FXMLLoader.load(getClass().getResource("/Accueil.fxml"));

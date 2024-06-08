@@ -73,9 +73,8 @@ public class AccueilTroisController {
         prixTotalColumn.setCellValueFactory(new PropertyValueFactory<>("prixTotal"));
         telephoneClientColumn.setCellValueFactory(new PropertyValueFactory<>("telephoneClient"));
         telephoneVendeurColumn.setCellValueFactory(new PropertyValueFactory<>("telephoneVendeur"));
-        profileItem.setOnAction(event -> handleProfileEditAction());
 
-        // Add sample data
+
         commandesTable.setItems(commandesList);
 
         actionsColumn.setCellFactory(createActionsCellFactory());
@@ -153,6 +152,7 @@ public class AccueilTroisController {
 
         System.out.println("Refused: " + commande);
     }
+    @FXML
     private void handleProfileEditAction() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/editprofile.fxml"));

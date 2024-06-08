@@ -42,8 +42,8 @@ public class LoginController {
 
     @FXML
     public void initialize() {
-        creat.setOnAction(event -> navigateToCreateAccount());
-        AccueilButton.setOnAction(event -> navigateToAccueil());
+
+
 
         loginButton.setOnAction(event -> {
             try {
@@ -117,6 +117,7 @@ public class LoginController {
         alert.showAndWait();
     }
 
+    @FXML
     private void navigateToAccueil() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Accueil.fxml"));
@@ -156,6 +157,7 @@ public class LoginController {
         }
     }
 
+    @FXML
     private void navigateToCreateAccount() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/create_account.fxml"));
