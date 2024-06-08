@@ -139,6 +139,42 @@ Label, #footer Label {
     -fx-border-color: black;
     -fx-border-width: 1px;
 }
+#profileVBox .section-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 0 10 0;
+}
+
+
+
+#profileVBox #header Button {
+    -fx-font-size: 14px;
+}
+
+#profileVBox #imagee ImageView {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.5, 0, 0);
+}
+
+#profileVBox #userInfoBox, #profileVBox #plateVBox {
+    -fx-padding: 20;
+    -fx-background-color: #ffffff;
+    -fx-border-width: 1;
+    -fx-border-color: #dcdcdc;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-alignment: center;
+}
+
+#profileVBox .plat-info-box {
+    -fx-padding: 10;
+    -fx-background-color: #f9f9f9;
+    -fx-border-width: 1;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-alignment: center;
+}
+
 
 
 

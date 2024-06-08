@@ -58,6 +58,31 @@ public  class PlatService implements PService<Plat> {
         }
         return plats;
     }
+    public List<Plat> getPlatsByVendeurTelephone(String telephone) {
+        List<Plat> plats = new ArrayList<>();
+        String query = "SELECT * FROM Plat WHERE idUVendeur = ?";
+        try (PreparedStatement stmt = cnx.prepareStatement(query)) {
+            stmt.setString(1, telephone);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                int idP = rs.getInt("idP");
+                String nomPlat = rs.getString("nomPlat");
+                String description = rs.getString("description");
+                double prix = rs.getDouble("prix");
+                int protein = rs.getInt("protein");
+                int calories = rs.getInt("calories");
+                String idUVendeur = rs.getString("idUVendeur");
+                String categorie = rs.getString("Categorie");
+                byte[] imageData = rs.getBytes("imageData");
+
+                Plat plat = new Plat(idP, nomPlat, description, prix, protein, calories, idUVendeur, categorie, imageData);
+                plats.add(plat);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return plats;
+    }
     @Override
     public void modifierPlat(Plat plat) {
         String query = "UPDATE Plat SET nomPlat = ?, description = ?, prix = ?, protein = ?, calories = ? WHERE idP = ?";

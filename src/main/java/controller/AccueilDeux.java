@@ -69,6 +69,7 @@ public class AccueilDeux {
         profileItem.setOnAction(event -> handleProfileEditAction());
         logoutItem.setOnAction(event -> handleLogout());
         platsBtn.setOnAction(event -> handlePlatsButtonClick());
+        profileviewItem.setOnAction(event -> handleProfileViewItemAction());
         // Retrieve the current user and set userType
         UserService userService = new UserService();
         UserSession session = UserSession.getInstance();
@@ -96,6 +97,17 @@ public class AccueilDeux {
     private void handleLogout() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Accueil.fxml"));
+            VBox root = loader.load();
+            Stage stage = (Stage) profileMenuBtn.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void handleProfileViewItemAction() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Profile.fxml"));
             VBox root = loader.load();
             Stage stage = (Stage) profileMenuBtn.getScene().getWindow();
             stage.setScene(new Scene(root));

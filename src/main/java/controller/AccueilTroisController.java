@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -14,6 +15,8 @@ import javafx.util.Callback;
 import entite.Commande;
 import service.UserService;
 import session.UserSession;
+
+import java.io.IOException;
 
 public class AccueilTroisController {
 
@@ -158,6 +161,24 @@ public class AccueilTroisController {
             stage.setScene(new Scene(root));
             stage.show();
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void handleLogout() {
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Accueil.fxml"));
+            Parent root = loader.load();
+
+
+            Stage stage = (Stage) profileMenuBtn.getScene().getWindow();
+
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

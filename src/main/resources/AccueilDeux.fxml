@@ -18,10 +18,9 @@
 
 <VBox alignment="TOP_CENTER" spacing="20" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AccueilDeux">
     <BorderPane prefHeight="418.0" prefWidth="727.0">
+        <!-- En-tête -->
         <top>
-
             <HBox id="header" alignment="CENTER" prefHeight="121.0" prefWidth="692.0" BorderPane.alignment="CENTER">
-
                 <children>
                     <Button fx:id="platsBtn" mnemonicParsing="false" prefHeight="30.0" prefWidth="68.0" text="Plats" onAction="#handlePlatsButtonClick" />
                     <Button fx:id="menusBtn" prefHeight="40.0" prefWidth="77.0" text="Menu">
@@ -74,7 +73,7 @@
                     <MenuButton fx:id="profileMenuBtn" alignment="TOP_LEFT" blendMode="DARKEN" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="39.0">
                         <items>
                             <MenuItem fx:id="profileviewItem" mnemonicParsing="false" text="Profile" visible="false" />
-                            <MenuItem fx:id="profileItem" mnemonicParsing="false" text="Edit Profile" />
+                            <MenuItem fx:id="profileItem" mnemonicParsing="false" text="Modifier le Profil" />
                             <MenuItem fx:id="addDishItem" mnemonicParsing="false" text="Ajouter un Plat" visible="false" />
                             <MenuItem fx:id="addMenuItem" mnemonicParsing="false" text="Ajouter un Menu" visible="false" />
                             <MenuItem fx:id="logoutItem" mnemonicParsing="false" text="Déconnexion" />
@@ -93,9 +92,8 @@
                 </BorderPane.margin>
             </HBox>
         </top>
+        <!-- Centre -->
         <center>
-
-
             <VBox alignment="CENTER" prefHeight="527.0" prefWidth="727.0" spacing="10" BorderPane.alignment="CENTER">
                 <children>
                     <GridPane prefHeight="34.0" prefWidth="687.0">
@@ -128,10 +126,10 @@
                 </children>
             </VBox>
         </center>
+        <!-- Bas de page -->
         <bottom>
-
-
             <HBox id="footer" alignment="CENTER" prefHeight="105.0" prefWidth="727.0" spacing="10" BorderPane.alignment="CENTER">
+                <!-- Ajoutez des composants de pied de page ici -->
             </HBox>
         </bottom>
     </BorderPane>

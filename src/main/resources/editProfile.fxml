@@ -15,13 +15,17 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<!-- Interface pour la modification du profil -->
 <VBox alignment="TOP_CENTER" spacing="20" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditProfileController">
-    <BorderPane prefHeight="600.0" prefWidth="800.0">
-        <top>
 
+    <!-- Disposition principale avec BorderPane -->
+    <BorderPane prefHeight="600.0" prefWidth="800.0">
+
+        <!-- En-tête (top) -->
+        <top>
             <HBox id="header" alignment="CENTER" prefHeight="121.0" prefWidth="692.0" BorderPane.alignment="CENTER">
                 <children>
-               <Button fx:id="AccueilButton" mnemonicParsing="false" text="Accueil" />
+                    <Button fx:id="AccueilButton" mnemonicParsing="false" text="Accueil" />
                     <Button fx:id="platsBtn" mnemonicParsing="false" prefHeight="30.0" prefWidth="68.0" text="Plats" onAction="#handlePlatsButtonClick" />
                     <Button fx:id="menusBtn" prefHeight="40.0" prefWidth="77.0" text="Menu">
                         <HBox.margin>
@@ -50,7 +54,7 @@
                     <MenuButton fx:id="profileMenuBtn" alignment="TOP_LEFT" blendMode="DARKEN" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="39.0">
                         <items>
                             <MenuItem fx:id="profileviewItem" mnemonicParsing="false" text="Profile" visible="false" />
-                            <MenuItem fx:id="profileItem" mnemonicParsing="false" onAction="#handleEditProfile" text="Edit Profile" />
+                            <MenuItem fx:id="profileItem" mnemonicParsing="false" onAction="#handleEditProfile" text="Modifier le Profil" />
                             <MenuItem fx:id="addDishItem" mnemonicParsing="false" text="Ajouter un Plat" visible="false" />
                             <MenuItem fx:id="addMenuItem" mnemonicParsing="false" text="Ajouter un Menu" visible="false" />
                             <MenuItem fx:id="logoutItem" mnemonicParsing="false" onAction="#handleLogout" text="Déconnexion" />
@@ -62,9 +66,9 @@
                                 </image>
                             </ImageView>
                         </graphic>
-                  <HBox.margin>
-                     <Insets left="100.0" />
-                  </HBox.margin>
+                        <HBox.margin>
+                            <Insets left="100.0" />
+                        </HBox.margin>
                     </MenuButton>
                 </children>
                 <BorderPane.margin>
@@ -73,49 +77,50 @@
             </HBox>
         </top>
 
+        <!-- Centre (center) -->
         <center>
             <VBox fx:id="clientFields" prefHeight="100.0" prefWidth="269.0" GridPane.columnIndex="1">
                 <children>
-                    <Label  text="Nom" />
+                    <Label text="Nom" />
                     <TextField fx:id="NomField" />
                     <Label text="Email" />
                     <TextField fx:id="emailField" />
                     <Label text="Address" />
                     <TextField fx:id="addressField" />
-               <Label text="Telephone" />
-               <TextField fx:id="TelephoneField" />
-                    <Label fx:id="poidsLabel" text="poids" />
+                    <Label text="Téléphone" />
+                    <TextField fx:id="TelephoneField" />
+                    <Label fx:id="poidsLabel" text="Poids" />
                     <TextField fx:id="PoidsField" />
-                    <Label fx:id="tailleLabel" text="taille" />
+                    <Label fx:id="tailleLabel" text="Taille" />
                     <TextField fx:id="TailleField" />
-                    <Label fx:id="ageLabel" text="age" />
+                    <Label fx:id="ageLabel" text="Âge" />
                     <TextField fx:id="ageField" />
-               <HBox prefHeight="100.0" prefWidth="200.0">
-                  <children>
-                          <Label fx:id="objecitiveLabel" prefHeight="27.0" prefWidth="87.0" text="Objective" />
-                          <ChoiceBox fx:id="objectiveChoiceBox" prefHeight="39.0" prefWidth="153.0">
-                        <HBox.margin>
-                           <Insets left="20.0" />
-                        </HBox.margin>
-                     </ChoiceBox>
-                          <Label fx:id="activiterLabel" prefHeight="27.0" prefWidth="82.0" text="Activiter">
-                        <HBox.margin>
-                           <Insets left="20.0" />
-                        </HBox.margin>
-                     </Label>
-                     <ChoiceBox fx:id="ActiverChoiceBox" prefHeight="39.0" prefWidth="136.0">
-                        <HBox.margin>
-                           <Insets left="20.0" right="20.0" />
-                        </HBox.margin>
-                     </ChoiceBox>
-                          <Label fx:id="sexeLabel" prefHeight="27.0" prefWidth="47.0" text="Sexe" />
-                          <ChoiceBox fx:id="SexeChoiceBox" prefWidth="150.0">
-                        <HBox.margin>
-                           <Insets left="20.0" />
-                        </HBox.margin>
-                     </ChoiceBox>
-                  </children>
-               </HBox>
+                    <HBox prefHeight="100.0" prefWidth="200.0">
+                        <children>
+                            <Label fx:id="objecitiveLabel" prefHeight="27.0" prefWidth="87.0" text="Objectif" />
+                            <ChoiceBox fx:id="objectiveChoiceBox" prefHeight="39.0" prefWidth="153.0">
+                                <HBox.margin>
+                                    <Insets left="20.0" />
+                                </HBox.margin>
+                            </ChoiceBox>
+                            <Label fx:id="activiterLabel" prefHeight="27.0" prefWidth="82.0" text="Activité">
+                                <HBox.margin>
+                                    <Insets left="20.0" />
+                                </HBox.margin>
+                            </Label>
+                            <ChoiceBox fx:id="ActiverChoiceBox" prefHeight="39.0" prefWidth="136.0">
+                                <HBox.margin>
+                                    <Insets left="20.0" right="20.0" />
+                                </HBox.margin>
+                            </ChoiceBox>
+                            <Label fx:id="sexeLabel" prefHeight="27.0" prefWidth="47.0" text="Sexe" />
+                            <ChoiceBox fx:id="SexeChoiceBox" prefWidth="150.0">
+                                <HBox.margin>
+                                    <Insets left="20.0" />
+                                </HBox.margin>
+                            </ChoiceBox>
+                        </children>
+                    </HBox>
                     <Button fx:id="saveButton" onAction="#handleSaveAction" text="Save" />
                 </children>
                 <padding>
@@ -124,10 +129,10 @@
             </VBox>
         </center>
 
+        <!-- Bas (bottom) -->
         <bottom>
-
             <HBox id="footer" alignment="CENTER" prefHeight="63.0" prefWidth="800.0" spacing="10" BorderPane.alignment="CENTER">
-
+                <!-- Footer content can be added here -->
             </HBox>
         </bottom>
     </BorderPane>

@@ -62,9 +62,6 @@ public class EditProfileController implements Initializable {
     private MenuItem profileItem;
 
     @FXML
-    private MenuItem settingsItem;
-
-    @FXML
     private MenuItem addDishItem;
 
     @FXML
@@ -107,7 +104,14 @@ public class EditProfileController implements Initializable {
         ActiverChoiceBox.getItems().addAll("SEDENTAIRE", "LEGERE", "MODEREE", "INTENSE");
         ActiverChoiceBox.setValue("Activiter");
 
-        AccueilButton.setOnAction(event -> navigateToAccueilDeux());
+        AccueilButton.setOnAction(event -> {
+            if(currentUser instanceof Livreur) {
+                navigateToAccueilTrois();
+            } else {
+                navigateToAccueilDeux();
+            }
+        });
+
         platsBtn.setOnAction(event -> handlePlatsButtonClick());
         userService = new UserService();
         UserSession session = UserSession.getInstance();
@@ -388,6 +392,18 @@ public class EditProfileController implements Initializable {
             stage.show();
         } catch (IOException e) {
             showErrorAlert("Erreur de navigation", "Échec du chargement de la page AccueilDeux.");
+            e.printStackTrace();
+        }
+    }
+    private void navigateToAccueilTrois() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccueilTrois.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) AccueilButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            showErrorAlert("Erreur de navigation", "Échec du chargement de la page AccueilTrois.");
             e.printStackTrace();
         }
     }
