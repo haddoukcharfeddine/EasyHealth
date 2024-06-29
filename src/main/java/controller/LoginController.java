@@ -30,6 +30,8 @@ public class LoginController {
     private Button loginButton;
     @FXML
     private Button AccueilButton;
+    @FXML
+    private Button forgotPasswordButton;
 
     @FXML
     private Label telephoneErrorLabel;
@@ -47,6 +49,8 @@ public class LoginController {
                 e.printStackTrace();
             }
         });
+
+        forgotPasswordButton.setOnAction(event -> navigateToForgotPassword());
     }
 
     @FXML
@@ -165,10 +169,25 @@ public class LoginController {
         }
     }
 
+    @FXML
+    private void navigateToForgotPassword() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/forgot_password.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) forgotPasswordButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            showErrorAlert("Erreur de navigation", "Échec du chargement de la page de récupération de mot de passe.");
+            e.printStackTrace();
+        }
+    }
+
     private boolean validatePassword(String plainPassword, String hashedPassword) {
         return BCrypt.checkpw(plainPassword, hashedPassword);
     }
 }
+
 
 
 

@@ -16,7 +16,7 @@
 
 <VBox alignment="CENTER" prefHeight="385.0" prefWidth="702.0" spacing="20" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
 
-          <!-- En-tête (header) -->
+    <!-- En-tête (header) -->
     <HBox id="header" alignment="TOP_RIGHT" prefHeight="68.0" prefWidth="692.0" VBox.vgrow="NEVER">
         <children>
             <HBox id="headert" alignment="TOP_RIGHT" prefHeight="55.0" prefWidth="136.0" HBox.hgrow="NEVER">
@@ -34,44 +34,51 @@
             </HBox>
         </children>
     </HBox>
-   <GridPane>
-     <columnConstraints>
-       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         <ColumnConstraints hgrow="SOMETIMES" maxWidth="231.0" minWidth="10.0" prefWidth="231.0" />
-       <ColumnConstraints hgrow="SOMETIMES" maxWidth="612.0" minWidth="10.0" prefWidth="333.0" />
-         <ColumnConstraints hgrow="SOMETIMES" maxWidth="437.0" minWidth="10.0" prefWidth="119.0" />
-     </columnConstraints>
-     <rowConstraints>
+
+    <GridPane>
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="231.0" minWidth="10.0" prefWidth="231.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="612.0" minWidth="10.0" prefWidth="333.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="437.0" minWidth="10.0" prefWidth="119.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-     </rowConstraints>
-      <children>
-            <TextField fx:id="telephoneField" prefHeight="32.0" prefWidth="348.0" promptText="Numéro de téléphone" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-          <Label fx:id="telephoneErrorLabel" textFill="red" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
-            <PasswordField fx:id="passwordField" promptText="Mot de passe" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-          <Label fx:id="passwordErrorLabel" textFill="red" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="6"/>
-      
-                <!-- Bouton de connexion -->
-          <Button fx:id="loginButton" text="Connexion" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
-      
-                <!-- Bouton pour créer un compte -->
-          <Button fx:id="creat" onAction="#navigateToCreateAccount" text="Créer un compte" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
-             <ImageView fitHeight="247.0" fitWidth="282.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
-                 <image>
-                     <Image url="@images/logos.png" />
-                 </image>
-             </ImageView>
-      
-                <!-- Titre de la section de connexion -->
-          <Label id="loginTitle" text="Connexion" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-      </children>
-   </GridPane>
+        </rowConstraints>
+
+        <children>
+            <TextField fx:id="telephoneField" prefHeight="32.0" prefWidth="348.0" promptText="Numéro de téléphone" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Label fx:id="telephoneErrorLabel" textFill="red" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <PasswordField fx:id="passwordField" promptText="Mot de passe" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Label fx:id="passwordErrorLabel" textFill="red" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+
+            <!-- Bouton de connexion -->
+            <Button fx:id="loginButton" text="Connexion" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+
+            <!-- Bouton pour créer un compte -->
+            <Button fx:id="creat" onAction="#navigateToCreateAccount" text="Créer un compte" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
+
+            <!-- Bouton pour oublier mot de passe -->
+            <Button fx:id="forgotPasswordButton" onAction="#navigateToForgotPassword" text="Mot de passe oublié ?" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+
+            <ImageView fitHeight="247.0" fitWidth="282.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
+                <image>
+                    <Image url="@images/logos.png" />
+                </image>
+            </ImageView>
+
+            <!-- Titre de la section de connexion -->
+            <Label id="loginTitle" text="Connexion" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+        </children>
+    </GridPane>
 </VBox>

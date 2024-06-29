@@ -261,7 +261,15 @@ public class UserService implements IService<User> {
         }
 
     }
+    public void updateUserPassword(String telephone, String hashedPassword) throws SQLException {
+        String query = "UPDATE user SET password = ? WHERE telephone = ?";
 
+        try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
+            preparedStatement.setString(1, hashedPassword);
+            preparedStatement.setString(2, telephone);
+            preparedStatement.executeUpdate();
+        }
+    }
     @Override
     public void deleteUser(int id) {
         String sql = "DELETE FROM User WHERE id = ?";
