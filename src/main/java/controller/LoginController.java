@@ -7,12 +7,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import service.UserService;
 import session.UserSession;
 
@@ -42,9 +39,6 @@ public class LoginController {
 
     @FXML
     public void initialize() {
-
-
-
         loginButton.setOnAction(event -> {
             try {
                 handleLogin(event);
@@ -64,10 +58,10 @@ public class LoginController {
 
         if (telephone.isEmpty() || password.isEmpty()) {
             if (telephone.isEmpty()) {
-                setFieldError(telephoneField,telephoneErrorLabel, "Le numéro de téléphone est requis.");
+                setFieldError(telephoneField, telephoneErrorLabel, "Le numéro de téléphone est requis.");
             }
             if (password.isEmpty()) {
-                setFieldError(passwordField,passwordErrorLabel, "Le mot de passe est requis.");
+                setFieldError(passwordField, passwordErrorLabel, "Le mot de passe est requis.");
             }
             return;
         }
@@ -82,7 +76,7 @@ public class LoginController {
 
         User user = userService.getUserByTelephone(telephone);
 
-        if (user != null && userService.validateLogin(telephone, password)) {
+        if (user != null && validatePassword(password, user.getPassword())) {
             UserSession session = UserSession.getInstance();
             session.setTelephone(user.getTelephone());
             session.setUserId(user.getId());
@@ -170,8 +164,11 @@ public class LoginController {
             e.printStackTrace();
         }
     }
-}
 
+    private boolean validatePassword(String plainPassword, String hashedPassword) {
+        return BCrypt.checkpw(plainPassword, hashedPassword);
+    }
+}
 
 
 

@@ -207,5 +207,3 @@ public class AccueilDeux {
         System.out.println("Search action performed with text: " + searchText);
     }
 }
-
-

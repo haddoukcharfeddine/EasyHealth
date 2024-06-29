@@ -24,6 +24,9 @@ public class Accueil {
     private Button faqBtn;
 
     @FXML
+    private Button workWithUsBtn;
+
+    @FXML
     private TextField SearchText;
 
 
@@ -44,6 +47,18 @@ public class Accueil {
             Parent menuPage = FXMLLoader.load(getClass().getResource("/menu.fxml"));
             Scene menuScene = new Scene(menuPage, 800, 600);
             Stage stage = (Stage) menusBtn.getScene().getWindow();
+            stage.setScene(menuScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleWorkWithUsClick() {
+        try {
+            Parent menuPage = FXMLLoader.load(getClass().getResource("/Travailler.fxml"));
+            Scene menuScene = new Scene(menuPage, 800, 600);
+            Stage stage = (Stage) workWithUsBtn.getScene().getWindow();
             stage.setScene(menuScene);
         } catch (IOException e) {
             e.printStackTrace();

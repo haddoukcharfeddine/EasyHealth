@@ -1,11 +1,6 @@
 package controller;
 
-import entite.Enum.Activer;
-import entite.Enum.Objectif;
-import entite.Enum.Sexe;
-import entite.Users.Client;
-import entite.Users.ClientSport;
-import entite.Users.User;
+import entite.Users.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.io.IOException;
 
-public class CreateAccountController {
+public class TravaillerController {
 
     @FXML
     private Button accueilButton;
@@ -41,25 +36,13 @@ public class CreateAccountController {
     private TextField newPasswordField;
 
     @FXML
-    private ChoiceBox<String> objectifChoiceBox;
+    private ChoiceBox<String> UserTypeChoiceBox;
 
     @FXML
-    private ChoiceBox<String> ActiverChoiceBox;
+    private CheckBox disponibleCheckBox;
 
     @FXML
-    private TextField poidsField;
-
-    @FXML
-    private TextField tailleField;
-
-    @FXML
-    private TextField ageField;
-
-    @FXML
-    private ChoiceBox<String> sexeChoiceBox;
-
-    @FXML
-    private Button createAccountButton;
+    private Button Confirmer;
 
     @FXML
     private Label usernameErrorLabel;
@@ -78,31 +61,25 @@ public class CreateAccountController {
 
     @FXML
     public void initialize() {
-        objectifChoiceBox.getItems().addAll("Perdre_du_poids", "Prendre_du_poids", "Aucun");
-        objectifChoiceBox.setValue("Objectif");
+        UserTypeChoiceBox.getItems().addAll("Vendeur", "Livreur");
+        UserTypeChoiceBox.setValue("Type d'Utilisateur");
 
-        sexeChoiceBox.getItems().addAll("HOMME", "FEMME");
-        sexeChoiceBox.setValue("Sexe");
+        // Attach selection handler
+        UserTypeChoiceBox.setOnAction(event -> handleUserTypeSelection());
 
-        ActiverChoiceBox.getItems().addAll("SEDENTAIRE", "LEGERE", "MODEREE", "INTENSE");
-        ActiverChoiceBox.setValue("Activiter");
+        Confirmer.setOnAction(this::handleCreateAccount);
 
-        createAccountButton.setOnAction(this::handleCreateAccount);
-
-        // Add listener to update field visibility based on selected objectif
-        objectifChoiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> updateFieldVisibility(newValue));
-
-        // Initial visibility update
-        updateFieldVisibility(objectifChoiceBox.getValue());
+        disponibleCheckBox.setVisible(false);
     }
 
-    private void updateFieldVisibility(String objectifType) {
-        boolean showFields = objectifType.equals("Perdre_du_poids") || objectifType.equals("Prendre_du_poids");
-        poidsField.setVisible(showFields);
-        tailleField.setVisible(showFields);
-        ageField.setVisible(showFields);
-        sexeChoiceBox.setVisible(showFields);
-        ActiverChoiceBox.setVisible(showFields);
+    @FXML
+    private void handleUserTypeSelection() {
+        String userType = UserTypeChoiceBox.getValue();
+        if ("Livreur".equals(userType)) {
+            disponibleCheckBox.setVisible(true);
+        } else {
+            disponibleCheckBox.setVisible(false);
+        }
     }
 
     @FXML
@@ -114,12 +91,7 @@ public class CreateAccountController {
             String telephone = newTelephoneField.getText().trim();
             String address = newAddresseField.getText().trim();
             String password = newPasswordField.getText().trim();
-            String objectifType = objectifChoiceBox.getValue();
-            String activerType = ActiverChoiceBox.getValue();
-            String sexe = sexeChoiceBox.getValue();
-            float poids = 0;
-            float taille = 0;
-            int age = 0;
+            String userType = UserTypeChoiceBox.getValue();
 
             boolean valid = true;
 
@@ -162,41 +134,32 @@ public class CreateAccountController {
             if (!valid) {
                 throw new IllegalArgumentException("Some fields are not filled or invalid!");
             }
-
-            if (poidsField.isVisible()) {
-                poids = Float.parseFloat(poidsField.getText().trim());
-            }
-            if (tailleField.isVisible()) {
-                taille = Float.parseFloat(tailleField.getText().trim());
-            }
-            if (ageField.isVisible()) {
-                age = Integer.parseInt(ageField.getText().trim());
-            }
-
-            if ((objectifType.equals("Perdre_du_poids") || objectifType.equals("Prendre_du_poids"))) {
-                if (poids <= 0 || taille <= 0 || age <= 0) {
-                    throw new NumberFormatException("Invalid input for poids, taille, or age!");
-                }
-            }
             String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 
-            User newUser;
-            if (objectifType.equals("Perdre_du_poids") || objectifType.equals("Prendre_du_poids")) {
-                newUser = new ClientSport(id, username, email, telephone, address, hashedPassword, Objectif.valueOf(objectifType), poids, taille, age, Sexe.valueOf(sexe), Activer.valueOf(activerType));
-            } else {
-                newUser = new Client(id, username, email, telephone, address, hashedPassword, Objectif.valueOf(objectifType));
+            User newUser = null;
+            if ("Vendeur".equals(userType)) {
+                newUser = new Vendeur(id, username, email, telephone, address, hashedPassword);
+            } else if ("Livreur".equals(userType)) {
+                boolean disponible = disponibleCheckBox.isSelected();
+                newUser = new Livreur(id, username, email, telephone, address, hashedPassword, disponible);
             }
 
-            UserService userService = new UserService();
-            userService.addUser(newUser);
-            User user = userService.getUserByTelephone(telephone);
-            UserSession session = UserSession.getInstance();
-            session.setTelephone(user.getTelephone());
-            session.setUserId(user.getId());
+            if (newUser != null) {
+                UserService userService = new UserService();
+                userService.addUser(newUser);
+                User user = userService.getUserByTelephone(telephone);
+                UserSession session = UserSession.getInstance();
+                session.setTelephone(user.getTelephone());
+                session.setUserId(user.getId());
 
-            navigateToAccueilDeux(event);
+                if (newUser instanceof Livreur) {
+                    navigateToAccueilTrois(event);
+                } else {
+                    navigateToAccueilDeux(event);
+                }
+            }
         } catch (NumberFormatException e) {
-            System.out.println("Invalid input for poids, taille, or age!");
+            System.out.println("Invalid input!");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         } catch (Exception e) {
@@ -224,11 +187,10 @@ public class CreateAccountController {
     @FXML
     private void navigateToAccueil() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Accueil.fxml"));
-            Parent root = loader.load();
+            Parent accueilPage = FXMLLoader.load(getClass().getResource("/Accueil.fxml"));
+            Scene accueilScene = new Scene(accueilPage, 800, 600);
             Stage stage = (Stage) accueilButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+            stage.setScene(accueilScene);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -245,7 +207,16 @@ public class CreateAccountController {
             e.printStackTrace();
         }
     }
+
+    private void navigateToAccueilTrois(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccueilTrois.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
-
-
-

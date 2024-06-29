@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="588.0" prefWidth="761.0" spacing="20" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TravaillerController">
+
+    <!-- En-tête -->
+    <HBox id="header" alignment="TOP_RIGHT" prefHeight="26.0" prefWidth="721.0">
+        <children>
+            <HBox id="headert" alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                <children>
+                    <Button fx:id="accueilButton" mnemonicParsing="false" onAction="#navigateToAccueil" text="Accueil">
+                        <graphic>
+                            <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@images/Accueil.png" />
+                                </image>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                </children>
+            </HBox>
+        </children>
+    </HBox>
+
+    <!-- Titre -->
+    <Label id="createAccountTitle" prefHeight="35.0" prefWidth="223.0" text="travailler avec nous" />
+    <GridPane>
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="273.0" minWidth="10.0" prefWidth="248.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="255.0" minWidth="10.0" prefWidth="201.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="360.0" minWidth="10.0" prefWidth="37.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="360.0" minWidth="10.0" prefWidth="253.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+        <children>
+            <ImageView fitHeight="286.0" fitWidth="255.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="19">
+                <image>
+                    <Image url="@images/logos.png" />
+                </image>
+                <viewport>
+                    <Rectangle2D />
+                </viewport>
+            </ImageView>
+            <TextField fx:id="newUsernameField" prefHeight="26.0" prefWidth="191.0" promptText="Entrer le Nom d'utilisateur" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+            <Label fx:id="usernameErrorLabel" textFill="red" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+            <TextField fx:id="newEmailField" promptText="Entrer l'Email" GridPane.columnIndex="1" GridPane.rowIndex="16" />
+            <Label fx:id="emailErrorLabel" textFill="red" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+            <TextField fx:id="newPasswordField" promptText="Entrer le mot de passe" GridPane.columnIndex="1" GridPane.rowIndex="22" />
+            <Label fx:id="passwordErrorLabel" textFill="red" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+            <TextField fx:id="newTelephoneField" promptText="Entrer le Numéro de Téléphone" GridPane.columnIndex="3" GridPane.rowIndex="16" />
+            <Label fx:id="telephoneErrorLabel" textFill="red" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="11" />
+            <TextField fx:id="newAddresseField" promptText="Entrer l'Adresse" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+            <Label fx:id="addressErrorLabel" textFill="red" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="19" />
+            <ChoiceBox fx:id="UserTypeChoiceBox" prefWidth="150.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="22" />
+
+            <Button fx:id="Confirmer" text="Confirmer" GridPane.columnIndex="3" GridPane.rowIndex="41" />
+            <HBox alignment="CENTER">
+                <VBox.margin>
+                    <Insets top="-60.0" />
+                </VBox.margin>
+            </HBox>
+             <CheckBox fx:id="disponibleCheckBox" text="Êtes-vous disponible dès maintenant ?" GridPane.columnIndex="1" GridPane.rowIndex="28" />
+        </children>
+    </GridPane>
+</VBox>
