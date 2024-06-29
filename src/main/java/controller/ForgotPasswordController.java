@@ -74,7 +74,7 @@ public class ForgotPasswordController {
         String host = "smtp.gmail.com";
         String port = "587";
         String username = "easyhealth241@gmail.com"; // Replace with your email
-        String password = "yffy hnjt kebm prvs"; // Replace with your email password
+        String password = "passwordhere"; // Replace with your email password
 
         // Setup mail server properties
         Properties properties = new Properties();
