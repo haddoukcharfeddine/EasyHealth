@@ -1,11 +1,8 @@
 package controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -34,12 +31,15 @@ public class NewPasswordController {
 
     @FXML
     private Button accueilButton;
+    @FXML
+    private TextField telephoneField;
+
 
     @FXML
     private void handleSaveNewPassword(ActionEvent event) {
         String newPassword = newPasswordField.getText();
         String confirmPassword = confirmPasswordField.getText();
-
+        String telephone = telephoneField.getText();
         if (newPassword.isEmpty() || confirmPassword.isEmpty()) {
             messageLabel.setText("Veuillez remplir tous les champs.");
             messageLabel.setVisible(true);
@@ -53,8 +53,6 @@ public class NewPasswordController {
             try {
                 String hashedPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt());
 
-                UserSession session = UserSession.getInstance();
-                String telephone = session.getTelephone();
 
                 UserService userService = new UserService();
                 userService.updateUserPassword(telephone, hashedPassword);

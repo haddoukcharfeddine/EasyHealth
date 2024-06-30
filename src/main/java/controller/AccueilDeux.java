@@ -51,6 +51,8 @@ public class AccueilDeux {
     private String userType;
     @FXML
     private Button platsBtn;
+    @FXML
+    private Button PanierBtn;
 
     public void setUserType(String userType) {
         this.userType = userType;
@@ -161,6 +163,7 @@ public class AccueilDeux {
                 platsBtn.setVisible(false);
                 menusBtn.setVisible(false);
                 SearchText.setVisible(false);
+                PanierBtn.setVisible(false);
                 addDishItem.setOnAction(event -> handleAjouterPlatEditAction());
                 addMenuItem.setOnAction(event -> handleAddMenu());
             } else {
@@ -170,6 +173,7 @@ public class AccueilDeux {
                 platsBtn.setVisible(true);
                 menusBtn.setVisible(true);
                 SearchText.setVisible(true);
+                PanierBtn.setVisible(true);
             }
         }
     }
