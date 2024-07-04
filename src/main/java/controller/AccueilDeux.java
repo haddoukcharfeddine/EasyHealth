@@ -1,15 +1,13 @@
 package controller;
 
-import entite.Enum.Objectif;
 import entite.Users.Client;
-import entite.Users.ClientSport;
 import entite.Users.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
@@ -18,14 +16,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import service.UserService;
 import session.UserSession;
-import javafx.scene.control.Label;
 
 import java.io.IOException;
 
 public class AccueilDeux {
-
-    @FXML
-    private Button menusBtn;
 
     @FXML
     private MenuButton profileMenuBtn;
@@ -35,8 +29,6 @@ public class AccueilDeux {
     private MenuItem profileItem;
     @FXML
     private MenuItem profileviewItem;
-    @FXML
-    private MenuItem addMenuItem;
     @FXML
     private MenuItem logoutItem;
     @FXML
@@ -62,34 +54,19 @@ public class AccueilDeux {
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
         updateMenuItemsVisibility();
-        updateCaloriesAndProteineLabels(); // Add this method call
+        updateCaloriesAndProteineLabels();
     }
 
     @FXML
     private void initialize() {
-
         UserService userService = new UserService();
         UserSession session = UserSession.getInstance();
         String currentUserTelephone = session.getTelephone();
         currentUser = userService.getUserByTelephone(currentUserTelephone);
         if (currentUser != null) {
             userType = userService.getUserType(currentUser).toString();
-            setCurrentUser(currentUser); // Ensure that the current user and userType are set, and visibility is updated
+            setCurrentUser(currentUser);
         }
-    }
-
-    @FXML
-    private void handleMenus() {
-        System.out.println("Menus button clicked");
-    }
-
-    private void handleStoreList() {
-        System.out.println("Store List button clicked");
-    }
-
-
-    private void handleAddMenu() {
-        System.out.println("Add Menu action clicked");
     }
 
     @FXML
@@ -104,6 +81,7 @@ public class AccueilDeux {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void handleProfileViewItemAction() {
         try {
@@ -129,6 +107,7 @@ public class AccueilDeux {
             e.printStackTrace();
         }
     }
+
     private void handleAjouterPlatEditAction() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterPlat.fxml"));
@@ -140,6 +119,7 @@ public class AccueilDeux {
             e.printStackTrace();
         }
     }
+
     @FXML
     void handlePlatsButtonClick() {
         try {
@@ -150,7 +130,6 @@ public class AccueilDeux {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            // Handle the exception here, such as displaying an error message to the user
         }
     }
 
@@ -158,20 +137,15 @@ public class AccueilDeux {
         if (userType != null) {
             if (userType.equals("Vendeur")) {
                 addDishItem.setVisible(true);
-                addMenuItem.setVisible(true);
                 profileviewItem.setVisible(true);
                 platsBtn.setVisible(false);
-                menusBtn.setVisible(false);
                 SearchText.setVisible(false);
                 PanierBtn.setVisible(false);
                 addDishItem.setOnAction(event -> handleAjouterPlatEditAction());
-                addMenuItem.setOnAction(event -> handleAddMenu());
             } else {
                 addDishItem.setVisible(false);
-                addMenuItem.setVisible(false);
                 profileviewItem.setVisible(false);
                 platsBtn.setVisible(true);
-                menusBtn.setVisible(true);
                 SearchText.setVisible(true);
                 PanierBtn.setVisible(true);
             }
@@ -181,27 +155,19 @@ public class AccueilDeux {
     private void updateCaloriesAndProteineLabels() {
         if (currentUser instanceof Client) {
             Client client = (Client) currentUser;
-            Objectif objectif = client.getObjectif();
-            if (objectif == Objectif.Perdre_du_poids || objectif == Objectif.Prendre_du_poids) {
-                int[] besoins = ClientSport.calculerBesoinsNutritionnels();
-                double tee = besoins[0];
-                double proteinNeeds = besoins[1];
+            // Here you would have the logic for setting the labels based on client's details
+            // For example:
+            Label caloriesLabel = new Label("Calories: ...");
+            CaloriesItem.getChildren().setAll(caloriesLabel);
 
-                // Update CaloriesItem label with the calculated value
-                Label caloriesLabel = new Label("Calories: " + (int) Math.round(tee));
-                CaloriesItem.getChildren().setAll(caloriesLabel);
+            Label proteineLabel = new Label("Proteine: ...");
+            ProteineItem.getChildren().setAll(proteineLabel);
 
-                // Update ProteineItem label with the calculated value
-                Label proteineLabel = new Label("Proteine: " + (int) Math.round(proteinNeeds));
-                ProteineItem.getChildren().setAll(proteineLabel);
-
-                // Make CaloriesItem and ProteineItem visible
-                CaloriesItem.setVisible(true);
-                ProteineItem.setVisible(true);
-            } else {
-                CaloriesItem.setVisible(false);
-                ProteineItem.setVisible(false);
-            }
+            CaloriesItem.setVisible(true);
+            ProteineItem.setVisible(true);
+        } else {
+            CaloriesItem.setVisible(false);
+            ProteineItem.setVisible(false);
         }
     }
 

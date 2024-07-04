@@ -1,7 +1,6 @@
 package entite.Users;
 
 import entite.Enum.UserType;
-import entite.Menu;
 import entite.Plat;
 import service.PlatService;
 
@@ -10,15 +9,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Vendeur extends User {
-    List<Plat> plats= new ArrayList<>();
+    List<Plat> plats = new ArrayList<>();
 
-    public Vendeur(int id, String nom, String email, String telephone, String adresse,String password) {
-        super(id, nom, email, telephone, adresse,password, UserType.Vendeur);
+    public Vendeur(int id, String nom, String email, String telephone, String adresse, String password) {
+        super(id, nom, email, telephone, adresse, password, UserType.Vendeur);
     }
-
-
-
-
 
     public void supprimerPlat() {
         PlatService platService = new PlatService();
@@ -39,27 +34,17 @@ public class Vendeur extends User {
         }
     }
 
-
-    public void ajouterMenu(String nomMenu, List<Plat> plats) {
+    public void ajouterPlat(Plat plat) {
         PlatService platService = new PlatService();
-        Menu menu = new Menu(0, nomMenu, plats);
-        platService.ajouterMenu(menu);
+        platService.ajouterPlat(plat);
     }
 
-
-    public void modifierMenu(int idM, String nomMenu, List<Plat> plats) {
+    public void modifierPlat(Plat plat) {
         PlatService platService = new PlatService();
-        Menu menu = new Menu(idM, nomMenu, plats);
-        platService.modifierMenu(menu);
+        platService.modifierPlat(plat);
     }
 
-
-    public void supprimerMenu(int idM) {
-        PlatService platService = new PlatService();
-        platService.supprimerMenu(idM);
+    public void gererCommandes() {
+        // Méthode pour gérer les commandes
     }
-
-    public void gererCommandes() {}
 }
-
-

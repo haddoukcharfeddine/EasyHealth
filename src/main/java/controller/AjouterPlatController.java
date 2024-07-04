@@ -44,7 +44,6 @@ public class AjouterPlatController {
     @FXML
     private void initialize() {
         profileMenuBtn.getItems().forEach(this::setMenuItemAction);
-
     }
 
     private void setMenuItemAction(MenuItem menuItem) {
@@ -112,19 +111,12 @@ public class AjouterPlatController {
         // Optionally, display a success message
         showInformationAlert("Success", "Plat added successfully");
     }
+
     @FXML
     private void navigateToAccueilDeux() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccueilDeux.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) AccueilButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            showErrorAlert("Erreur de navigation", "Échec du chargement de la page AccueilDeux.");
-            e.printStackTrace();
-        }
+        switchScene("/AccueilDeux.fxml");
     }
+
     @FXML
     private void handleEditProfile(ActionEvent event) {
         switchScene("/editprofile.fxml");

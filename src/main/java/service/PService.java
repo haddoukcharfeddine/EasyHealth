@@ -1,25 +1,18 @@
 package service;
 
-import entite.Menu;
-import entite.Plat;
-
 import java.util.List;
 
 public interface PService<T> {
-    void ajouterPlat(Plat plat);
 
-    void modifierPlat(Plat plat);
+    void ajouterPlat(T t);
 
-    void supprimerPlatById(int idP);
+    void modifierPlat(T t);
 
-    void supprimerPlatByNom(String nomPlat);
+    void supprimerPlatById(int id);
 
-    void modifierMenu(Menu menu);
+    void supprimerPlatByNom(String nom);
 
+    List<T> getAllPlats();
 
-
-    void ajouterMenu(Menu menu);
-
-    void supprimerMenu(int idM);
-    String platIdsToString(List<Plat> plats);
+    // Vous pouvez conserver d'autres méthodes génériques ici si nécessaire pour la gestion des plats
 }

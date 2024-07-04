@@ -41,9 +41,6 @@ public class PlatsController implements Initializable {
     private MenuItem addDishItem;
 
     @FXML
-    private MenuItem addMenuItem;
-
-    @FXML
     private MenuItem logoutItem;
     @FXML
     private MenuButton profileMenuBtn;
@@ -85,6 +82,7 @@ public class PlatsController implements Initializable {
         String searchText = SearchText.getText();
         System.out.println("Search action performed with text: " + searchText);
     }
+
     @FXML
     private void showErrorAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -93,6 +91,7 @@ public class PlatsController implements Initializable {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
     private void navigateToAccueilDeux() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccueilDeux.fxml"));
@@ -105,6 +104,7 @@ public class PlatsController implements Initializable {
             e.printStackTrace();
         }
     }
+
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -112,17 +112,13 @@ public class PlatsController implements Initializable {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
     @FXML
     private void handleLogout() {
         try {
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Accueil.fxml"));
             Parent root = loader.load();
-
-
             Stage stage = (Stage) profileMenuBtn.getScene().getWindow();
-
-
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
@@ -130,6 +126,7 @@ public class PlatsController implements Initializable {
             e.printStackTrace();
         }
     }
+
     private void handleProfileEditAction() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/editprofile.fxml"));
@@ -142,4 +139,3 @@ public class PlatsController implements Initializable {
         }
     }
 }
-
