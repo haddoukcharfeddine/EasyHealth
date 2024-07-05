@@ -47,42 +47,61 @@ public class PlatsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // Initialisation des actions des boutons et des éléments de menu
         AccueilButton.setOnAction(event -> navigateToAccueilDeux());
         profileItem.setOnAction(event -> handleProfileEditAction());
         logoutItem.setOnAction(event -> handleLogout());
+
+        // Initialisation du service des plats
         platService = new PlatService();
+
+        // Récupération de tous les plats depuis le service
         List<Plat> plats = platService.getAllPlats();
+
+        // Ajout de chaque plat à la grille d'affichage
         for (Plat plat : plats) {
             addPlate(plat);
         }
     }
 
+    // Méthode privée pour ajouter un plat à la grille d'affichage
     private void addPlate(Plat plat) {
+        // Conversion des données de l'image en Image JavaFX
         ByteArrayInputStream bis = new ByteArrayInputStream(plat.getImageData());
         Image image = new Image(bis);
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(150);
         imageView.setFitHeight(150);
         imageView.getStyleClass().add("plate-image");
+
+        // Création des étiquettes pour afficher les détails du plat
         Label nameLabel = new Label(plat.getNomPlat());
         Label descriptionLabel = new Label(plat.getDescription());
         Label proteinLabel = new Label("Protein: " + plat.getProtein());
         Label caloriesLabel = new Label("Calories: " + plat.getCalories());
+
+        // Bouton pour ajouter au panier (exemple)
         Button addToCartButton = new Button("Ajouter au Panier");
 
+        // Conteneur VBox pour regrouper les éléments du plat
         VBox plateInfo = new VBox(imageView, nameLabel, descriptionLabel, proteinLabel, caloriesLabel, addToCartButton);
         plateInfo.getStyleClass().add("plate-info");
-        plateInfo.setSpacing(10); // Set spacing between elements in the VBox
+        plateInfo.setSpacing(10); // Définit l'espacement entre les éléments dans le VBox
 
+        // Ajout du conteneur VBox à la grille d'affichage
         gridPane.addRow(gridPane.getRowCount(), plateInfo);
     }
 
+    // Gère l'action de recherche
     @FXML
     private void handleSearchAction(ActionEvent event) {
         String searchText = SearchText.getText();
         System.out.println("Search action performed with text: " + searchText);
+        // Ici, vous pourriez implémenter la logique de recherche en fonction du texte saisi
+        // par exemple, filtrer et afficher uniquement les plats correspondant à la recherche
     }
 
+    // Affiche une alerte d'erreur avec un titre et un message spécifiques
     @FXML
     private void showErrorAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -92,6 +111,7 @@ public class PlatsController implements Initializable {
         alert.showAndWait();
     }
 
+    // Navigation vers la page d'accueil deux
     private void navigateToAccueilDeux() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccueilDeux.fxml"));
@@ -105,6 +125,7 @@ public class PlatsController implements Initializable {
         }
     }
 
+    // Affiche une alerte avec un type spécifique, un titre et un message
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -113,6 +134,7 @@ public class PlatsController implements Initializable {
         alert.showAndWait();
     }
 
+    // Gère la déconnexion de l'utilisateur
     @FXML
     private void handleLogout() {
         try {
@@ -127,6 +149,7 @@ public class PlatsController implements Initializable {
         }
     }
 
+    // Gère l'action d'édition du profil utilisateur
     private void handleProfileEditAction() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/editprofile.fxml"));

@@ -43,9 +43,11 @@ public class AjouterPlatController {
 
     @FXML
     private void initialize() {
+        // Initialise les actions des éléments du menu déroulant profil
         profileMenuBtn.getItems().forEach(this::setMenuItemAction);
     }
 
+    // Associe une action à chaque élément du menu déroulant profil
     private void setMenuItemAction(MenuItem menuItem) {
         switch (menuItem.getId()) {
             case "profileItem":
@@ -57,6 +59,7 @@ public class AjouterPlatController {
         }
     }
 
+    // Gère le chargement d'une image depuis le système de fichiers
     @FXML
     private void handleSelectImage(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
@@ -71,8 +74,10 @@ public class AjouterPlatController {
         }
     }
 
+    // Gère l'ajout d'un plat
     @FXML
     private void handleAddPlat(ActionEvent event) {
+        // Récupère les informations entrées par l'utilisateur depuis l'interface
         String nomPlat = nomPlatField.getText();
         String description = descriptionField.getText();
         double prix = Double.parseDouble(prixField.getText());
@@ -80,16 +85,16 @@ public class AjouterPlatController {
         int calories = Integer.parseInt(caloriesField.getText());
         String categorie = categorieField.getText();
 
-        // Get the current user's telephone number from the UserSession
+        // Récupère le numéro de téléphone de l'utilisateur courant depuis la session utilisateur
         String currentUserTelephone = UserSession.getInstance().getTelephone();
 
+        // Vérifie si le numéro de téléphone de l'utilisateur courant est disponible
         if (currentUserTelephone == null) {
-            // Handle case where current user's telephone is not available
             showErrorAlert("Error", "Failed to retrieve current user's telephone number");
             return;
         }
 
-        // Prepare image data
+        // Prépare les données de l'image sous forme de tableau de bytes
         byte[] imageData = null;
         try {
             if (selectedImageFile != null) {
@@ -102,31 +107,35 @@ public class AjouterPlatController {
             return;
         }
 
-        // Create a new instance of PlatService
+        // Crée une nouvelle instance de PlatService pour gérer les opérations sur les plats
         PlatService platService = new PlatService();
 
-        // Add the new plat using PlatService
+        // Ajoute le nouveau plat en utilisant PlatService
         platService.ajouterPlat(new Plat(0, nomPlat, description, prix, proteine, calories, currentUserTelephone, categorie, imageData));
 
-        // Optionally, display a success message
+        // Affiche éventuellement un message de succès à l'utilisateur
         showInformationAlert("Success", "Plat added successfully");
     }
 
+    // Navigue vers la page d'accueil après avoir ajouté un plat
     @FXML
     private void navigateToAccueilDeux() {
         switchScene("/AccueilDeux.fxml");
     }
 
+    // Gère la navigation vers la page d'édition du profil utilisateur
     @FXML
     private void handleEditProfile(ActionEvent event) {
         switchScene("/editprofile.fxml");
     }
 
+    // Gère la déconnexion de l'utilisateur
     @FXML
     private void handleLogout(ActionEvent event) {
         switchScene("/Accueil.fxml");
     }
 
+    // Change la scène vers le fichier FXML spécifié
     private void switchScene(String fxmlFile) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
@@ -136,6 +145,7 @@ public class AjouterPlatController {
         }
     }
 
+    // Affiche une alerte d'erreur avec un titre et un message spécifiques
     private void showErrorAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -144,6 +154,7 @@ public class AjouterPlatController {
         alert.showAndWait();
     }
 
+    // Affiche une alerte d'information avec un titre et un message spécifiques
     private void showInformationAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);

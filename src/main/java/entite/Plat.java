@@ -1,18 +1,18 @@
 package entite;
 
-
-
+// Classe représentant un plat
 public class Plat {
-    private int idP;
-    private String nomPlat;
-    private String description;
-    private double prix;
-    private int protein;
-    private int calories;
-    private String idUVendeur;
-    private String categorie;
-    private byte[] imageData; // Image data as byte array
+    private int idP;              // Identifiant du plat
+    private String nomPlat;       // Nom du plat
+    private String description;   // Description du plat
+    private double prix;          // Prix du plat
+    private int protein;          // Quantité de protéines dans le plat
+    private int calories;         // Nombre de calories dans le plat
+    private String idUVendeur;    // Identifiant unique du vendeur du plat
+    private String categorie;     // Catégorie du plat
+    private byte[] imageData;    // Données de l'image du plat sous forme de tableau d'octets
 
+    // Constructeur pour initialiser un plat avec toutes ses propriétés
     public Plat(int idP, String nomPlat, String description, double prix, int protein, int calories, String idUVendeur, String categorie, byte[] imageData) {
         this.idP = idP;
         this.nomPlat = nomPlat;
@@ -25,7 +25,7 @@ public class Plat {
         this.imageData = imageData;
     }
 
-    // Getters and setters
+    // Getters and setters pour accéder et modifier les attributs privés
 
     public int getIdP() {
         return idP;
