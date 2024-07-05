@@ -4,16 +4,18 @@ import entite.Enum.Activer;
 import entite.Enum.Objectif;
 import entite.Enum.Sexe;
 
+// Classe ClientSport qui hérite de la classe Client
 public class ClientSport extends Client {
-    private static float poids;
-    private static float taille;
-    private static int age;
-    private static Sexe sexe;
-    private static Activer activer;
+    // Attributs spécifiques à ClientSport
+    private float poids;     // Poids du client sportif
+    private float taille;    // Taille du client sportif
+    private int age;         // Âge du client sportif
+    private Sexe sexe;       // Sexe du client sportif
+    private Activer activer; // Niveau d'activité physique du client sportif
 
-
+    // Constructeur de la classe ClientSport
     public ClientSport(int id, String nom, String email, String telephone, String adresse, String password, Objectif objectif, float poids, float taille, int age, Sexe sexe, Activer activer) {
-        super(id, nom, email, telephone, adresse, password, objectif);
+        super(id, nom, email, telephone, adresse, password, objectif); // Appel au constructeur de la classe parente Client
         this.poids = poids;
         this.taille = taille;
         this.age = age;
@@ -21,48 +23,59 @@ public class ClientSport extends Client {
         this.activer = activer;
     }
 
-
+    // Getter pour le poids du client sportif
     public float getPoids() {
         return poids;
     }
 
+    // Setter pour le poids du client sportif
     public void setPoids(float poids) {
         this.poids = poids;
     }
 
+    // Getter pour la taille du client sportif
     public float getTaille() {
         return taille;
     }
 
+    // Setter pour la taille du client sportif
     public void setTaille(float taille) {
         this.taille = taille;
     }
 
+    // Getter pour l'âge du client sportif
     public int getAge() {
         return age;
     }
 
+    // Setter pour l'âge du client sportif
     public void setAge(int age) {
         this.age = age;
     }
 
+    // Getter pour le sexe du client sportif
     public Sexe getSexe() {
         return sexe;
     }
 
+    // Setter pour le sexe du client sportif
     public void setSexe(Sexe sexe) {
         this.sexe = sexe;
     }
 
+    // Getter pour le niveau d'activité physique du client sportif
     public Activer getActiver() {
         return activer;
     }
 
+    // Setter pour le niveau d'activité physique du client sportif
     public void setActiver(Activer activer) {
         this.activer = activer;
     }
 
-    public static int[] calculerBesoinsNutritionnels() {
+    // Méthode pour calculer les besoins nutritionnels du client sportif
+    public int[] calculerBesoinsNutritionnels() {
+        // Calcul du métabolisme de base (BMR)
         double bmr;
         if (sexe == Sexe.HOMME) {
             bmr = 88.362 + (13.397 * poids) + (4.799 * taille) - (5.677 * age);
@@ -70,6 +83,7 @@ public class ClientSport extends Client {
             bmr = 447.593 + (9.247 * poids) + (3.098 * taille) - (4.330 * age);
         }
 
+        // Calcul du besoin énergétique total (TEE) en fonction du niveau d'activité physique
         double tee;
         switch (activer) {
             case SEDENTAIRE:
@@ -88,13 +102,14 @@ public class ClientSport extends Client {
                 tee = bmr;
         }
 
-        if (getObjectif() == Objectif.Perdre_du_poids) {
+        // Ajustement du TEE en fonction de l'objectif (perte de poids, gain de masse, etc.)
+        if (getObjectif() == Objectif.PERTE_POIDS) {
             tee -= 500;
-        } else if (getObjectif() == Objectif.Prendre_du_poids) {
+        } else if (getObjectif() == Objectif.GAIN_MASSE) {
             tee += 500;
         }
 
-        // Calculate daily protein needs
+        // Calcul des besoins quotidiens en protéines en fonction du niveau d'activité physique
         double proteinNeeds;
         switch (activer) {
             case SEDENTAIRE:
@@ -113,6 +128,7 @@ public class ClientSport extends Client {
                 proteinNeeds = poids * 0.8;
         }
 
+        // Arrondir et retourner les besoins calculés sous forme de tableau d'entiers
         return new int[]{(int) Math.round(tee), (int) Math.round(proteinNeeds)};
     }
 }
