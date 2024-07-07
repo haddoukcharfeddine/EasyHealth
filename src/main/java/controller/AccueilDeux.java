@@ -24,8 +24,7 @@ import java.io.IOException;
 
 public class AccueilDeux {
 
-    @FXML
-    private Button menusBtn;
+
 
     @FXML
     private MenuButton profileMenuBtn;
@@ -35,8 +34,7 @@ public class AccueilDeux {
     private MenuItem profileItem;
     @FXML
     private MenuItem profileviewItem;
-    @FXML
-    private MenuItem addMenuItem;
+
     @FXML
     private MenuItem logoutItem;
     @FXML
@@ -78,19 +76,13 @@ public class AccueilDeux {
         }
     }
 
-    @FXML
-    private void handleMenus() {
-        System.out.println("Menus button clicked");
-    }
 
     private void handleStoreList() {
         System.out.println("Store List button clicked");
     }
 
 
-    private void handleAddMenu() {
-        System.out.println("Add Menu action clicked");
-    }
+
 
     @FXML
     private void handleLogout() {
@@ -158,20 +150,17 @@ public class AccueilDeux {
         if (userType != null) {
             if (userType.equals("Vendeur")) {
                 addDishItem.setVisible(true);
-                addMenuItem.setVisible(true);
                 profileviewItem.setVisible(true);
-                platsBtn.setVisible(false);
-                menusBtn.setVisible(false);
-                SearchText.setVisible(false);
+                platsBtn.setVisible(true);
+
+                SearchText.setVisible(true);
                 PanierBtn.setVisible(false);
                 addDishItem.setOnAction(event -> handleAjouterPlatEditAction());
-                addMenuItem.setOnAction(event -> handleAddMenu());
             } else {
                 addDishItem.setVisible(false);
-                addMenuItem.setVisible(false);
                 profileviewItem.setVisible(false);
                 platsBtn.setVisible(true);
-                menusBtn.setVisible(true);
+
                 SearchText.setVisible(true);
                 PanierBtn.setVisible(true);
             }

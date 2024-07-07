@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
@@ -13,6 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <!-- Interface de plats -->
+
 <VBox stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PlatsController">
 
     <!-- Bordure principale -->
@@ -24,13 +26,6 @@
                 <children>
                     <!-- Bouton Accueil -->
                     <Button fx:id="AccueilButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="77.0" text="Accueil" />
-
-                    <!-- Bouton Menu -->
-                    <Button fx:id="menusBtn" prefHeight="40.0" prefWidth="77.0" text="Menu">
-                        <HBox.margin>
-                            <Insets />
-                        </HBox.margin>
-                    </Button>
 
                     <!-- Barre de recherche -->
                     <HBox fx:id="headert" alignment="CENTER" prefHeight="101.0" prefWidth="197.0">
@@ -86,7 +81,6 @@
                             <MenuItem fx:id="profileviewItem" mnemonicParsing="false" text="Profile" visible="false" />
                             <MenuItem fx:id="profileItem" mnemonicParsing="false" text="Modifier le Profil" />
                             <MenuItem fx:id="addDishItem" mnemonicParsing="false" text="Ajouter un Plat" visible="false" />
-                            <MenuItem fx:id="addMenuItem" mnemonicParsing="false" text="Ajouter un Menu" visible="false" />
                             <MenuItem fx:id="logoutItem" mnemonicParsing="false" text="Déconnexion" />
                         </items>
                         <graphic>

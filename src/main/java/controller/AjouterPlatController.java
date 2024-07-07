@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import service.PlatService;
@@ -140,6 +141,18 @@ public class AjouterPlatController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
             Objects.requireNonNull(profileMenuBtn.getScene()).setRoot(loader.load());
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void handleProfileViewItemAction() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Profile.fxml"));
+            VBox root = loader.load();
+            Stage stage = (Stage) profileMenuBtn.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

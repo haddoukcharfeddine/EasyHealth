@@ -37,8 +37,7 @@ public class ProfileController {
     @FXML
     private MenuItem addDishItem;
 
-    @FXML
-    private MenuItem addMenuItem;
+
     @FXML
     private MenuItem profileviewItem;
 
@@ -58,6 +57,7 @@ public class ProfileController {
     public void initialize() {
 
         AccueilButton.setOnAction(event -> navigateToAccueilDeux());
+        addDishItem.setOnAction((event -> handleAjouterPlatEditAction()));
         userService = new UserService();
         platService = new PlatService();
         userSession = UserSession.getInstance();
@@ -76,6 +76,18 @@ public class ProfileController {
 
         // Display the fetched plates
         displayPlats(plats);
+
+        if (currentUser != null) {
+            String userType = String.valueOf(userService.getUserType(currentUser));
+
+            if (userType != null) {
+                if (userType.equals("Vendeur")) {
+                    addDishItem.setVisible(true);
+                } else {
+                    addDishItem.setVisible(false);
+                }
+            }
+        }
     }
 
     // Method to display the fetched plates in the VBox

@@ -1,6 +1,7 @@
 package controller;
 
 import entite.Plat;
+import entite.Users.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import service.PlatService;
+import service.UserService;
+import session.UserSession;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -39,10 +42,12 @@ public class PlatsController implements Initializable {
 
     @FXML
     private MenuItem addDishItem;
-
+    private UserService userService;
+    private User currentUser;
     @FXML
-    private MenuItem addMenuItem;
-
+    private MenuItem profileviewItem;
+    @FXML
+    private Button platsBtn;
     @FXML
     private MenuItem logoutItem;
     @FXML
@@ -53,10 +58,33 @@ public class PlatsController implements Initializable {
         AccueilButton.setOnAction(event -> navigateToAccueilDeux());
         profileItem.setOnAction(event -> handleProfileEditAction());
         logoutItem.setOnAction(event -> handleLogout());
+        profileviewItem.setOnAction((event -> handleProfileViewItemAction()));
+        addDishItem.setOnAction((event -> handleAjouterPlatEditAction()));
         platService = new PlatService();
         List<Plat> plats = platService.getAllPlats();
         for (Plat plat : plats) {
             addPlate(plat);
+        }
+        userService = new UserService();
+        UserSession session = UserSession.getInstance();
+        String currentUserTelephone = session.getTelephone();
+
+
+        currentUser = userService.getUserByTelephone(currentUserTelephone);
+        if (currentUser != null) {
+            String userType = String.valueOf(userService.getUserType(currentUser));
+
+            if (userType != null) {
+                if (userType.equals("Vendeur")) {
+                    addDishItem.setVisible(true);
+                    profileviewItem.setVisible(true);
+
+                } else {
+                    addDishItem.setVisible(false);
+                    profileviewItem.setVisible(false);
+
+                }
+            }
         }
     }
 
@@ -105,12 +133,36 @@ public class PlatsController implements Initializable {
             e.printStackTrace();
         }
     }
+    @FXML
+    private void handleAjouterPlatEditAction() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterPlat.fxml"));
+            VBox root = loader.load();
+            Stage stage = (Stage) profileMenuBtn.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+    @FXML
+    private void handleProfileViewItemAction() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Profile.fxml"));
+            VBox root = loader.load();
+            Stage stage = (Stage) profileMenuBtn.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     @FXML
     private void handleLogout() {
