@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -34,7 +35,8 @@ public class AccueilDeux {
     private MenuItem profileItem;
     @FXML
     private MenuItem profileviewItem;
-
+    @FXML
+    private MenuItem gcommande;
     @FXML
     private MenuItem logoutItem;
     @FXML
@@ -133,6 +135,18 @@ public class AccueilDeux {
         }
     }
     @FXML
+    private void handlegestioncommande() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/login-view.fxml"));
+            AnchorPane root = loader.load();
+            Stage stage = (Stage) profileMenuBtn.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
     void handlePlatsButtonClick() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Plats.fxml"));
@@ -152,7 +166,7 @@ public class AccueilDeux {
                 addDishItem.setVisible(true);
                 profileviewItem.setVisible(true);
                 platsBtn.setVisible(true);
-
+                gcommande.setVisible(false);
                 SearchText.setVisible(true);
                 PanierBtn.setVisible(false);
                 addDishItem.setOnAction(event -> handleAjouterPlatEditAction());
@@ -160,7 +174,7 @@ public class AccueilDeux {
                 addDishItem.setVisible(false);
                 profileviewItem.setVisible(false);
                 platsBtn.setVisible(true);
-
+                gcommande.setVisible(true);
                 SearchText.setVisible(true);
                 PanierBtn.setVisible(true);
             }

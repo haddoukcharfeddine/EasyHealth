@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #F5DC6E;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
+    <children>
+        <Label layoutX="376.0" layoutY="24.0" text="Easy Health" textFill="#010f09">
+            <font>
+                <Font name="Monospaced Bold" size="34.0" />
+            </font>
+        </Label>
+        <Button fx:id="btnOrders" layoutX="510.0" layoutY="485.0" mnemonicParsing="false" onAction="#btnOrders" prefHeight="48.0" prefWidth="124.0" style="-fx-background-color: #A8C987;" text="Orders">
+            <font>
+                <Font name="Monospaced Bold" size="20.0" />
+            </font>
+            <effect>
+                <Blend mode="LIGHTEN" />
+            </effect>
+        </Button>
+        <Button fx:id="btnCategories" layoutX="23.0" layoutY="485.0" mnemonicParsing="false" onAction="#btnCategories" prefHeight="48.0" prefWidth="154.0" style="-fx-background-color: #A8C987;" text="Categories">
+            <font>
+                <Font name="Monospaced Bold" size="20.0" />
+            </font>
+            <effect>
+                <Blend mode="LIGHTEN" />
+            </effect>
+        </Button>
+        <Button fx:id="btnExit" layoutX="718.0" layoutY="485.0" mnemonicParsing="false" onAction="#btnExit" prefHeight="48.0" prefWidth="184.0" style="-fx-background-color: linear-gradient(to right, #f00000, #dc281e);;" text="Exit program">
+            <font>
+                <Font name="Monospaced Bold" size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="btnProducts" layoutX="271.0" layoutY="485.0" mnemonicParsing="false" onAction="#btnProducts" prefHeight="48.0" prefWidth="154.0" style="-fx-background-color: #A8C987;" text="Products">
+            <font>
+                <Font name="Monospaced Bold" size="20.0" />
+            </font>
+            <effect>
+                <Blend mode="LIGHTEN" />
+            </effect>
+        </Button>
+        <AnchorPane fx:id="dbProduct" layoutX="21.0" layoutY="60.0" prefHeight="406.0" prefWidth="882.0">
+            <children>
+                <TableView fx:id="tableView" layoutX="350.0" layoutY="18.0" prefHeight="366.0" prefWidth="538.0" style="-fx-background-color: linear-gradient(to right, #fc00ff, #00dbde); -fx-background-radius: 10px; -fx-border-radius: 10px;">
+                    <columns>
+                        <TableColumn fx:id="idCl" prefWidth="55.20001220703125" text="ID" />
+                        <TableColumn fx:id="nameCl" prefWidth="124.80001831054688" text="Name" />
+                        <TableColumn fx:id="categoryCl" text="Category" />
+                        <TableColumn fx:id="imageCl" minWidth="0.0" prefWidth="169.5999755859375" text="Image" />
+                        <TableColumn fx:id="priceCl" maxWidth="152.0" minWidth="10.199951171875" prefWidth="106.39999999999998" text="Price" />
+                    </columns>
+                </TableView>
+                <AnchorPane fx:id="formProduct" layoutX="14.0" layoutY="18.0" prefHeight="366.0" prefWidth="308.0">
+                    <children>
+                        <Label layoutX="16.0" layoutY="9.0" text="Name">
+                            <font>
+                                <Font name="Monospaced Regular" size="15.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="16.0" layoutY="67.0" text="Category">
+                            <font>
+                                <Font name="Monospaced Regular" size="15.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="16.0" layoutY="122.0" text="Image" visible="false">
+                            <font>
+                                <Font name="Monospaced Regular" size="15.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="16.0" layoutY="122.0" text="Calory">
+                            <font>
+                                <Font name="Monospaced Regular" size="15.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="16.0" layoutY="179.0" text="Price">
+                            <font>
+                                <Font name="Monospaced Regular" size="15.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="ttName" layoutX="118.0" layoutY="6.0" prefHeight="29.0" prefWidth="193.0" style="-fx-border-color: #A8C987; -fx-border-radius: 2px; -fx-border-width: 2;">
+                            <font>
+                                <Font name="Monospaced Regular" size="15.0" />
+                            </font>
+                        </TextField>
+                        <TextField fx:id="ttImage" layoutX="118.0" layoutY="116.0" prefHeight="29.0" prefWidth="193.0" style="-fx-border-color: #A8C987; -fx-border-radius: 2px; -fx-border-width: 2;" visible="false">
+                            <font>
+                                <Font name="Monospaced Regular" size="15.0" />
+                            </font>
+                        </TextField>
+                        <TextField fx:id="ttPrice" layoutX="118.0" layoutY="174.0" prefHeight="29.0" prefWidth="193.0" style="-fx-border-color: #A8C987; -fx-border-radius: 2px; -fx-border-width: 2;">
+                            <font>
+                                <Font name="Monospaced Regular" size="15.0" />
+                            </font>
+                        </TextField>
+                        <TextField fx:id="ttCalory" layoutX="118.0" layoutY="116.0" prefHeight="29.0" prefWidth="193.0" style="-fx-border-color: #A8C987; -fx-border-radius: 2px; -fx-border-width: 2;">
+                            <font>
+                                <Font name="Monospaced Regular" size="15.0" />
+                            </font>
+                        </TextField>
+                        <Button fx:id="btnCreate" layoutX="16.0" layoutY="233.0" mnemonicParsing="false" onAction="#btnCreate" prefHeight="30.0" prefWidth="124.0" style="-fx-background-color: #A8C987;" text="Create">
+                            <font>
+                                <Font name="Monospaced Bold" size="15.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="btnDelete" layoutX="182.0" layoutY="229.0" mnemonicParsing="false" onAction="#btnDelete" prefHeight="30.0" prefWidth="124.0" style="-fx-background-color: linear-gradient(to right, #f00000, #dc281e);" text="Delete">
+                            <font>
+                                <Font name="Monospaced Bold" size="15.0" />
+                            </font>
+                        </Button>
+                        <ChoiceBox fx:id="choiceCate" layoutX="117.0" layoutY="61.0" prefHeight="30.0" prefWidth="194.0" style="-fx-background-color: #A8C987;" value="Chose the category" />
+                    </children>
+                </AnchorPane>
+                <ImageView fx:id="imgPreview" fitHeight="100.0" fitWidth="200.0" layoutX="85.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true" />
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="dbCategory" layoutX="31.0" layoutY="68.0" prefHeight="406.0" prefWidth="635.0">
+            <children>
+                <TableView fx:id="tableViewCategory" layoutX="341.0" layoutY="10.0" prefHeight="366.0" prefWidth="303.0" style="-fx-background-color: #F5DC6E; -fx-background-radius: 10px; -fx-border-radius: 10px;">
+                    <columns>
+                        <TableColumn fx:id="idClCate" prefWidth="72.79998779296875" text="ID" />
+                        <TableColumn fx:id="nameClCate" prefWidth="224.79995727539062" text="Name" />
+                    </columns>
+                </TableView>
+                <AnchorPane fx:id="formProduct1" layoutX="14.0" layoutY="18.0" prefHeight="366.0" prefWidth="308.0">
+                    <children>
+                        <Label layoutX="6.0" layoutY="2.0" text="Name">
+                            <font>
+                                <Font name="Monospaced Regular" size="15.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="ttNameCategory" layoutX="108.0" layoutY="-1.0" prefHeight="29.0" prefWidth="193.0" style="-fx-border-color: #A8C987; -fx-border-radius: 2px; -fx-border-width: 2;">
+                            <font>
+                                <Font name="Monospaced Regular" size="15.0" />
+                            </font>
+                        </TextField>
+                        <Button fx:id="btnCreateCategory" layoutX="6.0" layoutY="224.0" mnemonicParsing="false" onAction="#btnCreateCategory" prefHeight="30.0" prefWidth="124.0" style="-fx-background-color: #A8C987;" text="Create">
+                            <font>
+                                <Font name="Monospaced Bold" size="15.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="btnDeleteCategory" layoutX="172.0" layoutY="221.0" mnemonicParsing="false" onAction="#btnDeleteCategory" prefHeight="30.0" prefWidth="124.0" style="-fx-background-color: linear-gradient(to right, #f00000, #dc281e);" text="Delete">
+                            <font>
+                                <Font name="Monospaced Bold" size="15.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="dbOrders" layoutX="31.0" layoutY="70.0" prefHeight="406.0" prefWidth="882.0">
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+            <children>
+                <Button fx:id="btnTable1" mnemonicParsing="false" onAction="#chooseTable" prefHeight="60.0" prefWidth="98.0" style="-fx-background-color: #A8C987;" text="Plat 1" textFill="#0c3015">
+                    <font>
+                        <Font name="Berlin Sans FB Demi Bold" size="20.0" />
+                    </font>
+                </Button>
+                <TableView fx:id="tableViewOrder" layoutX="396.0" prefHeight="200.0" prefWidth="487.0" style="-fx-background-color: #F5DC6E;">
+                    <columns>
+                        <TableColumn fx:id="OrderItemCl" prefWidth="274.4000549316406" text="Item" />
+                        <TableColumn fx:id="OrderPriceCl" prefWidth="114.39990234375" text="Price" />
+                        <TableColumn fx:id="OrderQtyCl" prefWidth="89.60003662109375" text="Quantity" />
+                        <TableColumn fx:id="OrderCaloryCl" prefWidth="89.60003662109375" text="Calory" />
+                    </columns>
+                </TableView>
+                <ChoiceBox fx:id="choiceItem" layoutX="396.0" layoutY="218.0" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #A8C987;" value="Chose the Item" />
+                <Button fx:id="addItem" layoutX="675.0" layoutY="218.0" mnemonicParsing="false" onAction="#addItem" prefHeight="29.0" prefWidth="98.0" style="-fx-background-color: #A8C987;" text="Add item">
+                    <font>
+                        <Font name="Monospaced Regular" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="removeItem" layoutX="784.0" layoutY="218.0" mnemonicParsing="false" onAction="#removeItem" prefHeight="29.0" prefWidth="98.0" style="-fx-background-color: linear-gradient(to right, #f00000, #dc281e);" text="Remove">
+                    <font>
+                        <Font name="Monospaced Regular" size="15.0" />
+                    </font>
+                </Button>
+                <TextArea fx:id="note" layoutX="396.0" layoutY="257.0" prefHeight="54.0" prefWidth="480.0" promptText="Note..." style="-fx-border-color: linear-gradient(to right, #bc4e9c, #f80759); -fx-border-radius: 2px; -fx-border-width: 2;">
+                    <font>
+                        <Font name="Monospaced Regular" size="12.0" />
+                    </font>
+                </TextArea>
+                <Button fx:id="createOrder" layoutX="591.0" layoutY="335.0" mnemonicParsing="false" onAction="#createOrder" prefHeight="30.0" prefWidth="133.0" style="-fx-background-color: #A8C987;" text="Commander">
+                    <font>
+                        <Font name="Monospaced Regular" size="15.0" />
+                    </font>
+                </Button>
+                <TextField fx:id="qty" layoutX="584.0" layoutY="218.0" prefHeight="30.0" prefWidth="82.0" promptText="quantity..." style="-fx-border-color: linear-gradient(to right, #bc4e9c, #f80759); -fx-border-radius: 2px; -fx-border-width: 2;">
+                    <font>
+                        <Font name="Monospaced Bold" size="12.0" />
+                    </font>
+                </TextField>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

@@ -70,13 +70,13 @@ public class ForgotPasswordController {
     }
 
     private void sendEmail(String recipient, int verificationCode) {
-        // SMTP server information (Gmail settings)
+
         String host = "smtp.gmail.com";
         String port = "587";
-        String username = "easyhealth241@gmail.com"; // Replace with your email
-        String password = "yffy hnjt kebm prvs"; // Replace with your email password
+        String username = "easyhealth241@gmail.com";
+        String password = "yffy hnjt kebm prvs";
 
-        // Setup mail server properties
+
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
