@@ -39,10 +39,10 @@
                     </HBox>
                     <MenuButton fx:id="profileMenuBtn" alignment="TOP_LEFT" blendMode="DARKEN" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="39.0">
                         <items>
-                            <MenuItem fx:id="profileviewItem" mnemonicParsing="false" text="Profile" />
+                            <MenuItem fx:id="profileviewItem" mnemonicParsing="false" onAction="#handleProfileViewItemAction" text="Profile" />
                             <MenuItem fx:id="profileItem" mnemonicParsing="false" onAction="#handleEditProfile" text="Modifier le Profil" />
                      <MenuItem fx:id="profileItem1" mnemonicParsing="false" onAction="#handleEditProfile" text="Modifier Plat" />
-                     <MenuItem fx:id="profileItem11" mnemonicParsing="false" onAction="#handleEditProfile" text="Supprime Plat" />
+                     <MenuItem fx:id="profileItem2" mnemonicParsing="false" onAction="#handleEditProfile" text="Supprime Plat" />
                             <MenuItem fx:id="logoutItem" mnemonicParsing="false" onAction="#handleLogout" text="Déconnexion" />
                         </items>
                         <graphic>
@@ -112,7 +112,7 @@
                         <RowConstraints />
                         <RowConstraints />
                         <RowConstraints />
-                  <RowConstraints />
+                        <RowConstraints />
                     </rowConstraints>
                 </GridPane>
             </VBox>

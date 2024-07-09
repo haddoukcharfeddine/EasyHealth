@@ -15,7 +15,7 @@ import java.io.IOException;
 
 public class Accueil {
     @FXML
-    private Button menusBtn;
+    private Button PlatsBtn;
 
     @FXML
     private Button loginBtn;
@@ -42,12 +42,12 @@ public class Accueil {
         }
     }
     @FXML
-    private void navigateToMenu() {
+    private void navigateToPlats() {
         try {
-            Parent menuPage = FXMLLoader.load(getClass().getResource("/menu.fxml"));
-            Scene menuScene = new Scene(menuPage, 800, 600);
-            Stage stage = (Stage) menusBtn.getScene().getWindow();
-            stage.setScene(menuScene);
+            Parent PlatsPage = FXMLLoader.load(getClass().getResource("/PlatsAccueil.fxml"));
+            Scene PlatsScene = new Scene(PlatsPage, 800, 600);
+            Stage stage = (Stage) PlatsBtn.getScene().getWindow();
+            stage.setScene(PlatsScene);
         } catch (IOException e) {
             e.printStackTrace();
         }

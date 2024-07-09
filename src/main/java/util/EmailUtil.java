@@ -11,7 +11,7 @@ public class EmailUtil {
         // Paramètres du serveur SMTP
         String host = "smtp.gmail.com"; // Adresse du serveur SMTP de Gmail
         final String user = "easyhealth241@gmail.com"; //  adresse email Gmail
-        final String password = "passwordhere"; //  mot de passe Gmail (ou mot de passe d'application)
+        final String password = "yffy hnjt kebm prvs"; //  mot de passe Gmail (ou mot de passe d'application)
 
         // Propriétés du serveur SMTP
         Properties properties = new Properties();

@@ -10,7 +10,7 @@ import java.util.List;
 
 // Classe Client qui hérite de la classe User
 public class Client extends User {
-    private Objectif objectif; // Objectif nutritionnel du client (perte de poids, gain de masse, etc.)
+    private static Objectif objectif; // Objectif nutritionnel du client (perte de poids, gain de masse, etc.)
     private List<Commande> historiqueCommandes; // Historique des commandes du client
     private int besoinsCaloriques; // Besoins caloriques actuels du client
     private List<Plat> plats; // Liste des plats disponibles
@@ -25,7 +25,7 @@ public class Client extends User {
 
 
     // Getter pour l'objectif du client
-    public Objectif getObjectif() {
+    public static Objectif getObjectif() {
         return objectif;
     }
 

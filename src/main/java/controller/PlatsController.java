@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 import service.PlatService;
 import service.UserService;
 import session.UserSession;
-import util.EmailUtil;
+import util.EmailUtil; // Assurez-vous que EmailUtil est bien importé
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -43,7 +43,10 @@ public class PlatsController implements Initializable {
 
     @FXML
     private MenuItem addDishItem;
-
+    private UserService userService;
+    private User currentUser;
+    @FXML
+    private MenuItem profileviewItem;
     @FXML
     private MenuItem logoutItem;
     @FXML
@@ -55,8 +58,8 @@ public class PlatsController implements Initializable {
         AccueilButton.setOnAction(event -> navigateToAccueilDeux());
         profileItem.setOnAction(event -> handleProfileEditAction());
         logoutItem.setOnAction(event -> handleLogout());
-
-        // Initialisation du service des plats
+        profileviewItem.setOnAction(event -> handleProfileViewItemAction());
+        addDishItem.setOnAction(event -> handleAjouterPlatEditAction());
         platService = new PlatService();
 
         // Récupération de tous les plats depuis le service
@@ -65,6 +68,24 @@ public class PlatsController implements Initializable {
         // Ajout de chaque plat à la grille d'affichage
         for (Plat plat : plats) {
             addPlate(plat);
+        }
+        userService = new UserService();
+        UserSession session = UserSession.getInstance();
+        String currentUserTelephone = session.getTelephone();
+
+        currentUser = userService.getUserByTelephone(currentUserTelephone);
+        if (currentUser != null) {
+            String userType = String.valueOf(userService.getUserType(currentUser));
+
+            if (userType != null) {
+                if (userType.equals("Vendeur")) {
+                    addDishItem.setVisible(true);
+                    profileviewItem.setVisible(true);
+                } else {
+                    addDishItem.setVisible(false);
+                    profileviewItem.setVisible(false);
+                }
+            }
         }
     }
 
@@ -136,6 +157,20 @@ public class PlatsController implements Initializable {
         }
     }
 
+    // Gère l'action d'ajout de plat
+    @FXML
+    private void handleAjouterPlatEditAction() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterPlat.fxml"));
+            VBox root = loader.load();
+            Stage stage = (Stage) profileMenuBtn.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     // Affiche une alerte avec un type spécifique, un titre et un message
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
@@ -143,6 +178,20 @@ public class PlatsController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    // Gère l'action de visualisation du profil
+    @FXML
+    private void handleProfileViewItemAction() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Profile.fxml"));
+            VBox root = loader.load();
+            Stage stage = (Stage) profileMenuBtn.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     // Gère la déconnexion de l'utilisateur
@@ -173,3 +222,4 @@ public class PlatsController implements Initializable {
         }
     }
 }
+

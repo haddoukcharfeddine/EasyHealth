@@ -36,19 +36,15 @@ public class ProfileController {
     private MenuButton profileMenuBtn;
     @FXML
     private MenuItem addDishItem;
-
-    @FXML
-    private MenuItem addMenuItem;
     @FXML
     private MenuItem profileviewItem;
-
     @FXML
     private MenuItem logoutItem;
     @FXML
     private MenuItem profileItem;
-
     @FXML
     private Button AccueilButton;
+
     private UserService userService;
     private PlatService platService;
     private UserSession userSession;
@@ -57,6 +53,7 @@ public class ProfileController {
     @FXML
     public void initialize() {
         AccueilButton.setOnAction(event -> navigateToAccueilDeux());
+        addDishItem.setOnAction(event -> handleAjouterPlatEditAction());
         userService = new UserService();
         platService = new PlatService();
         userSession = UserSession.getInstance();
@@ -76,6 +73,16 @@ public class ProfileController {
 
             // Display the fetched plates
             displayPlats(plats);
+
+            String userType = String.valueOf(userService.getUserType(currentUser));
+
+            if (userType != null) {
+                if (userType.equals("Vendeur")) {
+                    addDishItem.setVisible(true);
+                } else {
+                    addDishItem.setVisible(false);
+                }
+            }
         } else {
             showErrorAlert("Erreur d'utilisateur", "Impossible de récupérer les informations de l'utilisateur actuel.");
         }

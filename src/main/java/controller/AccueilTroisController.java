@@ -20,21 +20,10 @@ import java.io.IOException;
 
 public class AccueilTroisController {
 
-    @FXML
-    private Button menusBtn;
 
-    @FXML
-    private Button PanierBtn;
 
     @FXML
     private MenuButton profileMenuBtn;
-
-    @FXML
-    private MenuItem profileItem;
-
-
-    @FXML
-    private MenuItem logoutItem;
 
     @FXML
     private TableView<Commande> commandesTable;

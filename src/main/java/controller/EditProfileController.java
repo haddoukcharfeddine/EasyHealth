@@ -64,8 +64,7 @@ public class EditProfileController implements Initializable {
     @FXML
     private MenuItem addDishItem;
 
-    @FXML
-    private MenuItem addMenuItem;
+
     @FXML
     private MenuItem profileviewItem;
 
@@ -77,8 +76,7 @@ public class EditProfileController implements Initializable {
     private Button AccueilButton;
     @FXML
     private Button platsBtn;
-    @FXML
-    private Button menusBtn;
+
     @FXML
     private Label poidsLabel;
     @FXML
@@ -125,17 +123,15 @@ public class EditProfileController implements Initializable {
             if (userType != null) {
                 if (userType.equals("Vendeur")) {
                     addDishItem.setVisible(true);
-                    addMenuItem.setVisible(true);
                     profileviewItem.setVisible(true);
                     platsBtn.setVisible(false);
-                    menusBtn.setVisible(false);
+                    profileItem.setVisible(false);
 
                 } else {
                     addDishItem.setVisible(false);
-                    addMenuItem.setVisible(false);
-                    profileviewItem.setVisible(false);
+                    profileviewItem.setVisible(true);
                     platsBtn.setVisible(false);
-                    menusBtn.setVisible(false);
+                    profileItem.setVisible(false);
 
                 }
             }

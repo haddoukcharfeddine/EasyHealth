@@ -7,11 +7,11 @@ import entite.Enum.Sexe;
 // Classe ClientSport qui hérite de la classe Client
 public class ClientSport extends Client {
     // Attributs spécifiques à ClientSport
-    private float poids;     // Poids du client sportif
-    private float taille;    // Taille du client sportif
-    private int age;         // Âge du client sportif
-    private Sexe sexe;       // Sexe du client sportif
-    private Activer activer; // Niveau d'activité physique du client sportif
+    private static float poids;     // Poids du client sportif
+    private static float taille;    // Taille du client sportif
+    private static int age;         // Âge du client sportif
+    private static Sexe sexe;       // Sexe du client sportif
+    private static Activer activer; // Niveau d'activité physique du client sportif
 
     // Constructeur de la classe ClientSport
     public ClientSport(int id, String nom, String email, String telephone, String adresse, String password, Objectif objectif, float poids, float taille, int age, Sexe sexe, Activer activer) {
@@ -74,7 +74,7 @@ public class ClientSport extends Client {
     }
 
     // Méthode pour calculer les besoins nutritionnels du client sportif
-    public int[] calculerBesoinsNutritionnels() {
+    public static int[] calculerBesoinsNutritionnels() {
         // Calcul du métabolisme de base (BMR)
         double bmr;
         if (sexe == Sexe.HOMME) {

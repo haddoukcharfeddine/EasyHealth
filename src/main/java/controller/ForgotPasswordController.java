@@ -37,7 +37,7 @@ public class ForgotPasswordController {
     private Button verifyButton;
 
     @FXML
-    private Button accueilButton;
+    private Button AccueilButton;
 
     private int verificationCode; // Variable to store the generated verification code
 
@@ -74,7 +74,7 @@ public class ForgotPasswordController {
         String host = "smtp.gmail.com";
         String port = "587";
         String username = "easyhealth241@gmail.com"; // Replace with your email
-        String password = "passwordhere"; // Replace with your email password
+        String password = "yffy hnjt kebm prvs"; // Replace with your email password
 
         // Setup mail server properties
         Properties properties = new Properties();
@@ -167,7 +167,7 @@ public class ForgotPasswordController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Accueil.fxml"));
             Parent root = loader.load();
-            Stage stage = (Stage) accueilButton.getScene().getWindow();
+            Stage stage = (Stage) AccueilButton.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {

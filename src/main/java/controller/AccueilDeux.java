@@ -1,13 +1,14 @@
 package controller;
 
+import entite.Enum.Objectif;
 import entite.Users.Client;
+import entite.Users.ClientSport;
 import entite.Users.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
@@ -16,6 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import service.UserService;
 import session.UserSession;
+import javafx.scene.control.Label;
 
 import java.io.IOException;
 
@@ -33,12 +35,10 @@ public class AccueilDeux {
     private MenuItem logoutItem;
     @FXML
     private TextField SearchText;
-
     @FXML
     private HBox CaloriesItem;
     @FXML
     private HBox ProteineItem;
-
     private User currentUser;
     private String userType;
     @FXML
@@ -54,7 +54,7 @@ public class AccueilDeux {
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
         updateMenuItemsVisibility();
-        updateCaloriesAndProteineLabels();
+        updateCaloriesAndProteineLabels(); // Add this method call
     }
 
     @FXML
@@ -65,8 +65,12 @@ public class AccueilDeux {
         currentUser = userService.getUserByTelephone(currentUserTelephone);
         if (currentUser != null) {
             userType = userService.getUserType(currentUser).toString();
-            setCurrentUser(currentUser);
+            setCurrentUser(currentUser); // Ensure that the current user and userType are set, and visibility is updated
         }
+    }
+
+    private void handleStoreList() {
+        System.out.println("Store List button clicked");
     }
 
     @FXML
@@ -130,6 +134,7 @@ public class AccueilDeux {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+            // Handle the exception here, such as displaying an error message to the user
         }
     }
 
@@ -138,8 +143,8 @@ public class AccueilDeux {
             if (userType.equals("Vendeur")) {
                 addDishItem.setVisible(true);
                 profileviewItem.setVisible(true);
-                platsBtn.setVisible(false);
-                SearchText.setVisible(false);
+                platsBtn.setVisible(true);
+                SearchText.setVisible(true);
                 PanierBtn.setVisible(false);
                 addDishItem.setOnAction(event -> handleAjouterPlatEditAction());
             } else {
@@ -155,19 +160,27 @@ public class AccueilDeux {
     private void updateCaloriesAndProteineLabels() {
         if (currentUser instanceof Client) {
             Client client = (Client) currentUser;
-            // Here you would have the logic for setting the labels based on client's details
-            // For example:
-            Label caloriesLabel = new Label("Calories: ...");
-            CaloriesItem.getChildren().setAll(caloriesLabel);
+            Objectif objectif = client.getObjectif();
+            if (objectif == Objectif.Perdre_du_poids || objectif == Objectif.Prendre_du_poids) {
+                int[] besoins = ClientSport.calculerBesoinsNutritionnels();
+                double tee = besoins[0];
+                double proteinNeeds = besoins[1];
 
-            Label proteineLabel = new Label("Proteine: ...");
-            ProteineItem.getChildren().setAll(proteineLabel);
+                // Update CaloriesItem label with the calculated value
+                Label caloriesLabel = new Label("Calories: " + (int) Math.round(tee));
+                CaloriesItem.getChildren().setAll(caloriesLabel);
 
-            CaloriesItem.setVisible(true);
-            ProteineItem.setVisible(true);
-        } else {
-            CaloriesItem.setVisible(false);
-            ProteineItem.setVisible(false);
+                // Update ProteineItem label with the calculated value
+                Label proteineLabel = new Label("Proteine: " + (int) Math.round(proteinNeeds));
+                ProteineItem.getChildren().setAll(proteineLabel);
+
+                // Make CaloriesItem and ProteineItem visible
+                CaloriesItem.setVisible(true);
+                ProteineItem.setVisible(true);
+            } else {
+                CaloriesItem.setVisible(false);
+                ProteineItem.setVisible(false);
+            }
         }
     }
 
