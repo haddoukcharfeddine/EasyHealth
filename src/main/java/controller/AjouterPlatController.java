@@ -18,6 +18,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import service.PlatService;
 import session.UserSession;
+import util.EmailUtil;
 
 public class AjouterPlatController {
 
@@ -112,6 +113,12 @@ public class AjouterPlatController {
         // Ajoute le nouveau plat en utilisant PlatService
         platService.ajouterPlat(new Plat(0, nomPlat, description, prix, proteine, calories, currentUserTelephone, categorie, imageData));
 
+        // Envoie un email de notification
+        String destinataire = "vendor@example.com"; // Remplacez par l'email du fournisseur
+        String sujet = "Nouveau Plat Ajouté";
+        String contenu = "Un nouveau plat a été ajouté: " + nomPlat + "\nDescription: " + description + "\nPrix: " + prix + "\nCatégorie: " + categorie;
+        EmailUtil.envoyerEmail(destinataire, sujet, contenu);
+
         // Affiche éventuellement un message de succès à l'utilisateur
         showInformationAlert("Succès", "Plat ajouté avec succès");
     }
@@ -143,6 +150,7 @@ public class AjouterPlatController {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void handleProfileViewItemAction() {
         try {
