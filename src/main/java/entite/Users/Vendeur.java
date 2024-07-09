@@ -58,7 +58,6 @@ public class Vendeur extends User {
     // Méthode pour gérer les commandes (à implémenter selon les besoins spécifiques)
     public void gererCommandes() {
         // Cette méthode pourrait être utilisée pour gérer les commandes des plats, mais elle n'est pas encore implémentée ici
-        // Elle pourrait impliquer l'affichage des commandes reçues, la gestion des états des commandes, etc.
     }
 }
 

@@ -1,6 +1,7 @@
 package controller;
 
 import entite.Plat;
+import entite.Users.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import service.PlatService;
+import service.UserService;
+import session.UserSession;
+import util.EmailUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -90,6 +94,13 @@ public class PlatsController implements Initializable {
 
         // Ajout du conteneur VBox à la grille d'affichage
         gridPane.addRow(gridPane.getRowCount(), plateInfo);
+    }
+
+    // Méthode pour ajouter un plat et envoyer un email
+    public void ajouterPlat(Plat plat) {
+        platService.ajouterPlat(plat); // Utilise la méthode ajoutée du service
+
+        // Le service gère maintenant l'envoi de l'email
     }
 
     // Gère l'action de recherche

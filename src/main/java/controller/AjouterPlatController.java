@@ -9,13 +9,10 @@ import entite.Plat;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import service.PlatService;
 import session.UserSession;
 
@@ -37,8 +34,7 @@ public class AjouterPlatController {
     private ImageView imageView;
     @FXML
     private MenuButton profileMenuBtn;
-    @FXML
-    private Button AccueilButton;
+
     private File selectedImageFile;
 
     @FXML
@@ -90,7 +86,7 @@ public class AjouterPlatController {
 
         // Vérifie si le numéro de téléphone de l'utilisateur courant est disponible
         if (currentUserTelephone == null) {
-            showErrorAlert("Error", "Failed to retrieve current user's telephone number");
+            showErrorAlert("Erreur", "Impossible de récupérer le numéro de téléphone de l'utilisateur");
             return;
         }
 
@@ -103,7 +99,7 @@ public class AjouterPlatController {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            showErrorAlert("Error", "Failed to read image file");
+            showErrorAlert("Erreur", "Échec de lecture du fichier image");
             return;
         }
 
@@ -114,12 +110,12 @@ public class AjouterPlatController {
         platService.ajouterPlat(new Plat(0, nomPlat, description, prix, proteine, calories, currentUserTelephone, categorie, imageData));
 
         // Affiche éventuellement un message de succès à l'utilisateur
-        showInformationAlert("Success", "Plat added successfully");
+        showInformationAlert("Succès", "Plat ajouté avec succès");
     }
 
     // Navigue vers la page d'accueil après avoir ajouté un plat
     @FXML
-    private void navigateToAccueilDeux() {
+    private void navigateToAccueilDeux(ActionEvent event) {
         switchScene("/AccueilDeux.fxml");
     }
 

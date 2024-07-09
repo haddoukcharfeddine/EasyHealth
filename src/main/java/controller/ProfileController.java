@@ -56,7 +56,6 @@ public class ProfileController {
 
     @FXML
     public void initialize() {
-
         AccueilButton.setOnAction(event -> navigateToAccueilDeux());
         userService = new UserService();
         platService = new PlatService();
@@ -66,47 +65,52 @@ public class ProfileController {
         String currentUserTelephone = userSession.getTelephone();
         currentUser = userService.getUserByTelephone(currentUserTelephone);
 
-        // Update the UI with the current user's information
-        nameLabel.setText(currentUser.getNom());
-        addressLabel.setText(currentUser.getAdresse());
-        telephoneLabel.setText(currentUser.getTelephone());
+        if (currentUser != null) {
+            // Update the UI with the current user's information
+            nameLabel.setText(currentUser.getNom());
+            addressLabel.setText(currentUser.getAdresse());
+            telephoneLabel.setText(currentUser.getTelephone());
 
-        // Fetch plats of the current user
-        List<Plat> plats = platService.getPlatsByVendeurTelephone(currentUserTelephone);
+            // Fetch plats of the current user
+            List<Plat> plats = platService.getPlatsByVendeurTelephone(currentUserTelephone);
 
-        // Display the fetched plates
-        displayPlats(plats);
+            // Display the fetched plates
+            displayPlats(plats);
+        } else {
+            showErrorAlert("Erreur d'utilisateur", "Impossible de récupérer les informations de l'utilisateur actuel.");
+        }
     }
 
     // Method to display the fetched plates in the VBox
     private void displayPlats(List<Plat> plats) {
         for (Plat plat : plats) {
-            VBox platInfoBox = new VBox();
-            platInfoBox.setSpacing(5);
+            if (plat != null && plat.getImageData() != null) {
+                VBox platInfoBox = new VBox();
+                platInfoBox.setSpacing(5);
 
-            ImageView imageView = new ImageView(new Image(new ByteArrayInputStream(plat.getImageData())));
-            imageView.setFitWidth(100); // Adjust the width of the image as needed
-            imageView.setPreserveRatio(true); // Maintain the aspect ratio of the image
-            platInfoBox.getChildren().add(imageView);
-            // Create labels for plat information
-            Label nomLabel = new Label("Name: " + plat.getNomPlat());
-            Label descriptionLabel = new Label("Description: " + plat.getDescription());
-            Label prixLabel = new Label("Price: " + plat.getPrix());
-            Label proteinLabel = new Label("Protein: " + plat.getProtein());
-            Label caloriesLabel = new Label("Calories: " + plat.getCalories());
+                ImageView imageView = new ImageView(new Image(new ByteArrayInputStream(plat.getImageData())));
+                imageView.setFitWidth(100); // Adjust the width of the image as needed
+                imageView.setPreserveRatio(true); // Maintain the aspect ratio of the image
+                platInfoBox.getChildren().add(imageView);
 
-            // Add labels to the platInfoBox
-            platInfoBox.getChildren().addAll(nomLabel, descriptionLabel, prixLabel, proteinLabel, caloriesLabel);
+                // Create labels for plat information
+                Label nomLabel = new Label("Name: " + plat.getNomPlat());
+                Label descriptionLabel = new Label("Description: " + plat.getDescription());
+                Label prixLabel = new Label("Price: " + plat.getPrix());
+                Label proteinLabel = new Label("Protein: " + plat.getProtein());
+                Label caloriesLabel = new Label("Calories: " + plat.getCalories());
 
-            // Create and add an ImageView for the plat image
+                // Add labels to the platInfoBox
+                platInfoBox.getChildren().addAll(nomLabel, descriptionLabel, prixLabel, proteinLabel, caloriesLabel);
 
-
-            // Optionally, you can add more UI components or customize the layout further
-
-            // Add platInfoBox to the plateVBox
-            plateVBox.getChildren().add(platInfoBox);
+                // Add platInfoBox to the plateVBox
+                plateVBox.getChildren().add(platInfoBox);
+            } else {
+                System.err.println("Erreur: plat ou imageData est null");
+            }
         }
     }
+
     private void handleAjouterPlatEditAction() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterPlat.fxml"));
@@ -118,17 +122,13 @@ public class ProfileController {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void handleLogout() {
         try {
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Accueil.fxml"));
             Parent root = loader.load();
-
-
             Stage stage = (Stage) profileMenuBtn.getScene().getWindow();
-
-
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
@@ -136,22 +136,21 @@ public class ProfileController {
             e.printStackTrace();
         }
     }
+
     @FXML
-    private void handleEditProfile(){try {
+    private void handleEditProfile() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/editProfile.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) profileMenuBtn.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/editProfile.fxml"));
-        Parent root = loader.load();
-
-
-        Stage stage = (Stage) profileMenuBtn.getScene().getWindow();
-
-
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    } catch (IOException e) {
-        e.printStackTrace();
-    }}
     @FXML
     private void showErrorAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -160,6 +159,7 @@ public class ProfileController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
     private void navigateToAccueilDeux() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccueilDeux.fxml"));

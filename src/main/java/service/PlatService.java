@@ -1,7 +1,9 @@
 package service;
 
 import entite.Plat;
+import entite.Users.User;
 import util.DataSource;
+import util.EmailUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -30,9 +32,47 @@ public class PlatService implements PService<Plat> {
             stmt.setString(7, plat.getCategorie());
             stmt.setBytes(8, plat.getImageData()); // Insère les données d'image sous forme de tableau d'octets
             stmt.executeUpdate(); // Exécute la requête d'insertion
+
+            // Récupérer l'ID généré automatiquement
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    plat.setIdP(generatedKeys.getInt(1));
+                }
+            }
+
+            // Envoyer un email au vendeur
+            User vendeur = getUserById(plat.getIdUVendeur());
+            if (vendeur != null && vendeur.getEmail() != null) {
+                String emailVendeur = vendeur.getEmail();
+                String sujet = "Nouveau plat ajouté";
+                String contenu = "Votre plat " + plat.getNomPlat() + " a été ajouté avec succès.";
+
+                EmailUtil.envoyerEmail(emailVendeur, sujet, contenu);
+            }
+
         } catch (SQLException e) {
             e.printStackTrace(); // Gestion des exceptions SQL
         }
+    }
+
+    // Méthode pour récupérer un utilisateur par son ID
+    private User getUserById(String idVendeur) {
+        String query = "SELECT * FROM User WHERE idU = ?";
+        try (PreparedStatement stmt = cnx.prepareStatement(query)) {
+            stmt.setString(1, idVendeur);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    String idU = rs.getString("idU");
+                    String nom = rs.getString("nom");
+                    String email = rs.getString("email");
+                    // Autres champs de l'utilisateur si nécessaire
+                    return new User(idU, nom, email); // Adapté pour votre classe User
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     // Méthode pour modifier un plat existant dans la base de données

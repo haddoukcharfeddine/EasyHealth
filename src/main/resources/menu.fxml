@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.MenuController" alignment="CENTER" spacing="10">
-    <Label text="Menu Page" id="menuTitle"/>
+<VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuController">
+    <Label id="menuTitle" text="Plat Page" />
 
-    <Button text="Back" fx:id="backBtn"/>
+    <Button fx:id="backBtn" text="Back" />
 </VBox>
-
